@@ -2,7 +2,11 @@
 
 [Kurssisivu](https://ohjelmistotekniikka-hy.github.io/)
 
+## Harjoitustyö
+
 Harjoitustyö on *mahdollisesti* joku peli. Selviää ensi viikolla.
+
+## Viikko 1
 
 Ensimmäisen viikon harjoituksessa tehtiin muutamia tiedostoja:
 - [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
