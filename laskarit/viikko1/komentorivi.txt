@@ -1,0 +1,5 @@
+kurssit
+└── ot-harjoitustyo
+    ├── README.md
+    └── laskarit
+        └── viikko1
