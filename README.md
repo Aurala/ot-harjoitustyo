@@ -11,7 +11,7 @@ Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytös
 - [Määrittelydokumentti](dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 
-## Laskarit
+## [Laskarit](laskarit/)
 
 ### Viikko 1
 
