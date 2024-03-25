@@ -9,7 +9,7 @@ Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Sol
 Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytössä, esimerkiksi innostamaan lapsia matematiikan opiskeluun tai jopa tuottamaan Python-koodia (omien sääntöjen kirjoittaminen).
 
 - [Määrittelydokumentti](dokumentaatio/vaatimusmaarittely.md)
-- [Työaikakirjanpito](dokumentaatio/työaikakirjanpito.md)
+- [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 ## Laskarit
 
