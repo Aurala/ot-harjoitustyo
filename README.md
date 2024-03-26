@@ -11,10 +11,22 @@ Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytös
 - [Määrittelydokumentti](dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 
-## [Laskarit](laskarit/)
+## Laskarit
+
+[Laskaritehtävät](laskarit/)
 
 ### Viikko 1
 
-Ensimmäisen viikon harjoituksessa tehtiin muutamia tiedostoja:
+[Viikon 1 laskaritehtävät](laskarit/viikko1/)
+
+[Harjoituksessa](https://ohjelmistotekniikka-hy.github.io/python/viikko1) harjoiteltiin gitin käyttöä komentoriviltä ja tehtiin tiedostoja:
 - [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
 - [gitlog.txt](laskarit/viikko1/gitlog.txt)
+
+### Viikko 2
+
+[Viikon 2 laskaritehtävät](laskarit/viikko2/)
+
+[Harjoituksessa](https://ohjelmistotekniikka-hy.github.io/python/viikko2) opeteltiin
+- Käyttämään Poetryä ja hallitsemaan riippuvuuksia
+- Tekemään yksikkötestejä
