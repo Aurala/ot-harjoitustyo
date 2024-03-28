@@ -10,6 +10,7 @@ Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytös
 
 - [Määrittelydokumentti](dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
+- [Changelog](dokumentaatio/changelog.txt)
 
 ## Laskarit
 
