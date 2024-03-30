@@ -5,9 +5,13 @@ description = "Outomaatti"
 authors = ["Markus <markus.aurala@gmail.com>"]
 readme = "README.md"
 
+# Numpyn versiot 1.24:stä eteenpäin: Python ^3.9
+# Kurssin vaatimus: Python ^3.8
+
 [tool.poetry.dependencies]
 python = "^3.8"
 invoke = "^2.2.0"
+numpy = "1.24"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
