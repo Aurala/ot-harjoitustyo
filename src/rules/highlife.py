@@ -1,19 +1,21 @@
 import numpy as np
-from entities.rule import Rule
+from rules.ruleset import Ruleset
 from entities.universe import Universe
 
-class GameOfLife(Rule):
+class CustomRuleset(Ruleset):
 
     def __init__(self):
-        self.name = "Game of Life (B2/S23)"
-        self.description = "Game of Life..."
+        self.name = "HighLife (B36/S23)"
+        self.description = "A Game of Life variation. https://conwaylife.com/wiki/OCA:HighLife"
 
+    @classmethod
     def calculate(self, universe: Universe):
         
-        birth_conditions = [3]
+        birth_conditions = [3, 6]
         survive_conditions = [2, 3]
 
-        new_universe = np.zeros([universe.true_height, universe.true_width])
+        # get universe data via method, not manipulate directly
+        new_universe = np.zeros([universe.true_height, universe.true_width], dtype=np.int8)
         
         for row in range(1, universe.true_height-1):
             for col in range(1, universe.true_width-1):
@@ -27,4 +29,4 @@ class GameOfLife(Rule):
                     if neighbors in survive_conditions:
                         new_universe[row][col] = 1
 
-        universe.set_universe(new_universe)
+        universe.set_universe_as_ndarray(new_universe)

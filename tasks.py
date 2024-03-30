@@ -7,6 +7,16 @@ def start(ctx):
 
 # FIX
 @task
+def life(ctx):
+    ctx.run("python3 src/textmode_life.py", pty=True)
+
+# FIX
+@task
+def highlife(ctx):
+    ctx.run("python3 src/textmode_highlife.py", pty=True)
+
+# FIX
+@task
 def test(ctx):
     ctx.run("pytest src", pty=True)
 

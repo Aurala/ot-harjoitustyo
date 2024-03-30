@@ -1,11 +1,13 @@
 import random
 from entities.universe import Universe
-from rules.gameoflife import GameOfLife
+from importlib import import_module
 
 class UniverseService:
 
-    def __init__(self, x=5, y=5):
+    # FIX default-arvot
+    def __init__(self, x=5, y=5, ruleset="rules.highlife"):
         self.universe = Universe(x, y)
+        self.ruleset = import_module(ruleset).CustomRuleset
 
     def get_textual_presentation(self):
         return str(self.universe)
@@ -16,8 +18,14 @@ class UniverseService:
     def get_height(self):
         return self.universe.height
 
+    def count_cells(self):
+        return self.universe.count_cells()
+
     def add_cell(self, x, y):
         self.universe.add_cell(x, y)
+
+    def add_pattern(self, x, y, pattern):
+        self.universe.add_pattern(x, y, pattern)
 
     def erase_cell(self, x, y):
         self.universe.erase_cell(x, y)
@@ -25,6 +33,8 @@ class UniverseService:
     def clear_universe(self):
         self.universe.clear_universe()
 
+    def get_universe_as_list(self):
+        return self.universe.get_universe_as_list()
+
     def next_generation(self):
-        gol = GameOfLife()
-        gol.calculate(self.universe)
+        self.ruleset.calculate(self.universe)
