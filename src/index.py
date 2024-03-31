@@ -9,15 +9,13 @@ def main():
     pygame.init()
     FPS = 60
     FramePerSec = pygame.time.Clock()
-    window = pygame.display.set_mode((80, 40))
-    window.fill((255, 255, 255))
+    screen = pygame.display.set_mode((500, 500))
+    screen.fill((255, 255, 255))
     pygame.display.set_caption("Game")
 
     # Initialize Outomaatti
-    universe_service = UniverseService(80, 40, "rules.life")
+    universe_service = UniverseService(100, 100, "rules.life")
     generation = 0
-    #print("Sukupolvi:", generation, " " * 5, "Soluja:", universe_service.count_cells())
-    #print("\nPaina Ctrl+C poistuaksesi...")
 
     # Glidereita
     glider = [[1, 0, 0], [0, 1, 1], [1, 1, 0]]
@@ -44,19 +42,27 @@ def main():
         [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
     universe_service.add_pattern(40, 5, glider_gun)
 
+    surface = pygame.Surface((100, 100))
+    font = pygame.font.SysFont("Arial", 36)
+
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
-        window.fill((255, 255, 255))
-
+        surface.fill((255, 255, 255))
+    
         universe = universe_service.get_universe_as_list()
         for y in range(len(universe)):
             for x in range(len(universe[0])):
                 if universe[y][x] == 1:
-                    pygame.draw.line(window, (0, 0, 0), (x, y), (x, y))
+                    pygame.draw.line(surface, (0, 0, 0), (x, y), (x, y))
+        
+        screen.blit(pygame.transform.scale_by(surface, (5, 5)), (0, 0))
+
+        text = font.render("Sukupolvi: " + str(generation) + "   Soluja: " + str(universe_service.count_cells()), True, (255, 0, 0))
+        screen.blit(text, (10, 450))
 
         pygame.display.flip()
 

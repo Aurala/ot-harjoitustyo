@@ -5,11 +5,12 @@ description = "Outomaatti"
 authors = ["Markus <markus.aurala@gmail.com>"]
 readme = "README.md"
 
-# Numpyn versiot 1.24:stä eteenpäin: Python ^3.9
+# Numpy ^1.24 eteenpäin: Python 3.9
+# Numpy 1.24 ei asennu Python 3.12:lla
 # Kurssin vaatimus: Python ^3.8
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">= 3.8, < 3.12"
 invoke = "^2.2.0"
 numpy = "1.24"
 pygame = "^2.5.2"
