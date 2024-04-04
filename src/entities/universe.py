@@ -1,9 +1,12 @@
 import numpy as np
 
 class Universe:
-    
+
+# FIX: Define the visibility (private, protected)
+
     def __init__(self, x=5, y=5, padding=5):
-        # FIX: negatiiviset luvut, nollat, muut kuin numerot
+        # FIX: Managing bad inputs
+        # FIX: Defaults to be read from a configuration file
         self.padding = padding
         self.matrix = np.zeros([y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
 
@@ -27,6 +30,7 @@ class Universe:
         y, _ = self.matrix.shape
         return y
 
+    # FIX: Should be internal only
     def get_padding(self):
         return self.padding
 
@@ -44,6 +48,7 @@ class Universe:
         if 0 <= x < self.width and 0 <= y < self.height:
             self.matrix[y + self.padding][x + self.padding] = 0
 
+    # FIX: Use Numpy methods for speed
     def add_pattern(self, x, y, pattern):
         for i in range(len(pattern)):
             for j in range(len(pattern[0])):
@@ -52,19 +57,27 @@ class Universe:
 
     def clear_universe(self):
         self.matrix.fill(0)
+    
+    def get_entire_universe_as_ndarray(self):
+        return self.get_visible_universe().copy()
+
+    # FIX: Manage the possible size mismatch
+    def set_entire_universe_as_ndarray(self, universe):
+        np.copyto(self.matrix, universe)
 
     def get_universe_as_ndarray(self):
         return self.matrix.copy()
-    
-    def set_universe_as_ndarray(self, universe):
-        np.copyto(self.matrix, universe)
 
+    # FIX: This method returns the visible universe, the other method returns the whole of it
     def get_universe_as_list(self):
         return self.get_visible_universe().tolist()
 
-    def __str__(self):
+    # FIX: Use Numpy methods for speed
+    # FIX: Use get_visible_universe()
+    def get_universe_as_text(self):
+        universe = self.get_visible_universe()
         presentation = ""
-        for row in self.matrix[self.padding:-self.padding, self.padding:-self.padding]:
+        for row in universe:
             for col in row:
                 if col == 0:
                     presentation += "."

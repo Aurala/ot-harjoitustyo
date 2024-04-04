@@ -14,7 +14,7 @@ class CustomRuleset(Ruleset):
         birth_conditions = [3, 6]
         survive_conditions = [2, 3]
 
-        # get universe data via method, not manipulate directly
+        # FIX: Get universe data via method (as a Numpy array), not access directly (should be protected anyways)
         new_universe = np.zeros([universe.true_height, universe.true_width], dtype=np.int8)
         
         for row in range(1, universe.true_height-1):
@@ -29,4 +29,4 @@ class CustomRuleset(Ruleset):
                     if neighbors in survive_conditions:
                         new_universe[row][col] = 1
 
-        universe.set_universe_as_ndarray(new_universe)
+        universe.set_entire_universe_as_ndarray(new_universe)

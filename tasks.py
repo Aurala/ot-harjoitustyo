@@ -1,31 +1,39 @@
 from invoke import task
 
-# FIX
-@task
-def start(ctx):
-    ctx.run("python3 src/index.py", pty=True)
+# FIX: Descriptions for each task; 'build' task; more extensive cleanup
 
-# FIX
 @task
-def life(ctx):
-    ctx.run("python3 src/textmode_life.py", pty=True)
+def start(c):
+    print("Starting Outomaatti")
+    c.run("python3 src/index.py", pty=True)
 
-# FIX
 @task
-def highlife(ctx):
-    ctx.run("python3 src/textmode_highlife.py", pty=True)
+def life(c):
+    print("Starting Outomaatti (textmode, ruleset=Life)")
+    c.run("python3 src/textmode_life.py", pty=True)
 
-# FIX
 @task
-def test(ctx):
-    ctx.run("pytest src", pty=True)
+def highlife(c):
+    print("Starting Outomaatti (textmode, ruleset=Highlife)")
+    c.run("python3 src/textmode_highlife.py", pty=True)
 
-# FIX
 @task
-def coverage(ctx):
-    ctx.run("coverage run --branch -m pytest src", pty=True)
+def test(c):
+    print("Running tests")
+    c.run("pytest src", pty=True)
 
-# FIX
 @task
-def coverage_report(ctx):
-    ctx.run("coverage html", pty=True)
+def clean(c):
+    print("Cleaning up")
+    c.run("rm -rf htmlcov", pty=True)
+    c.run("rm -rf .pytest_cache", pty=True)
+
+@task
+def coverage(c):
+    print("Checking the test coverage")
+    c.run("coverage run --branch -m pytest src", pty=True)
+
+@task(coverage)
+def coverage_report(c):
+    print("Generating the test report")
+    c.run("coverage html", pty=True)

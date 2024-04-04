@@ -2,32 +2,64 @@
 
 [Kurssisivu](https://ohjelmistotekniikka-hy.github.io/)
 
-## Harjoitustyö
+## Harjoitustyö: Outomaatti
 
-Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B23/S3), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
+Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B3/S23), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
 
 Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytössä, esimerkiksi innostamaan lapsia matematiikan opiskeluun tai jopa tuottamaan Python-koodia (omien sääntöjen kirjoittaminen).
 
-- [Määrittelydokumentti](dokumentaatio/vaatimusmaarittely.md)
+## Toimintaympäristöstä
+
+...
+
+## Dokumentaatio
+
+- Käyttöohje
+- [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+- Arkkitehtuurikuvaus
+- Testausdokumentti
 - [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 - [Changelog](dokumentaatio/changelog.md)
 
-## Laskarit
+## Komentorivitoiminnot
 
-[Laskaritehtävät](laskarit/)
+### Käynnistys
 
-### Viikko 1
+Ohjelma käynnistyy komennolla:
 
-[Viikon 1 laskaritehtävät](laskarit/viikko1/)
+```
+poetry run invoke start
+```
 
-[Harjoituksessa](https://ohjelmistotekniikka-hy.github.io/python/viikko1) harjoiteltiin gitin käyttöä komentoriviltä ja tehtiin tiedostoja:
-- [komentorivi.txt](laskarit/viikko1/komentorivi.txt)
-- [gitlog.txt](laskarit/viikko1/gitlog.txt)
+HUOMIO: Käyttöliittymän toteutus on vielä alkutekijöissään eikä siinä ole toiminnallisuutta. Sovellus ajaa Game of Life -sääntöjä 100x100-ruudussa määritellyille kuvioille kunnes käyttäjä sulkee sovellusikkunan.
 
-### Viikko 2
+Vaihtoehtoisesti käyttäjä voi käynnistää tekstimuotoisen käyttöliittymän komennoilla:
 
-[Viikon 2 laskaritehtävät](laskarit/viikko2/)
+```
+poetry run invoke life
+```
 
-[Harjoituksessa](https://ohjelmistotekniikka-hy.github.io/python/viikko2) opeteltiin
-- Käyttämään Poetryä ja hallitsemaan riippuvuuksia
-- Tekemään yksikkötestejä
+tai
+
+```
+poetry run invoke highlife
+```
+
+Erona komennoissa on se, että ensimmäinen käyttää oletusarvoisia sääntöjä (B3/S23) ja jälkimmäinen nk. Highlife-sääntöjä (B36/S23). Sovellus lataa säännöt toteuttavat funktiot dynaamisesti eri luokista.
+
+### Testaus
+
+Automaattitestit suoritetaan komennolla:
+
+```
+poetry run invoke test
+```
+
+Testiraportti generoidaan komennoilla:
+
+```
+poetry run invoke coverage
+poetry run invoke coverage-report
+```
+
+Jälkimmäinen komento tuottaa HTML-muotoisen raportin, joka tallentuu projektin juureen hakemistoon 'htmlcov'.
