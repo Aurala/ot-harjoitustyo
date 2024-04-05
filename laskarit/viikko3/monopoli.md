@@ -11,31 +11,33 @@ Lisätietoja harjoituksen tekemiseen löytyi:
     Monopolipeli "1" -- "1" Pelilauta
     Pelilauta "1" -- "40" Ruutu
     Ruutu "1" <|-- "1" Aloitusruutu
-    Ruutu "1" <|-- Sattuma
-    Sattuma -- SattumaKortti
-    SattumaKortti : * toiminto()
-    Ruutu "1" <|-- Yhteismaa
-    Yhteismaa -- YhteismaaKortti
-    YhteismaaKortti : * toiminto()
-    Aloitusruutu : * toiminto()
+    Ruutu "1" <|-- "3" Sattuma
+    Sattuma "1" -- "1" SattumaKortti : päällimmäinen kortti 16 kortin pinosta (satunnaisjärjestys)
+    SattumaKortti : jokuToiminto()*
+    Ruutu <|-- "3" Yhteismaa
+    Yhteismaa "1" -- "1" YhteismaaKortti : päällimmäinen kortti 16 kortin pinosta (satunnaisjärjestys)
+    YhteismaaKortti : jokuToiminto()*
+    Aloitusruutu : jokuToiminto()*
     Aloitusruutu : sijainti
-    Ruutu "1" <|-- Vankila
-    Vankila : * toiminto()
+    Ruutu <|-- "1" Vankila
+    Vankila : jokuToiminto()*
     Vankila : sijainti
-    Ruutu <|-- Asema
-    Asema : * toiminto()
-    Ruutu "1" <|-- Laitos
-    Laitos : * toiminto()
-    Ruutu "1" <|-- Katu
+    Ruutu <|-- "4" Asema
+    Asema : jokuToiminto()*
+    Ruutu <|-- "2" Laitos
+    Laitos : jokuToiminto()*
+    Ruutu <|-- "24" Katu
     Katu : nimi
-    Katu : * toiminto()
-    Katu -- "0..4" Talo
-    Katu -- "0..1" Hotelli
+    Katu : jokuToiminto()*
+    Katu "1" -- "0..4" Talo
+    Katu "1" -- "0..1" Hotelli
     Talo .. Hotelli : JOKO TAI (neljä taloa voi poistaa ja rakentaa tilalle hotellin)
     Ruutu "1" -- "1" Ruutu : seuraava
     Ruutu "1" -- "0..8" Pelinappula
     Pelinappula "1" -- "1" Pelaaja
     Pelaaja "2..8" -- "1" Monopolipeli
-    Pelaaja -- Katu
+    Pelaaja "0..1" -- "1" Katu
     Pelaaja : rahaa
 ```
+
+Erilaisten ruutujen ja niihin liittyvien korttien lukumääriä osoittavissa merkinnöissä epävarmuutta. Toivottavasti meni edes jokseenkin oikein.

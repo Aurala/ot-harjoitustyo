@@ -8,6 +8,7 @@ class CustomRuleset(Ruleset):
         self.name = "Game of Life (B2/S23)"
         self.description = "Game of Life..."
 
+    # FIX: Remove code duplication between Life and Highlife classes
     @classmethod
     def calculate(self, universe: Universe):
         

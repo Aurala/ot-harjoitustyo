@@ -1,9 +1,11 @@
 # Viikko 3
 
-- Projektin tiedostorakenne, pakolliset riippuvuudet
-- Universe-luokka, jossa tieto soluista sekä metodit niiden käsittelyyn
-- Outomaatti-service, joka luo Universen annettujen parametrien mukaisesti ja tarjoaa sovelluksille pääsyn Universe-luokan metodeihin
-- Kaksi tekstipohjaista käyttöliittymää, joilla varmistettu, että sovellus osaa ladata dynaamisesti eri luokista eri sääntöjä toteuttavia funktioita
-- Yksinkertaisin mahdollinen graafinen käyttöliittymä, jolla harjoiteltu Pygamen käyttöä
-- Universe-luokan ja Outomaatti-servicen automaattitestit
-- Raakile Pattern-luokasta ja -repositorystä
+- Alustettu projekti kurssila määritelyillä pakollisilla riippuvuuksilla
+- Lisätty riippuvuuksia: Pygame, Numpy, Dynaconf
+- Tehty toteutus Universe-luokasta, jossa tieto soluista sekä metodit niiden käsittelyyn
+- Tehty minimaalinen Outomaatti-service, jossa käyttöliittymien tarvitsemat palvelut
+- Rakennettu kaksi ei-interaktiivista tekstipohjaista käyttöliittymää ja yksi ei-interaktiivinen graafinen käyttöliittymä, joilla varmistettu, että sovellus osaa ladata dynaamisesti ja suorittaa eri luokista eri sääntöjä toteuttavia funktioita oikein
+- Tehty kattavat taskit sovelluksen ja testien ajamiseen skeä testiraporttien generoimiseen
+- Toteutettu automaattitestejä Universe-luokalle ja Outomaatti-servicelle
+- (Aloitettu raakile Pattern-luokasta ja -repositorystä - ei kuitenkaan vielä käytössä)
+- (Aloitettu väsäämään tietokantaa luovaa koodia - ei kuitenkaan vielä käytössä)

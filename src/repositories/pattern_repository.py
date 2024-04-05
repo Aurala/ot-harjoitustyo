@@ -14,7 +14,11 @@ class PatternRepository:
     def save_pattern(self):
         pass
 
-    # Adapted from https://github.com/reppertj/Game-of-Life/blob/master/lifereader.py (MIT license)
+    # My function will use the regular expression from Justin Reppert's Game of Life
+    # project at https://github.com/reppertj/Game-of-Life/blob/master/lifereader.py
+    # published under the MIT license
+    # My function will parse also the optional metadata in the comments to be stored
+    # in the database
     # FIX: exception handling
     def parse_rle(self):
         lines = [

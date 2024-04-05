@@ -4,13 +4,17 @@
 
 ## Harjoitustyö: Outomaatti
 
-Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B3/S23), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
+Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B3/S23), mutta sovellus tarjoaa käyttäjälle mahdollisuuden käyttää erilaisia sääntöjä.
 
 Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytössä, esimerkiksi innostamaan lapsia matematiikan opiskeluun tai jopa tuottamaan Python-koodia (omien sääntöjen kirjoittaminen).
 
 ## Toimintaympäristöstä
 
-...
+Testatut ympäristöt:
+- macOS 14.4.1 (Apple Silicon)
+- Helsingin yliopiston Cubbli Linux -virtuaalikoneet
+
+Riippuvuuksien puolesta sovellus toimii Python-versioilla 3.8-3.11. Kehityksessä ja testauksessa on ollut käytössä pääasiassa Python 3.10.
 
 ## Dokumentaatio
 
@@ -55,11 +59,14 @@ Automaattitestit suoritetaan komennolla:
 poetry run invoke test
 ```
 
-Testiraportti generoidaan komennoilla:
+Testiraportti generoidaan komennolla:
 
 ```
 poetry run invoke coverage
-poetry run invoke coverage-report
 ```
 
-Jälkimmäinen komento tuottaa HTML-muotoisen raportin, joka tallentuu projektin juureen hakemistoon 'htmlcov'.
+Tai jos käyttäjä haluaa HTML-muotoisen testiraportin, joka tallentuu projektin juureen hakemistoon 'htmlcov', niin komento on:
+
+```
+poetry run invoke coverage-report
+```

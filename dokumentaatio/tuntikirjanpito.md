@@ -10,4 +10,5 @@
 | 30.3.2024 | 8 | Laskentasääntöjen lataaminen dynaamisesti luokista; Pygameen tutustumista; toimivat simulaatiot tekstimoodissa ja Pygamessa |
 | 31.3.2024 | 5 | Refaktorointia ja testien kirjoittamista; Pygame-liittymän parantelua |
 | 4.4.2024 | 3 | Koodin, testien ja dokumentaation siistimistä palautuskuntoon |
-| Yhteensä | 32 | |
+| 6.4.2024 | 1 | Toimivuuden testaaminen Cubbli Linuxissa; Dynaconfin lisäys projektiin; viikko3-branchin mergeäminen mainiin ja palautus |
+| Yhteensä | 33 | |
