@@ -19,7 +19,7 @@ class Universe:
     def height(self):
         y, _ = self.matrix.shape
         return y - self.padding * 2
-    
+
     @property
     def true_width(self):
         _ ,x = self.matrix.shape
@@ -57,7 +57,7 @@ class Universe:
 
     def clear_universe(self):
         self.matrix.fill(0)
-    
+
     def get_entire_universe_as_ndarray(self):
         return self.get_visible_universe().copy()
 

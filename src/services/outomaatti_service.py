@@ -1,5 +1,5 @@
-from entities.universe import Universe
 from importlib import import_module
+from entities.universe import Universe
 
 class OutomaattiService:
 
@@ -10,7 +10,7 @@ class OutomaattiService:
 
     def get_width(self):
         return self.universe.width
-    
+
     def get_height(self):
         return self.universe.height
 
@@ -34,7 +34,7 @@ class OutomaattiService:
 
     def get_universe_as_list(self):
         return self.universe.get_universe_as_list()
-  
+
     def get_universe_as_text(self):
         return self.universe.get_universe_as_text()
 

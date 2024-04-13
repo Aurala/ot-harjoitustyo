@@ -23,6 +23,11 @@ def test(c):
     c.run("pytest src", pty=True)
 
 @task
+def lint(c):
+    print("Linting")
+    c.run("pylint src", pty=True)
+
+@task
 def clean(c):
     print("Cleaning up")
     c.run("rm -rf htmlcov", pty=True)

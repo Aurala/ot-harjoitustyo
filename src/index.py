@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 from services.outomaatti_service import OutomaattiService
 
@@ -51,7 +52,7 @@ def main():
                 sys.exit()
 
         surface.fill((255, 255, 255))
-    
+
         # In this Proof of Concept Python lists are used
         # FIX: Switch to Numpy arrays for speed
         universe = outomaatti.get_universe_as_list()
@@ -59,7 +60,7 @@ def main():
             for x in range(len(universe[0])):
                 if universe[y][x] == 1:
                     pygame.draw.line(surface, (0, 0, 0), (x, y), (x, y))
-        
+
         screen.blit(pygame.transform.scale_by(surface, (5, 5)), (0, 0))
 
         text = font.render("Sukupolvi: " + str(generation) + "   Soluja: " + str(outomaatti.count_cells()), True, (255, 0, 0))
