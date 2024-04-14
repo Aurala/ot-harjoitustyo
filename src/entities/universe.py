@@ -59,16 +59,15 @@ class Universe:
         self.matrix.fill(0)
 
     def get_entire_universe_as_ndarray(self):
-        return self.get_visible_universe().copy()
+        return self.matrix.copy()
 
     # FIX: Manage the possible size mismatch
     def set_entire_universe_as_ndarray(self, universe):
         np.copyto(self.matrix, universe)
 
     def get_universe_as_ndarray(self):
-        return self.matrix.copy()
+        return self.get_visible_universe().copy()
 
-    # FIX: This method returns the visible universe, the other method returns the whole of it
     def get_universe_as_list(self):
         return self.get_visible_universe().tolist()
 

@@ -59,7 +59,7 @@ Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä ole
 - Käyttäjä voi määrittää maksimikeston simulaatiolle.
 - Käyttäjä voi valita useista erilaista piirtotyökaluista.
 - Käyttäjä voi määrittää piirtovärin.
-- Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioksi.
+- Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioiksi.
 - Käyttäjän sulkiessa sovelluksen, se tallentaa meneillään olevan simulaation tietokantaan.
 - Käyttäjä voi tallettaa tiedostoon yksittäisen kuvakaappauksen simulaatiosta.
 - Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
