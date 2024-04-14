@@ -1,6 +1,7 @@
 from importlib import import_module
 from entities.universe import Universe
 
+
 class OutomaattiService:
 
     # FIX: Read defaults from a configuration file

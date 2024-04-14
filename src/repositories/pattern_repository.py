@@ -1,5 +1,6 @@
 import re
 
+
 class PatternRepository:
 
     def __init__(self):
@@ -42,17 +43,18 @@ class PatternRepository:
             "10bo5bo$37b3o9bobo3bobo$37bo12boo4boo$62bo$61bobo$61bobo$62bo5$64boo$\n",
             "64boo$$67boo4bo$67boo3bobo$72bobo$73bo5$75boo$75boo$$78boo$78boo$$81b\n",
             "oo$81boo!\n"]
-        
+
         lines = [line for line in lines if line.strip()[0] != '#']
         header = lines[0]
         lines = lines[1:]
         lines = ''.join(lines).strip('\n')
-        header_pattern = re.compile(r'x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?B(\d+).*?S(\d+.)')
+        header_pattern = re.compile(
+            r'x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?B(\d+).*?S(\d+.)')
         header_matches = header_pattern.search(header)
-        #try:
+        # try:
         born = header_matches.group(3)
         survive = header_matches.group(4)
-        #except IndexError:
+        # except IndexError:
         #    print("No or improper rule in file; defaulting to B3/S23.")
         #    born = "3"
         #    survive = "23"
@@ -60,8 +62,10 @@ class PatternRepository:
         height = int(header_matches.group(2))
         line_pattern = re.compile(r'(\d*)([bo$!])')
         line_data = line_pattern.findall(lines)
-        line_data = [(1, match[1]) if match[0] == '' else (int(match[0]), match[1]) for match in line_data]
+        line_data = [(1, match[1]) if match[0] == '' else (
+            int(match[0]), match[1]) for match in line_data]
         print(height, width, born, survive, line_data)
+
 
 if __name__ == "__main__":
     pr = PatternRepository()

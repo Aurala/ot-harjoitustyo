@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from entities.universe import Universe
 
+
 class TestUniverse(unittest.TestCase):
 
     def setUp(self):

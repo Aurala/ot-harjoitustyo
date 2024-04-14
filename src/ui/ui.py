@@ -3,6 +3,7 @@ import pygame_menu
 import numpy as np
 from services.outomaatti_service import OutomaattiService
 
+
 class UI():
 
     def __init__(self):
@@ -27,31 +28,43 @@ class UI():
         self.theme = pygame_menu.Theme()
         self.theme.background_color = (55, 55, 55)
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
-        self.fontawesome = pygame.font.Font('src/ui/resources/Font Awesome 6 Free-Solid-900.otf', size=24)
+        self.fontawesome = pygame.font.Font(
+            'src/ui/resources/Font Awesome 6 Free-Solid-900.otf', size=24)
 
-        self.menu = pygame_menu.Menu(position=(100, 0), width=200, height=625, theme=self.theme, title='')
+        self.menu = pygame_menu.Menu(
+            position=(100, 0), width=200, height=625, theme=self.theme, title='')
 
         flow_controls_frame = self.menu.add.frame_h(200, 50)
-        flow_controls_frame.pack(self.menu.add.button("play", lambda: self.play_button_pressed(), font_name=self.fontawesome))
-        flow_controls_frame.pack(self.menu.add.button("pause", lambda: self.pause_button_pressed(), font_name=self.fontawesome))
-        flow_controls_frame.pack(self.menu.add.button("forward-step", lambda: self.next_frame_button_pressed(), font_name=self.fontawesome))
+        flow_controls_frame.pack(self.menu.add.button(
+            "play", lambda: self.play_button_pressed(), font_name=self.fontawesome))
+        flow_controls_frame.pack(self.menu.add.button(
+            "pause", lambda: self.pause_button_pressed(), font_name=self.fontawesome))
+        flow_controls_frame.pack(self.menu.add.button(
+            "forward-step", lambda: self.next_frame_button_pressed(), font_name=self.fontawesome))
 
         edit_controls_frame = self.menu.add.frame_h(200, 50)
-        edit_controls_frame.pack(self.menu.add.button("pencil", lambda: self.pencil_button_pressed(), font_name=self.fontawesome))
-        edit_controls_frame.pack(self.menu.add.button("eraser", lambda: self.erase_button_pressed(), font_name=self.fontawesome))
-        edit_controls_frame.pack(self.menu.add.button("trash", lambda: self.trash_button_pressed(), font_name=self.fontawesome))
+        edit_controls_frame.pack(self.menu.add.button(
+            "pencil", lambda: self.pencil_button_pressed(), font_name=self.fontawesome))
+        edit_controls_frame.pack(self.menu.add.button(
+            "eraser", lambda: self.erase_button_pressed(), font_name=self.fontawesome))
+        edit_controls_frame.pack(self.menu.add.button(
+            "trash", lambda: self.trash_button_pressed(), font_name=self.fontawesome))
 
         pattern_controls_frame = self.menu.add.frame_h(200, 50)
-        pattern_controls_frame.pack(self.menu.add.button("database", lambda: self.browse_button_pressed(), font_name=self.fontawesome))
-        pattern_controls_frame.pack(self.menu.add.button("folder-open", lambda: self.import_button_pressed(), font_name=self.fontawesome))
+        pattern_controls_frame.pack(self.menu.add.button(
+            "database", lambda: self.browse_button_pressed(), font_name=self.fontawesome))
+        pattern_controls_frame.pack(self.menu.add.button(
+            "folder-open", lambda: self.import_button_pressed(), font_name=self.fontawesome))
 
         application_controls_frame = self.menu.add.frame_h(200, 50)
-        application_controls_frame.pack(self.menu.add.button("gear", self.settings_button_pressed(), font_name=self.fontawesome))
-        application_controls_frame.pack(self.menu.add.button("right-from-bracket", pygame_menu.events.EXIT, font_name=self.fontawesome))
+        application_controls_frame.pack(self.menu.add.button(
+            "gear", self.settings_button_pressed(), font_name=self.fontawesome))
+        application_controls_frame.pack(self.menu.add.button(
+            "right-from-bracket", pygame_menu.events.EXIT, font_name=self.fontawesome))
 
         self.is_application_running = False
         self.is_simulation_running = False
-  
+
     def play_button_pressed(self):
         self.is_simulation_running = True
         print("Play pressed")
@@ -106,15 +119,22 @@ class UI():
 
         # Glider gun
         glider_gun = \
-            [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
-            [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
-            [1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
+            [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+                 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+                 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+             [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+                 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0,
+                 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
+                 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.outomaatti.add_pattern(40, 10, glider_gun)
 
         self.is_application_running = True
@@ -145,10 +165,12 @@ class UI():
 
             pygame.surfarray.blit_array(self.cell_surface, rgb_array * 255)
 
-            self.surface.blit(pygame.transform.scale_by(self.cell_surface, (6, 6)), (0, 0))
+            self.surface.blit(pygame.transform.scale_by(
+                self.cell_surface, (6, 6)), (0, 0))
 
             font = pygame.font.SysFont("Arial", 18)
-            text = font.render("Universumi: " + str(self.outomaatti.get_width()) + "x" + str(self.outomaatti.get_height())  + "   Sukupolvi: " + str(self.generation) + "   Soluja: " + str(self.outomaatti.count_cells()), True, (255, 0, 0))
+            text = font.render("Universumi: " + str(self.outomaatti.get_width()) + "x" + str(self.outomaatti.get_height()) +
+                               "   Sukupolvi: " + str(self.generation) + "   Soluja: " + str(self.outomaatti.count_cells()), True, (255, 0, 0))
             self.surface.blit(text, (10, 600))
 
             self.menu.update(events)

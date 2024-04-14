@@ -28,6 +28,11 @@ def lint(c):
     c.run("pylint src", pty=True)
 
 @task
+def format(c):
+    print("Formatting code (press CTRL-C now if there are uncommitted changes)")
+    c.run("autopep8 --in-place --recursive src", pty=True)
+
+@task
 def clean(c):
     print("Cleaning up")
     c.run("rm -rf htmlcov", pty=True)

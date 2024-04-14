@@ -1,14 +1,16 @@
 import numpy as np
 
+
 class Universe:
 
-# FIX: Define the visibility (private, protected)
+    # FIX: Define the visibility (private, protected)
 
     def __init__(self, x=5, y=5, padding=5):
         # FIX: Managing bad inputs
         # FIX: Defaults to be read from a configuration file
         self.padding = padding
-        self.matrix = np.zeros([y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
+        self.matrix = np.zeros(
+            [y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
 
     @property
     def width(self):
@@ -22,7 +24,7 @@ class Universe:
 
     @property
     def true_width(self):
-        _ ,x = self.matrix.shape
+        _, x = self.matrix.shape
         return x
 
     @property
@@ -35,7 +37,8 @@ class Universe:
         return self.padding
 
     def get_visible_universe(self):
-        return self.matrix[self.padding:self.padding+self.height, self.padding:self.padding+self.width]
+        return self.matrix[self.padding:self.padding+self.height,
+                           self.padding:self.padding+self.width]
 
     def count_cells(self):
         return np.count_nonzero(self.get_visible_universe())
@@ -71,16 +74,7 @@ class Universe:
     def get_universe_as_list(self):
         return self.get_visible_universe().tolist()
 
-    # FIX: Use Numpy methods for speed
-    # FIX: Use get_visible_universe()
     def get_universe_as_text(self):
         universe = self.get_visible_universe()
-        presentation = ""
-        for row in universe:
-            for col in row:
-                if col == 0:
-                    presentation += "."
-                else:
-                    presentation += "*"
-            presentation += "\n"
-        return presentation
+        presentation = np.where(universe == 0, ".", "*").astype(str)
+        return "\n".join("".join(row) for row in presentation) + "\n"

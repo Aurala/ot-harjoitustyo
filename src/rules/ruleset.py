@@ -1,5 +1,5 @@
-import numpy as np
 from entities.universe import Universe
+
 
 class Ruleset:
 
