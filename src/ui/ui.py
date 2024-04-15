@@ -9,6 +9,14 @@ class UI():
     def __init__(self):
 
         # FIX: Error handling
+        # FIX: Move code to functions/classes
+
+        self.surface_size_x = 600
+        self.surface_size_y = 600
+        self.universe_size_x = 100
+        self.universe_size_y = 100
+        self.scaling_factor_x = self.surface_size_x / self.universe_size_x
+        self.scaling_factor_y = self.surface_size_y / self.universe_size_y
 
         # Initialize Pygame
         pygame.init()
@@ -20,19 +28,28 @@ class UI():
         self.clock = pygame.time.Clock()
 
         # Initialize Outomaatti
-        self.outomaatti = OutomaattiService(200, 200, "rules.life")
+        self.outomaatti = OutomaattiService(100, 100, "rules.life")
         self.generation = 0
-        self.cell_surface = pygame.Surface((200, 200))
+        self.cell_surface = pygame.Surface((100, 100))
 
-        # Initialize pygame-menu
-        self.theme = pygame_menu.Theme()
-        self.theme.background_color = (55, 55, 55)
-        self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
+        self.cursor_normal = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_ARROW)
+        self.cursor_pencil = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
+
+        self.menufont = pygame_menu.font.FONT_MUNRO
         self.fontawesome = pygame.font.Font(
             "src/ui/resources/Font Awesome 6 Free-Solid-900.otf", size=24)
+        
+        # Initialize pygame-menu
+        self.theme = pygame_menu.Theme(widget_font=self.menufont, widget_font_color=(255, 255, 255), widget_font_size=16)
+        self.theme.background_color = (55, 55, 55)
+        self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 
         self.menu = pygame_menu.Menu(
             position=(100, 0), width=200, height=625, theme=self.theme, title='')
+
+        self.menu.add.label("Outomaatti")
+
+        self.menu.add.selector('Nopeus: ', [('hidas', 1), ('keskinopea', 2), ('nopea', 3)], onchange=self.set_speed())
 
         flow_controls_frame = self.menu.add.frame_h(200, 50)
         flow_controls_frame.pack(self.menu.add.button(
@@ -65,19 +82,25 @@ class UI():
         self.is_application_running = False
         self.is_simulation_running = False
 
-    def play_button_pressed(self):
-        self.is_simulation_running = True
-        print("Play pressed")
-
-    def pause_button_pressed(self):
-        self.is_simulation_running = False
-        print("Pause pressed")
-
     # FIX: logic
+    def set_speed(self):
+        print("Speed changed")
+
+    # FIX: change the state of buttons
+    def play_button_pressed(self):
+        print("Play pressed")
+        self.is_simulation_running = True
+
+    # FIX: change the state of buttons
+    def pause_button_pressed(self):
+        print("Pause pressed")
+        self.is_simulation_running = False
+
+    # FIX: logic, change the state of buttons
     def next_frame_button_pressed(self):
         print("Next frame pressed")
 
-    # FIX: logic
+    # FIX: logic, change the state of buttons
     def pencil_button_pressed(self):
         print("Pencil pressed")
 
@@ -85,9 +108,10 @@ class UI():
     def eraser_button_pressed(self):
         print("Eraser pressed")
 
-    # FIX: logic
+    # FIX: add a confirmation dialog, pause simulation
     def trash_button_pressed(self):
         print("Trash pressed")
+        self.outomaatti.clear_universe()
 
     # FIX: logic
     def browse_button_pressed(self):
@@ -146,17 +170,30 @@ class UI():
         # - framerate
         # - define what to redraw and when
         # - move the Outomaatti calculation to a thread if needed
+        # FIX: move code to functions
 
         while self.is_application_running:
 
             self.clock.tick(30)
             start_time = pygame.time.get_ticks()
 
+            mouse_position_x, mouse_position_y = pygame.mouse.get_pos()
+            if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
+                pygame.mouse.set_cursor(self.cursor_pencil)
+            else:
+                pygame.mouse.set_cursor(self.cursor_normal)
+
             events = pygame.event.get()
 
             for event in events:
                 if event.type == pygame.QUIT:
                     self.is_running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_position_x, mouse_position_y = pygame.mouse.get_pos()
+                    if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
+                        print("Mouse clicked (scaled): x = " + str(mouse_position_x/self.scaling_factor_x) + ", y = " + str(mouse_position_y/self.scaling_factor_y))
+                        if not self.is_simulation_running:
+                            self.outomaatti.add_cell(int(mouse_position_x/self.scaling_factor_x), int(mouse_position_y/self.scaling_factor_y))
 
             self.surface.blit(self.background, (0, 0))
 
@@ -173,11 +210,17 @@ class UI():
             self.cell_surface.set_colorkey((0, 0, 0))
 
             self.surface.blit(pygame.transform.scale_by(
-                self.cell_surface, (3, 3)), (0, 0))
+                self.cell_surface, (self.scaling_factor_x, self.scaling_factor_y)), (0, 0))
 
             font = pygame.font.SysFont("Arial", 18)
-            text = font.render("Universumi: " + str(self.outomaatti.get_width()) + "x" + str(self.outomaatti.get_height()) +
-                               "   Sukupolvi: " + str(self.generation) + "   Soluja: " + str(self.outomaatti.count_cells()), True, (255, 0, 0))
+            text = font.render("Universumi: " + 
+                               str(self.outomaatti.get_width()) + 
+                               "x" + 
+                               str(self.outomaatti.get_height()) +
+                               "   Sukupolvi: " + 
+                               str(self.generation) + 
+                               "   Soluja: " + 
+                               str(self.outomaatti.count_cells()), True, (255, 0, 0))
             self.surface.blit(text, (10, 600))
 
             self.menu.update(events)
@@ -186,4 +229,4 @@ class UI():
             pygame.display.update()
 
             end_time = pygame.time.get_ticks()
-            print(end_time-start_time)
+            # print(end_time-start_time)
