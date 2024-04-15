@@ -53,9 +53,9 @@ class Universe:
 
     # FIX: Use Numpy methods for speed
     def add_pattern(self, x, y, pattern):
-        for i in range(len(pattern)):
-            for j in range(len(pattern[0])):
-                if pattern[i][j] == 1:
+        for i, row in enumerate(pattern):
+            for j, value in enumerate(row):
+                if value == 1:
                     self.add_cell(x + j, y + i)
 
     def clear_universe(self):

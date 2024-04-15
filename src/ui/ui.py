@@ -15,21 +15,21 @@ class UI():
         pygame.display.set_caption('Outomaatti')
         self.surface = pygame.display.set_mode((800, 625))
         self.background = pygame.Surface((800, 625))
-        self.background.fill("#ffffff")
+        self.background.fill((0, 0, 0))
 
         self.clock = pygame.time.Clock()
 
         # Initialize Outomaatti
-        self.outomaatti = OutomaattiService(100, 100, "rules.life")
+        self.outomaatti = OutomaattiService(200, 200, "rules.life")
         self.generation = 0
-        self.cell_surface = pygame.Surface((100, 100))
+        self.cell_surface = pygame.Surface((200, 200))
 
         # Initialize pygame-menu
         self.theme = pygame_menu.Theme()
         self.theme.background_color = (55, 55, 55)
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
         self.fontawesome = pygame.font.Font(
-            'src/ui/resources/Font Awesome 6 Free-Solid-900.otf', size=24)
+            "src/ui/resources/Font Awesome 6 Free-Solid-900.otf", size=24)
 
         self.menu = pygame_menu.Menu(
             position=(100, 0), width=200, height=625, theme=self.theme, title='')
@@ -119,7 +119,8 @@ class UI():
 
         # Glider gun
         glider_gun = \
-            [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                  0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
@@ -134,11 +135,17 @@ class UI():
                  0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.outomaatti.add_pattern(40, 10, glider_gun)
 
         self.is_application_running = True
         self.is_simulation_running = False
+
+        # FIX: optimize
+        # - framerate
+        # - define what to redraw and when
+        # - move the Outomaatti calculation to a thread if needed
 
         while self.is_application_running:
 
@@ -153,7 +160,7 @@ class UI():
 
             self.surface.blit(self.background, (0, 0))
 
-            self.cell_surface.fill((255, 255, 255))
+            self.cell_surface.fill((255, 0, 0))
 
             if self.is_simulation_running:
                 self.outomaatti.next_generation()
@@ -162,11 +169,11 @@ class UI():
             universe = self.outomaatti.get_universe_as_ndarray().transpose()
             expanded_array = np.expand_dims(universe, axis=2)
             rgb_array = np.repeat(expanded_array, 3, axis=2)
-
-            pygame.surfarray.blit_array(self.cell_surface, rgb_array * 255)
+            self.cell_surface = pygame.surfarray.make_surface(rgb_array * 255)
+            self.cell_surface.set_colorkey((0, 0, 0))
 
             self.surface.blit(pygame.transform.scale_by(
-                self.cell_surface, (6, 6)), (0, 0))
+                self.cell_surface, (3, 3)), (0, 0))
 
             font = pygame.font.SysFont("Arial", 18)
             text = font.render("Universumi: " + str(self.outomaatti.get_width()) + "x" + str(self.outomaatti.get_height()) +

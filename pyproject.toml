@@ -16,6 +16,7 @@ numpy = "1.24"
 dynaconf = "^3.2.5"
 pygame-ce = "^2.4.1"
 pygame-menu-ce = "^4.4.3"
+pyclean = "^3.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"

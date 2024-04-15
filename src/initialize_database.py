@@ -4,35 +4,50 @@ from database_connection import get_database_connection
 def drop_tables(connection):
 
     sql_commands = [
-        "DROP TABLE IF EXISTS patterns",
-        "DROP TABLE IF EXISTS categories"
+        "DROP TABLE IF EXISTS Patterns",
+        "DROP TABLE IF EXISTS Categories",
+        "DROP TABLE IF EXISTS Rules"
     ]
+
+    cursor = connection.cursor()
+    for command in sql_commands:
+        cursor.execute(command)
+    connection.commit()
 
 
 def create_tables(connection):
 
     sql_commands = [
         """
-        CREATE TABLE patterns (
-            id primary key, 
-            category text,
-            name text
-            comments text,
-            pattern text,
-            meta text,
-            x_coord integer,
-            y_coord integer,
-            rules text,
-            hash text
+        CREATE TABLE Patterns (
+            pattern_id INTEGER PRIMARY KEY, 
+            category_id INTEGER REFERENCES Categories,
+            rules_id INTEGER REFERENCES Rules,
+            name TEXT,
+            pattern TEXT,
+            metadata TEXT
         )
         """,
         """
-        CREATE TABLE categories (
-            id primary key,
-            name, description
+        CREATE TABLE Categories (
+            category_id INTEGER PRIMARY KEY,
+            name TEXT,
+            description TEXT
+        )
+        """,
+        """
+        CREATE TABLE Rules (
+            rule_id INTEGER PRIMARY KEY,
+            name TEXT,
+            description TEXT
         )
         """
     ]
+
+    cursor = connection.cursor()
+    for command in sql_commands:
+        cursor.execute(command)
+    connection.commit()
 
 
 def initialize_database():

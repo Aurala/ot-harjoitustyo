@@ -1,6 +1,6 @@
 from invoke import task
 
-# FIX: Descriptions for each task; 'build' task; more extensive cleanup
+# FIX: Descriptions for each task; more extensive cleanup
 
 @task
 def start(c):
@@ -33,10 +33,17 @@ def format(c):
     c.run("autopep8 --in-place --recursive src", pty=True)
 
 @task
+def initdb(c):
+    print("Initializing the database")
+    c.run("python3 src/initialize_database.py")
+
+@task
 def clean(c):
     print("Cleaning up")
     c.run("rm -rf htmlcov", pty=True)
     c.run("rm -rf .pytest_cache", pty=True)
+    c.run("rm -rf *.db", pty=True)
+    c.run("pyclean --verbose .")
 
 @task
 def coverage(c):

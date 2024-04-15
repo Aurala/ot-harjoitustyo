@@ -45,7 +45,8 @@ def main():
     while True:
         system("clear")
         print(outomaatti.get_universe_as_text())
-        print("Sukupolvi:", generation, " " * 5,
+        print("Säännöt: Life", " " * 5,
+              "Sukupolvi:", generation, " " * 5,
               "Soluja:", outomaatti.count_cells())
         print("\nPaina Ctrl+C poistuaksesi...")
         sleep(1)
