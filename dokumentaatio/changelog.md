@@ -15,7 +15,12 @@
 - Vaihdettu Pygame Community Editioniin
 - Lisätty Pygame-menu -kirjasto käyttöliittymän valikoiden rakentamiseen (kokeiltu ensin Pygame GUI -kirjastoa, mutta osoittautui rikkinäiseksi ainakin omassa kehitysympäristössäni)
 - Käyttöliittymään lisätty status-palkki ja menu oikeaan reunaan
+- Käyttöliittymän napeista toimii play, pause, clean, exit, mutta nappien tilat (active/deactive) eivät päivity (vielä)
+- Käyttäjä voi piirtää soluja ruudulle simulaation ollessa pysäytettynä
+- Käyttäjä voi poistaa soluja ruudulta simulaation ollessa pysäytettynä
 - Font Awesome -fontti lisätty, jotta saadaan tyylikkäitä ikoneita menun nappeihin
 - Tietokannan luova koodi tehty, oma taski (initdb)
-- Koodia refaktoroitu ja formatoitu automaattisesti ja käsin linttausvirheiden poistamiseksi
-- Pientä optimointia siellä ja täällä isojen solumäärien käsittelyyn
+- Ylimääräisten tiedostojen poistoon tehty taski (clean), jota varten asennettu Pyclean
+- Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 10 virhettä)
+- **Käytössä olevien luokkien** haarautumakattavuus > 20%
+- Optimointia isojen solumäärien käsittelyä varten

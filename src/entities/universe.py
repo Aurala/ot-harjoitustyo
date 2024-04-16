@@ -43,6 +43,13 @@ class Universe:
     def count_cells(self):
         return np.count_nonzero(self.get_visible_universe())
 
+    def invert_cell(self, x, y):
+        if 0 <= x < self.width and 0 <= y < self.height:
+            if self.matrix[y + self.padding][x + self.padding] == 0:
+                self.matrix[y + self.padding][x + self.padding] = 1
+            else:
+                self.matrix[y + self.padding][x + self.padding] = 0
+
     def add_cell(self, x, y):
         if 0 <= x < self.width and 0 <= y < self.height:
             self.matrix[y + self.padding][x + self.padding] = 1

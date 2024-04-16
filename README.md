@@ -20,7 +20,7 @@ Riippuvuuksien puolesta sovellus toimii Python-versioilla 3.8-3.11. Kehityksess�
 
 - Käyttöohje
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
-- Arkkitehtuurikuvaus
+- [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 - Testausdokumentti
 - [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 - [Changelog](dokumentaatio/changelog.md)

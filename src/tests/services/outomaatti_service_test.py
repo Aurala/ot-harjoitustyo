@@ -24,6 +24,13 @@ class TestOutomaattiService(unittest.TestCase):
         self.assertEqual(outomaatti.get_width(), 42)
         self.assertEqual(outomaatti.get_height(), 69)
 
+    def test_invert_cell_in_universe(self):
+        outomaatti = OutomaattiService(1, 1)
+        outomaatti.invert_cell(0, 0)
+        self.assertEqual(outomaatti.get_universe_as_text(), "*\n")
+        outomaatti.invert_cell(0, 0)
+        self.assertEqual(outomaatti.get_universe_as_text(), ".\n")
+
     def test_add_cell_to_universe(self):
         outomaatti = OutomaattiService(1, 1)
         outomaatti.add_cell(0, 0)

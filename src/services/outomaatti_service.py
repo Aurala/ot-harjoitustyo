@@ -18,6 +18,9 @@ class OutomaattiService:
     def count_cells(self):
         return self.universe.count_cells()
 
+    def invert_cell(self, x, y):
+        self.universe.invert_cell(x, y)
+
     def add_cell(self, x, y):
         self.universe.add_cell(x, y)
 

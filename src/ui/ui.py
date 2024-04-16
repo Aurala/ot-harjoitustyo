@@ -193,7 +193,7 @@ class UI():
                     if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
                         print("Mouse clicked (scaled): x = " + str(mouse_position_x/self.scaling_factor_x) + ", y = " + str(mouse_position_y/self.scaling_factor_y))
                         if not self.is_simulation_running:
-                            self.outomaatti.add_cell(int(mouse_position_x/self.scaling_factor_x), int(mouse_position_y/self.scaling_factor_y))
+                            self.outomaatti.invert_cell(int(mouse_position_x/self.scaling_factor_x), int(mouse_position_y/self.scaling_factor_y))
 
             self.surface.blit(self.background, (0, 0))
 
