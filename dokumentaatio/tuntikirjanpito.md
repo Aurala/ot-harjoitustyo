@@ -11,4 +11,7 @@
 | 31.3.2024 | 5 | Refaktorointia ja testien kirjoittamista; Pygame-liittymän parantelua |
 | 4.4.2024 | 3 | Koodin, testien ja dokumentaation siistimistä palautuskuntoon |
 | 6.4.2024 | 1 | Toimivuuden testaaminen Cubbli Linuxissa; Dynaconfin lisäys projektiin; viikko3-branchin mergeäminen mainiin ja palautus |
-| Yhteensä | 33 | |
+| 13.4.2024 | 8 | Linting-task lisätty + koodia korjattu ohjeiden mukaisesti; aikaa paloi pygame-gui -kirjaston bugeihin |
+| 14.4.2024 | 6 | Käyttöliittymän rakentamista |
+| 15.4.2024 | 4 | Linttausvirheiden korjailua; käyttöliittymätoiminnallisuuksia |
+| Yhteensä | 49 | |

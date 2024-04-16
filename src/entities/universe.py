@@ -1,14 +1,16 @@
 import numpy as np
 
+
 class Universe:
 
-# FIX: Define the visibility (private, protected)
+    # FIX: Define the visibility (private, protected)
 
     def __init__(self, x=5, y=5, padding=5):
         # FIX: Managing bad inputs
         # FIX: Defaults to be read from a configuration file
         self.padding = padding
-        self.matrix = np.zeros([y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
+        self.matrix = np.zeros(
+            [y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
 
     @property
     def width(self):
@@ -19,10 +21,10 @@ class Universe:
     def height(self):
         y, _ = self.matrix.shape
         return y - self.padding * 2
-    
+
     @property
     def true_width(self):
-        _ ,x = self.matrix.shape
+        _, x = self.matrix.shape
         return x
 
     @property
@@ -35,10 +37,18 @@ class Universe:
         return self.padding
 
     def get_visible_universe(self):
-        return self.matrix[self.padding:self.padding+self.height, self.padding:self.padding+self.width]
+        return self.matrix[self.padding:self.padding+self.height,
+                           self.padding:self.padding+self.width]
 
     def count_cells(self):
         return np.count_nonzero(self.get_visible_universe())
+
+    def invert_cell(self, x, y):
+        if 0 <= x < self.width and 0 <= y < self.height:
+            if self.matrix[y + self.padding][x + self.padding] == 0:
+                self.matrix[y + self.padding][x + self.padding] = 1
+            else:
+                self.matrix[y + self.padding][x + self.padding] = 0
 
     def add_cell(self, x, y):
         if 0 <= x < self.width and 0 <= y < self.height:
@@ -50,38 +60,28 @@ class Universe:
 
     # FIX: Use Numpy methods for speed
     def add_pattern(self, x, y, pattern):
-        for i in range(len(pattern)):
-            for j in range(len(pattern[0])):
-                if pattern[i][j] == 1:
+        for i, row in enumerate(pattern):
+            for j, value in enumerate(row):
+                if value == 1:
                     self.add_cell(x + j, y + i)
 
     def clear_universe(self):
         self.matrix.fill(0)
-    
+
     def get_entire_universe_as_ndarray(self):
-        return self.get_visible_universe().copy()
+        return self.matrix.copy()
 
     # FIX: Manage the possible size mismatch
     def set_entire_universe_as_ndarray(self, universe):
         np.copyto(self.matrix, universe)
 
     def get_universe_as_ndarray(self):
-        return self.matrix.copy()
+        return self.get_visible_universe().copy()
 
-    # FIX: This method returns the visible universe, the other method returns the whole of it
     def get_universe_as_list(self):
         return self.get_visible_universe().tolist()
 
-    # FIX: Use Numpy methods for speed
-    # FIX: Use get_visible_universe()
     def get_universe_as_text(self):
         universe = self.get_visible_universe()
-        presentation = ""
-        for row in universe:
-            for col in row:
-                if col == 0:
-                    presentation += "."
-                else:
-                    presentation += "*"
-            presentation += "\n"
-        return presentation
+        presentation = np.where(universe == 0, ".", "*").astype(str)
+        return "\n".join("".join(row) for row in presentation) + "\n"

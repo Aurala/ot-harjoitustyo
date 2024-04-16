@@ -1,6 +1,7 @@
 import unittest
 from services.outomaatti_service import OutomaattiService
 
+
 class TestOutomaattiService(unittest.TestCase):
 
     blinker_vertical = [[0, 1, 0], [0, 1, 0], [0, 1, 0]]
@@ -10,16 +11,25 @@ class TestOutomaattiService(unittest.TestCase):
         self.outomaatti = OutomaattiService()
 
     def test_create_service_with_default_parameters(self):
-        self.assertEqual(self.outomaatti.get_universe_as_text(), ".....\n.....\n.....\n.....\n.....\n")
+        self.assertEqual(self.outomaatti.get_universe_as_text(),
+                         ".....\n.....\n.....\n.....\n.....\n")
 
     def test_create_service_with_universe_of_4x5(self):
         outomaatti = OutomaattiService(4, 5)
-        self.assertEqual(outomaatti.get_universe_as_text(), "....\n....\n....\n....\n....\n")
- 
+        self.assertEqual(outomaatti.get_universe_as_text(),
+                         "....\n....\n....\n....\n....\n")
+
     def test_universe_dimensions(self):
         outomaatti = OutomaattiService(42, 69)
         self.assertEqual(outomaatti.get_width(), 42)
         self.assertEqual(outomaatti.get_height(), 69)
+
+    def test_invert_cell_in_universe(self):
+        outomaatti = OutomaattiService(1, 1)
+        outomaatti.invert_cell(0, 0)
+        self.assertEqual(outomaatti.get_universe_as_text(), "*\n")
+        outomaatti.invert_cell(0, 0)
+        self.assertEqual(outomaatti.get_universe_as_text(), ".\n")
 
     def test_add_cell_to_universe(self):
         outomaatti = OutomaattiService(1, 1)

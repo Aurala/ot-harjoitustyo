@@ -39,16 +39,16 @@ Graafisten elementtien lähteet:
 ## Toiminnallisuus
 
 - Käyttäjä voi muuttaa kanvaasin kokoa.
-- Käyttäjä voi piirtää soluja kanvaasille.
+- Tehty: Käyttäjä voi piirtää soluja kanvaasille.
 - Käyttäjä voi pyyhkiä soluja kanvaasilta.
 - Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
 - Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
-- Käyttäjä voi käynnistää simulaation.
+- Tehty: Käyttäjä voi käynnistää simulaation.
 - Käyttäjä voi säätää simulaation nopeutta.
 - Käyttäjä voi pysäyttää simulaation.
 - Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
-- Simulaation ollessa pysäytettynä, käyttäjällä on mahdollisuus muokata kanvaasia (yllä mainituilla työkaluilla).
-- Käyttäjä voi seurata simulaation tilaa (sukupolvi, elossa olevien solujen määrä) infopalkista.
+- Tehty: Simulaation ollessa pysäytettynä, käyttäjällä on mahdollisuus muokata kanvaasia (yllä mainituilla työkaluilla).
+- Tehty: Käyttäjä voi seurata simulaation tilaa (sukupolvi, elossa olevien solujen määrä) infopalkista.
 - Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.
 - Käyttäjä voi muuttaa parametrejä, jotka annetaan funktiolle, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
 
@@ -59,7 +59,7 @@ Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä ole
 - Käyttäjä voi määrittää maksimikeston simulaatiolle.
 - Käyttäjä voi valita useista erilaista piirtotyökaluista.
 - Käyttäjä voi määrittää piirtovärin.
-- Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioksi.
+- Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioiksi.
 - Käyttäjän sulkiessa sovelluksen, se tallentaa meneillään olevan simulaation tietokantaan.
 - Käyttäjä voi tallettaa tiedostoon yksittäisen kuvakaappauksen simulaatiosta.
 - Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
