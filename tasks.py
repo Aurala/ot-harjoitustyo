@@ -40,6 +40,7 @@ def initdb(c):
 @task
 def clean(c):
     print("Cleaning up")
+    c.run("rm -rf .coverage", pty=True)
     c.run("rm -rf htmlcov", pty=True)
     c.run("rm -rf .pytest_cache", pty=True)
     c.run("rm -rf *.db", pty=True)

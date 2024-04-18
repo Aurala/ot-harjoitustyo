@@ -1,6 +1,7 @@
 import pygame
 import pygame_menu
 import numpy as np
+from config import settings
 from services.outomaatti_service import OutomaattiService
 
 
@@ -10,17 +11,18 @@ class UI():
 
         # FIX: Error handling
         # FIX: Move code to functions/classes
+        # FIX: Read defaults
 
         self.surface_size_x = 600
         self.surface_size_y = 600
-        self.universe_size_x = 100
-        self.universe_size_y = 100
+        self.universe_size_x = settings.ui.default_width
+        self.universe_size_y = settings.ui.default_height
         self.scaling_factor_x = self.surface_size_x / self.universe_size_x
         self.scaling_factor_y = self.surface_size_y / self.universe_size_y
 
         # Initialize Pygame
         pygame.init()
-        pygame.display.set_caption('Outomaatti')
+        pygame.display.set_caption(settings.ui.window_name)
         self.surface = pygame.display.set_mode((800, 625))
         self.background = pygame.Surface((800, 625))
         self.background.fill((0, 0, 0))
@@ -35,21 +37,28 @@ class UI():
         self.cursor_normal = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_ARROW)
         self.cursor_pencil = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
 
-        self.menufont = pygame_menu.font.FONT_MUNRO
+        self.logofont = pygame_menu.font.FONT_MUNRO
+        self.menufont = pygame.font.SysFont("Arial", 16)
+        self.statusfont = pygame.font.SysFont("Arial", 18)
         self.fontawesome = pygame.font.Font(
             "src/ui/resources/Font Awesome 6 Free-Solid-900.otf", size=24)
-        
+
         # Initialize pygame-menu
         self.theme = pygame_menu.Theme(widget_font=self.menufont, widget_font_color=(255, 255, 255), widget_font_size=16)
         self.theme.background_color = (55, 55, 55)
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 
-        self.menu = pygame_menu.Menu(
-            position=(100, 0), width=200, height=625, theme=self.theme, title='')
+        self.menu = pygame_menu.Menu(position=(100, 0), width=200, height=625, theme=self.theme, title='')
+        self.menu.add.label("Outomaatti", font_name=self.logofont)
 
-        self.menu.add.label("Outomaatti")
+        self.menu.add.label("Säännöt:")
+        self.menu.add.dropselect(title="", items=[('Life', 1), ('HighLife', 2), ('zzz', 3)])
 
-        self.menu.add.selector('Nopeus: ', [('hidas', 1), ('keskinopea', 2), ('nopea', 3)], onchange=self.set_speed())
+        self.menu.add.label("Nopeus:")
+        self.menu.add.selector("", [('hidas', 1), ('keskinopea', 2), ('nopea', 3)], onchange=self.set_speed())
+
+        # When adding buttons, print the name of Font Awesome icon
+        # Search for icons at https://fontawesome.com/search?q=&o=r&m=free
 
         flow_controls_frame = self.menu.add.frame_h(200, 50)
         flow_controls_frame.pack(self.menu.add.button(
@@ -65,6 +74,8 @@ class UI():
         edit_controls_frame.pack(self.menu.add.button(
             "eraser", lambda: self.erase_button_pressed(), font_name=self.fontawesome))
         edit_controls_frame.pack(self.menu.add.button(
+            "shuffle", lambda: self.random_button_pressed(), font_name=self.fontawesome))
+        edit_controls_frame.pack(self.menu.add.button(
             "trash", lambda: self.trash_button_pressed(), font_name=self.fontawesome))
 
         pattern_controls_frame = self.menu.add.frame_h(200, 50)
@@ -77,9 +88,10 @@ class UI():
         application_controls_frame.pack(self.menu.add.button(
             "gear", self.settings_button_pressed(), font_name=self.fontawesome))
         application_controls_frame.pack(self.menu.add.button(
+            "camera-retro", lambda: self.snapshot_button_pressed(), font_name=self.fontawesome))
+        application_controls_frame.pack(self.menu.add.button(
             "right-from-bracket", pygame_menu.events.EXIT, font_name=self.fontawesome))
 
-        self.is_application_running = False
         self.is_simulation_running = False
 
     # FIX: logic
@@ -107,6 +119,14 @@ class UI():
     # FIX: logic
     def eraser_button_pressed(self):
         print("Eraser pressed")
+
+    # FIX: logic
+    def random_button_pressed(self):
+        print("Random pressed")
+
+    # FIX: logic
+    def snapshot_button_pressed(self):
+        print("Snapshot pressed")
 
     # FIX: add a confirmation dialog, pause simulation
     def trash_button_pressed(self):
@@ -163,7 +183,6 @@ class UI():
                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.outomaatti.add_pattern(40, 10, glider_gun)
 
-        self.is_application_running = True
         self.is_simulation_running = False
 
         # FIX: optimize
@@ -172,7 +191,7 @@ class UI():
         # - move the Outomaatti calculation to a thread if needed
         # FIX: move code to functions
 
-        while self.is_application_running:
+        while 1:
 
             self.clock.tick(30)
             start_time = pygame.time.get_ticks()
@@ -197,7 +216,7 @@ class UI():
 
             self.surface.blit(self.background, (0, 0))
 
-            self.cell_surface.fill((255, 0, 0))
+            #self.cell_surface.fill((255, 0, 0))
 
             if self.is_simulation_running:
                 self.outomaatti.next_generation()
@@ -207,13 +226,12 @@ class UI():
             expanded_array = np.expand_dims(universe, axis=2)
             rgb_array = np.repeat(expanded_array, 3, axis=2)
             self.cell_surface = pygame.surfarray.make_surface(rgb_array * 255)
-            self.cell_surface.set_colorkey((0, 0, 0))
+            #self.cell_surface.set_colorkey((0, 0, 0))
 
             self.surface.blit(pygame.transform.scale_by(
                 self.cell_surface, (self.scaling_factor_x, self.scaling_factor_y)), (0, 0))
 
-            font = pygame.font.SysFont("Arial", 18)
-            text = font.render("Universumi: " + 
+            text = self.statusfont.render("Universumi: " + 
                                str(self.outomaatti.get_width()) + 
                                "x" + 
                                str(self.outomaatti.get_height()) +
