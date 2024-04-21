@@ -12,7 +12,7 @@ class CustomRuleset(Ruleset):
     # FIX: use of decorator, Pylint does not like
     # FIX: this routine can be made faster, not sure how exactly but needs to be done
     @classmethod
-    def calculate(self, universe: Universe):
+    def calculate(cls, universe: Universe):
 
         birth_conditions = [3]
         survive_conditions = [2, 3]

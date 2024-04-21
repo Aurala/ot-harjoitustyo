@@ -3,7 +3,22 @@ file = "outomaatti.db"
 
 [ui]
 window_name = "Outomaatti"
-default_width = 100
-default_height = 100
+default_universe_width = 100
+default_universe_height = 100
+
+#
+# IMPORTANT: Tuples "(255, 255, 255)" are not supported by Dynaconf
+#            Please write color codes in hex strings ("#ffffff")
+#
+
+# Menu
+menu_color_background = "#4EC5F1"
+menu_color_logo_text = "#FFFFFF"
+menu_color_text = "#FFFFFF"
+menu_color_active_icon = "#FFFFFF"
+menu_color_inactive_icon = "#808080"
+
+# Status bar
+status_color_text = "#4EC5F1"
 
 [rules]

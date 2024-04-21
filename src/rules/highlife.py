@@ -11,7 +11,7 @@ class CustomRuleset(Ruleset):
 
     # FIX: use of decorator, Pylint does not like
     @classmethod
-    def calculate(self, universe: Universe):
+    def calculate(cls, universe: Universe):
 
         birth_conditions = [3, 6]
         survive_conditions = [2, 3]

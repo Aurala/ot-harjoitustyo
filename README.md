@@ -35,7 +35,7 @@ Ohjelma käynnistyy komennolla:
 poetry run invoke start
 ```
 
-HUOMIO: Käyttöliittymän toteutus on vielä alkutekijöissään eikä siinä ole toiminnallisuutta. Sovellus ajaa Game of Life -sääntöjä 100x100-ruudussa määritellyille kuvioille kunnes käyttäjä sulkee sovellusikkunan.
+HUOMIO: Käyttöliittymän toteutus on vielä alkutekijöissään eikä siinä ole juuri toiminnallisuutta. Sovellus ajaa Game of Life -sääntöjä 100x100-ruudussa määritellyille kuvioille kunnes käyttäjä sulkee sovellusikkunan.
 
 Vaihtoehtoisesti käyttäjä voi käynnistää tekstimuotoisen käyttöliittymän komennoilla:
 

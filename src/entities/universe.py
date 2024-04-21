@@ -4,10 +4,9 @@ import numpy as np
 class Universe:
 
     # FIX: Define the visibility (private, protected)
+    # FIX: Managing bad inputs
 
     def __init__(self, x=5, y=5, padding=5):
-        # FIX: Managing bad inputs
-        # FIX: Defaults to be read from a configuration file
         self.padding = padding
         self.matrix = np.zeros(
             [y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
