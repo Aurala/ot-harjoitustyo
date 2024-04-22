@@ -30,7 +30,7 @@ class CustomRuleset(Ruleset):
         for row in range(1, height-1):
             for col in range(1, width-1):
                 neighborhood = old_universe[row - 1:row + 2, col - 1:col + 2]
-                # FIX: Test if it faster to np.sum and deduct own value
+                # FIX: I have a feeling np.sum - own state is faster
                 neighborhood_sum = np.sum(neighborhood * kernel)
 
                 if old_universe[row, col] == 0 and neighborhood_sum in birth_conditions:

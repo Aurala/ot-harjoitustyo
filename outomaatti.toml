@@ -13,6 +13,7 @@ default_universe_height = 100
 
 # Menu
 menu_color_background = "#4EC5F1"
+menu_color_background_speed = "#003AFF"
 menu_color_logo_text = "#FFFFFF"
 menu_color_text = "#FFFFFF"
 menu_color_active_icon = "#FFFFFF"

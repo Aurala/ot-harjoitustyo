@@ -44,148 +44,181 @@ class UI():
             "src/ui/resources/Font Awesome 6 Free-Solid-900.otf", size=24)
         
         self.font_inactive = {"color": settings.ui.menu_color_inactive_icon, "selected_color": settings.ui.menu_color_inactive_icon}
-        self.font_inactive = {"color": settings.ui.menu_color_active_icon, "selected_color": settings.ui.menu_color_active_icon}
+        self.font_active = {"color": settings.ui.menu_color_active_icon, "selected_color": settings.ui.menu_color_active_icon}
 
         # Initialize pygame-menu
         self.theme = pygame_menu.Theme(widget_font=self.menufont, widget_font_color=settings.ui.menu_color_text, widget_font_size=16)
         self.theme.background_color = settings.ui.menu_color_background
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
+        self.theme.widget_selection_effect=pygame_menu.widgets.NoneSelection()
 
         self.menu = pygame_menu.Menu(position=(100, 0), width=200, height=625, theme=self.theme, title='')
         self.menu.add.label("Outomaatti", font_name=self.logofont)
 
-        # FIX: Read values from database
-        self.menu.add.label("Säännöt:")
-        self.menu.add.dropselect(title="", items=[('Life', 1), ('HighLife', 2), ('zzz', 3)])
-
         self.menu.add.label("Nopeus:")
-        self.menu.add.selector("", [('hidas', 1), ('keskinopea', 2), ('nopea', 3)], onchange=self.set_speed())
+        speed_controls_frame = self.menu.add.frame_h(200, 50)
+        speed_controls_frame.pack(self.menu.add.button(
+            "dice-one",
+            lambda: self.speed_button_pressed("speed_one", 1),
+            font_name=self.fontawesome,
+            button_id="speed_one"))
+        speed_controls_frame.pack(self.menu.add.button(
+            "dice-two",
+            lambda: self.speed_button_pressed("speed_two", 2),
+            font_name=self.fontawesome,
+            button_id="speed_two"))
+        speed_controls_frame.pack(self.menu.add.button(
+            "dice-three",
+            lambda: self.speed_button_pressed("speed_three", 3),
+            font_name=self.fontawesome,
+            button_id="speed_three"))
 
-        # When adding buttons, simply print the name of Font Awesome icon and it will render
+        # When adding buttons, print the name of Font Awesome icon into the widget.
         # Search for icons at https://fontawesome.com/search?q=&o=r&m=free
 
         flow_controls_frame = self.menu.add.frame_h(200, 50)
         flow_controls_frame.pack(self.menu.add.button(
             "play",
             lambda: self.play_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="play"))
         flow_controls_frame.pack(self.menu.add.button(
             "pause",
-            lambda: self.pause_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            lambda: self.play_button_pressed(),
+            font_name=self.fontawesome,
+            button_id="pause"))
+        self.menu.get_widget("pause").hide()
         flow_controls_frame.pack(self.menu.add.button(
             "forward-step",
-            lambda: self.next_frame_button_pressed(),
-            font_name=self.fontawesome))
+            lambda: self.next_button_pressed(),
+            font_name=self.fontawesome,
+            button_id="next"))
 
         edit_controls_frame = self.menu.add.frame_h(200, 50)
         edit_controls_frame.pack(self.menu.add.button(
-            "pencil",
-            lambda: self.pencil_button_pressed(),
-            font_name=self.fontawesome)
-        )
-        edit_controls_frame.pack(self.menu.add.button(
-            "eraser",
-            lambda: self.eraser_button_pressed(),
-            button_id="eraser",
-            font_name=self.fontawesome)
-        )
-        edit_controls_frame.pack(self.menu.add.button(
             "shuffle",
             lambda: self.random_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="random"))
         edit_controls_frame.pack(self.menu.add.button(
             "trash",
             lambda: self.trash_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="trash"))
 
         pattern_controls_frame = self.menu.add.frame_h(200, 50)
         pattern_controls_frame.pack(self.menu.add.button(
             "database",
             lambda: self.browse_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="browse"))
         pattern_controls_frame.pack(self.menu.add.button(
             "folder-open",
             lambda: self.import_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="import"))
 
         application_controls_frame = self.menu.add.frame_h(200, 50)
         application_controls_frame.pack(self.menu.add.button(
             "gear",
             self.settings_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="settings"))
         application_controls_frame.pack(self.menu.add.button(
             "camera-retro",
             lambda: self.snapshot_button_pressed(),
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="snapshot"))
+        application_controls_frame.pack(self.menu.add.button(
+            "info",
+            lambda: self.info_button_pressed(),
+            font_name=self.fontawesome,
+            button_id="info"))
         application_controls_frame.pack(self.menu.add.button(
             "right-from-bracket",
             pygame_menu.events.EXIT,
-            font_name=self.fontawesome)
-        )
+            font_name=self.fontawesome,
+            button_id="exit"))
 
         self.is_simulation_running = False
 
+    # FIX: actually changing speed
+    def change_button_states(self, playing):
+        ids = ["speed_one", "speed_two", "speed_three", "next", "random", "trash", "browse", "import", "settings", "snapshot", "info", "exit"]
+        for id in ids:
+            button = self.menu.get_widget(id, True)
+            if playing:
+                button.update_font(self.font_inactive.copy())
+            else:
+                button.update_font(self.font_active.copy())
+        if playing:
+            self.menu.get_widget("play", True).hide()
+            self.menu.get_widget("pause", True).show()
+        else:
+            self.menu.get_widget("pause", True).hide()
+            self.menu.get_widget("play", True).show()
+
     # FIX: logic
-    def set_speed(self):
-        print("Speed changed")
+    def speed_button_pressed(self, widget, speed):
+        if not self.is_simulation_running:
+            ids = ["speed_one", "speed_two", "speed_three"]
+            for id in ids:
+                button = self.menu.get_widget(id, True)
+                if button.get_id() == widget:
+                    button.set_background_color(settings.ui.menu_color_background_speed)
+                else:
+                    button.set_background_color(settings.ui.menu_color_background)
 
     # FIX: change the state of buttons
     def play_button_pressed(self):
-        print("Play pressed")
-        self.is_simulation_running = True
-
-    # FIX: change the state of buttons
-    def pause_button_pressed(self):
-        print("Pause pressed")
-        self.is_simulation_running = False
-
-    # FIX: logic, change the state of buttons
-    def next_frame_button_pressed(self):
-        print("Next frame pressed")
+        if self.is_simulation_running:
+            self.is_simulation_running = False
+            self.change_button_states(False)
+        else:
+            self.is_simulation_running = True
+            self.change_button_states(True)
 
     # FIX: logic, change the state of buttons
-    def pencil_button_pressed(self):
-        print("Pencil pressed")
-
-    # FIX: logic
-    def eraser_button_pressed(self):
-        print("Eraser pressed")
-        self.menu.get_widget("eraser").update_font(self.font_inactive)
+    def next_button_pressed(self):
+        pass
 
     # FIX: logic
     def random_button_pressed(self):
-        print("Random pressed")
+        pass
 
-    # FIX: add a confirmation dialog, pause simulation
+    # FIX: add a confirmation dialog
     def trash_button_pressed(self):
-        print("Trash pressed")
-        self.outomaatti.clear_universe()
+        if not self.is_simulation_running:
+            self.outomaatti.clear_universe()
 
     # FIX: logic
     def browse_button_pressed(self):
-        print("Browse pressed")
+        pass
 
     # FIX: logic
     def import_button_pressed(self):
-        print("Import pressed")
+        pass
 
     # FIX: logic
     def settings_button_pressed(self):
-        print("Settings pressed")
+        pass
 
     # FIX: logic
     def snapshot_button_pressed(self):
-        print("Snapshot pressed")
-        pygame.image.save(self.cell_surface, "universe.png")
+        pass
+
+    # FIX: logic
+    def info_button_pressed(self):
+        pass
+
+    # FIX: confirmation dialog
+    def exit_button_pressed(self):
+        pass
+
+    # FIX: save name, type and location from settings; save the scaled version
+    def snapshot_button_pressed(self):
+        if not self.is_simulation_running:
+            pygame.image.save(self.cell_surface, "universe.png")
 
     def update_status(self):
         text = self.statusfont.render("Universumi: " + 
@@ -216,10 +249,11 @@ class UI():
         else:
             pygame.mouse.set_cursor(self.cursor_normal)
 
-    # FIX: For speed, no need to redraw the whole screen
+    # FIX: Draw only what needs to be drawn, not the whole screen --> speed
     def update_background(self):
         self.surface.blit(self.background, (0, 0))
 
+    # FIX: Less nested code
     def process_events(self, events):
         for event in events:
             if event.type == pygame.QUIT:

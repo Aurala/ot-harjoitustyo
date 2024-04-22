@@ -1,4 +1,5 @@
 from database_connection import get_database_connection
+from config import settings
 
 
 def drop_tables(connection):
@@ -56,6 +57,9 @@ def initialize_database():
 
     drop_tables(connection)
     create_tables(connection)
+    #import_rules()
+    #import categories()
+    #import patterns()
 
 
 if __name__ == "__main__":
