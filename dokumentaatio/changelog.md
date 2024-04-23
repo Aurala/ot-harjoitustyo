@@ -24,3 +24,9 @@
 - Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 10 virhettä)
 - **Käytössä olevien luokkien** haarautumakattavuus > 20%
 - Optimointia isojen solumäärien käsittelyä varten
+
+# Viikko 5
+
+- Käyttöliittymän menu pitkälti tehty
+- Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 5 virhettä)
+- **Käytössä olevien luokkien** haarautumakattavuus > 40%

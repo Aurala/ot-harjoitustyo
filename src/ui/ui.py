@@ -52,7 +52,7 @@ class UI():
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
         self.theme.widget_selection_effect=pygame_menu.widgets.NoneSelection()
 
-        self.menu = pygame_menu.Menu(position=(100, 0), width=200, height=625, theme=self.theme, title='')
+        self.menu = pygame_menu.Menu(position=(100, 0), width=200, height=625, center_content=True, theme=self.theme, title='')
         self.menu.add.label("Outomaatti", font_name=self.logofont)
 
         self.menu.add.label("Nopeus:")
@@ -139,6 +139,8 @@ class UI():
             pygame_menu.events.EXIT,
             font_name=self.fontawesome,
             button_id="exit"))
+
+        self.menu.center_content()
 
         self.is_simulation_running = False
 

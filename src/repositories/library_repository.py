@@ -1,18 +1,43 @@
 import re
+#import sqlite3
+#from database_connection import get_database_connection
+#from config import settings
+from entities.pattern import Pattern
+from entities.category import Category
+#from entities.rules import Rules
 
 
-class PatternRepository:
+class LibraryRepository:
 
-    def __init__(self):
+    def __init__(self, connection):
+        self._connection = connection
+
+    def get_categories(self):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT category_id, name, description FROM Categories")
+        rows = cursor.fetchall()
+
+        categories = []
+        for row in rows:
+            categories.append(Category(row[0], row[1], row[2]))
+
+        return categories
+
+    def get_patterns(self):
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT pattern_id, category_id, name, rules_id, pattern, metadata FROM Patterns")
+        rows = cursor.fetchall()
+
+        patterns = []
+        for row in rows:
+            patterns.append(Pattern(row[0], row[1], row[2], row[3], row[4], row[5]))
+
+        return patterns
+
+    def get_pattern(self, pattern_id):
         pass
 
-    def list_patterns(self, category=None):
-        pass
-
-    def load_pattern(self):
-        pass
-
-    def save_pattern(self):
+    def save_pattern(self, pattern):
         pass
 
     # My function will use the regular expression from Justin Reppert's Game of Life
@@ -65,8 +90,3 @@ class PatternRepository:
         line_data = [(1, match[1]) if match[0] == '' else (
             int(match[0]), match[1]) for match in line_data]
         print(height, width, born, survive, line_data)
-
-
-if __name__ == "__main__":
-    pr = PatternRepository()
-    pr.parse_rle()
