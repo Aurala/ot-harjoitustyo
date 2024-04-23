@@ -1,10 +1,10 @@
 import re
-#import sqlite3
-#from database_connection import get_database_connection
-#from config import settings
+# import sqlite3
+# from database_connection import get_database_connection
+# from config import settings
 from entities.pattern import Pattern
 from entities.category import Category
-#from entities.rules import Rules
+# from entities.rules import Rules
 
 
 class LibraryRepository:
@@ -25,12 +25,14 @@ class LibraryRepository:
 
     def get_patterns(self):
         cursor = self._connection.cursor()
-        cursor.execute("SELECT pattern_id, category_id, name, rules_id, pattern, metadata FROM Patterns")
+        cursor.execute(
+            "SELECT pattern_id, category_id, name, rules_id, pattern, metadata FROM Patterns")
         rows = cursor.fetchall()
 
         patterns = []
         for row in rows:
-            patterns.append(Pattern(row[0], row[1], row[2], row[3], row[4], row[5]))
+            patterns.append(
+                Pattern(row[0], row[1], row[2], row[3], row[4], row[5]))
 
         return patterns
 

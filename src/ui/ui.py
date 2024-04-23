@@ -35,24 +35,29 @@ class UI():
         self.cell_surface = pygame.Surface((100, 100))
 
         self.cursor_normal = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_ARROW)
-        self.cursor_pencil = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
+        self.cursor_pencil = pygame.cursors.Cursor(
+            pygame.SYSTEM_CURSOR_CROSSHAIR)
 
         self.logofont = pygame_menu.font.FONT_MUNRO
         self.menufont = pygame.font.SysFont("Arial", 16)
         self.statusfont = pygame.font.SysFont("Arial", 18)
         self.fontawesome = pygame.font.Font(
             "src/ui/resources/Font Awesome 6 Free-Solid-900.otf", size=24)
-        
-        self.font_inactive = {"color": settings.ui.menu_color_inactive_icon, "selected_color": settings.ui.menu_color_inactive_icon}
-        self.font_active = {"color": settings.ui.menu_color_active_icon, "selected_color": settings.ui.menu_color_active_icon}
+
+        self.font_inactive = {"color": settings.ui.menu_color_inactive_icon,
+                              "selected_color": settings.ui.menu_color_inactive_icon}
+        self.font_active = {"color": settings.ui.menu_color_active_icon,
+                            "selected_color": settings.ui.menu_color_active_icon}
 
         # Initialize pygame-menu
-        self.theme = pygame_menu.Theme(widget_font=self.menufont, widget_font_color=settings.ui.menu_color_text, widget_font_size=16)
+        self.theme = pygame_menu.Theme(
+            widget_font=self.menufont, widget_font_color=settings.ui.menu_color_text, widget_font_size=16)
         self.theme.background_color = settings.ui.menu_color_background
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
-        self.theme.widget_selection_effect=pygame_menu.widgets.NoneSelection()
+        self.theme.widget_selection_effect = pygame_menu.widgets.NoneSelection()
 
-        self.menu = pygame_menu.Menu(position=(100, 0), width=200, height=625, center_content=True, theme=self.theme, title='')
+        self.menu = pygame_menu.Menu(position=(
+            100, 0), width=200, height=625, center_content=True, theme=self.theme, title='')
         self.menu.add.label("Outomaatti", font_name=self.logofont)
 
         self.menu.add.label("Nopeus:")
@@ -146,7 +151,8 @@ class UI():
 
     # FIX: actually changing speed
     def change_button_states(self, playing):
-        ids = ["speed_one", "speed_two", "speed_three", "next", "random", "trash", "browse", "import", "settings", "snapshot", "info", "exit"]
+        ids = ["speed_one", "speed_two", "speed_three", "next", "random",
+               "trash", "browse", "import", "settings", "snapshot", "info", "exit"]
         for id in ids:
             button = self.menu.get_widget(id, True)
             if playing:
@@ -167,9 +173,11 @@ class UI():
             for id in ids:
                 button = self.menu.get_widget(id, True)
                 if button.get_id() == widget:
-                    button.set_background_color(settings.ui.menu_color_background_speed)
+                    button.set_background_color(
+                        settings.ui.menu_color_background_speed)
                 else:
-                    button.set_background_color(settings.ui.menu_color_background)
+                    button.set_background_color(
+                        settings.ui.menu_color_background)
 
     # FIX: change the state of buttons
     def play_button_pressed(self):
@@ -223,14 +231,14 @@ class UI():
             pygame.image.save(self.cell_surface, "universe.png")
 
     def update_status(self):
-        text = self.statusfont.render("Universumi: " + 
-                               str(self.outomaatti.get_width()) + 
-                               "x" + 
-                               str(self.outomaatti.get_height()) +
-                               "   Sukupolvi: " + 
-                               str(self.generation) + 
-                               "   Soluja: " + 
-                               str(self.outomaatti.count_cells()), True, settings.ui.status_color_text)
+        text = self.statusfont.render("Universumi: " +
+                                      str(self.outomaatti.get_width()) +
+                                      "x" +
+                                      str(self.outomaatti.get_height()) +
+                                      "   Sukupolvi: " +
+                                      str(self.generation) +
+                                      "   Soluja: " +
+                                      str(self.outomaatti.count_cells()), True, settings.ui.status_color_text)
         self.surface.blit(text, (10, 600))
 
     def update_simulation(self):
@@ -239,7 +247,7 @@ class UI():
         expanded_array = np.expand_dims(universe, axis=2)
         rgb_array = np.repeat(expanded_array, 3, axis=2)
         self.cell_surface = pygame.surfarray.make_surface(rgb_array * 255)
-        #self.cell_surface.set_colorkey((0, 0, 0))
+        # self.cell_surface.set_colorkey((0, 0, 0))
 
         self.surface.blit(pygame.transform.scale_by(
             self.cell_surface, (self.scaling_factor_x, self.scaling_factor_y)), (0, 0))
@@ -263,9 +271,11 @@ class UI():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_position_x, mouse_position_y = pygame.mouse.get_pos()
                 if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
-                    print("Mouse clicked (scaled): x = " + str(mouse_position_x/self.scaling_factor_x) + ", y = " + str(mouse_position_y/self.scaling_factor_y))
+                    print("Mouse clicked (scaled): x = " + str(mouse_position_x /
+                          self.scaling_factor_x) + ", y = " + str(mouse_position_y/self.scaling_factor_y))
                     if not self.is_simulation_running:
-                        self.outomaatti.invert_cell(int(mouse_position_x/self.scaling_factor_x), int(mouse_position_y/self.scaling_factor_y))
+                        self.outomaatti.invert_cell(int(
+                            mouse_position_x/self.scaling_factor_x), int(mouse_position_y/self.scaling_factor_y))
 
     def mainloop(self):
 
@@ -288,7 +298,7 @@ class UI():
         # Glider gun
         glider_gun = \
             [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                  0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
@@ -328,7 +338,7 @@ class UI():
 
             self.update_background()
 
-            #self.cell_surface.fill((255, 0, 0))
+            # self.cell_surface.fill((255, 0, 0))
 
             if self.is_simulation_running:
                 self.outomaatti.next_generation()
