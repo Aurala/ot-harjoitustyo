@@ -24,3 +24,17 @@
 - Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 10 virhettä)
 - **Käytössä olevien luokkien** haarautumakattavuus > 20%
 - Optimointia isojen solumäärien käsittelyä varten
+
+# Viikko 5
+
+- Käyttöliittymän toiminnallisuutta kasvatettu
+- Kasvaneesta toiminnallisuudesta huolimatta, erilaisten kontrollien määrää vähennetty
+- Toimivia nappeja:
+    - Play/pause
+    - Trash
+    - Snapshot
+    - Exit
+- Käyttöliittymän nappien tilat päivittyvät sen mukaan onko simulaatio käynnissä vai ei
+- Suurempi määrä asetuksia (outomaatti.toml)
+- Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 5 virhettä)
+- **Käytössä olevien luokkien** haarautumakattavuus > 40%

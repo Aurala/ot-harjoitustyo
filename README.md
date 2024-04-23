@@ -27,6 +27,18 @@ Riippuvuuksien puolesta sovellus toimii Python-versioilla 3.8-3.11. Kehityksess�
 
 ## Komentorivitoiminnot
 
+### Asennus
+
+Kun projekti on kopioitu haluttuun paikkaan, siirrytään koodin sisältävään hakemistoon ja ajetaan komento:
+
+```
+poetry install
+```
+
+Komento virtuaaliympäristön ja lataa tarvittavat riippuvuudet.
+
+Poetryn asennusohjeet löytyvät [täältä](https://python-poetry.org/docs/#installing-with-the-official-installer).
+
 ### Käynnistys
 
 Ohjelma käynnistyy komennolla:
@@ -53,6 +65,12 @@ Erona komennoissa on se, että ensimmäinen käyttää oletusarvoisia sääntöj
 
 ### Testaus
 
+Koodin laatua mittaava testi ajetaan komennolla:
+
+```
+poetry run invoke lint
+```
+
 Automaattitestit suoritetaan komennolla:
 
 ```
@@ -69,4 +87,12 @@ Tai jos käyttäjä haluaa HTML-muotoisen testiraportin, joka tallentuu projekti
 
 ```
 poetry run invoke coverage-report
+```
+
+### Muuta
+
+Erilaisten työkalujen luomat työtiedostot ja cache-tiedostot voidaan poistaa komennolla:
+
+```
+poetry run invoke clean
 ```

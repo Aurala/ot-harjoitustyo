@@ -12,7 +12,7 @@ class CustomRuleset(Ruleset):
     # FIX: use of decorator, Pylint does not like
     # FIX: this routine can be made faster, not sure how exactly but needs to be done
     @classmethod
-    def calculate(self, universe: Universe):
+    def calculate(cls, universe: Universe):
 
         birth_conditions = [3]
         survive_conditions = [2, 3]
@@ -30,7 +30,7 @@ class CustomRuleset(Ruleset):
         for row in range(1, height-1):
             for col in range(1, width-1):
                 neighborhood = old_universe[row - 1:row + 2, col - 1:col + 2]
-                # FIX: Test if it faster to np.sum and deduct own value
+                # FIX: I have a feeling np.sum - own state is faster
                 neighborhood_sum = np.sum(neighborhood * kernel)
 
                 if old_universe[row, col] == 0 and neighborhood_sum in birth_conditions:

@@ -56,6 +56,9 @@ def initialize_database():
 
     drop_tables(connection)
     create_tables(connection)
+    # import_rules()
+    # import categories()
+    # import patterns()
 
 
 if __name__ == "__main__":
