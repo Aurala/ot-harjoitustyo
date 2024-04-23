@@ -40,12 +40,12 @@ Graafisten elementtien lähteet:
 
 - Käyttäjä voi muuttaa kanvaasin kokoa.
 - Tehty: Käyttäjä voi piirtää soluja kanvaasille.
-- Käyttäjä voi pyyhkiä soluja kanvaasilta.
+- Tehty: Käyttäjä voi pyyhkiä soluja kanvaasilta.
 - Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
 - Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
 - Tehty: Käyttäjä voi käynnistää simulaation.
 - Käyttäjä voi säätää simulaation nopeutta.
-- Käyttäjä voi pysäyttää simulaation.
+- Tehty: Käyttäjä voi pysäyttää simulaation.
 - Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
 - Tehty: Simulaation ollessa pysäytettynä, käyttäjällä on mahdollisuus muokata kanvaasia (yllä mainituilla työkaluilla).
 - Tehty: Käyttäjä voi seurata simulaation tilaa (sukupolvi, elossa olevien solujen määrä) infopalkista.
@@ -61,7 +61,7 @@ Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä ole
 - Käyttäjä voi määrittää piirtovärin.
 - Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioiksi.
 - Käyttäjän sulkiessa sovelluksen, se tallentaa meneillään olevan simulaation tietokantaan.
-- Käyttäjä voi tallettaa tiedostoon yksittäisen kuvakaappauksen simulaatiosta.
+- Tehty: Käyttäjä voi tallettaa tiedostoon yksittäisen kuvakaappauksen simulaatiosta.
 - Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
 - Käyttäjä voi tallettaa automaattisesti tiedostoon kuvakaappauksen jokaisesta sukupolvesta simulaation aikana.
 - Käyttäjä voi tuoda kuvioita [eri formaateissa](https://conwaylife.com/wiki/File_formats) olevista tiedostoista.
