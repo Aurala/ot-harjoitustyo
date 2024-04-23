@@ -16,6 +16,10 @@ Testatut ympäristöt:
 
 Riippuvuuksien puolesta sovellus toimii Python-versioilla 3.8-3.11. Kehityksessä ja testauksessa on ollut käytössä pääasiassa Python 3.10.
 
+## Lataa ja kokeile
+
+Koodikatselmointiin tarkoitettu release löytyy [täältä](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Viikko5).
+
 ## Dokumentaatio
 
 - Käyttöohje
