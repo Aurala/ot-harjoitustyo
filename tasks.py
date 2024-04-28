@@ -22,6 +22,16 @@ def test(c):
     print("Running tests")
     c.run("pytest src", pty=True)
 
+@task(test)
+def coverage(c):
+    print("Checking the test coverage")
+    c.run("coverage run --branch -m pytest src", pty=True)
+
+@task(coverage)
+def coverage_report(c):
+    print("Generating the test report")
+    c.run("coverage html", pty=True)
+
 @task
 def lint(c):
     print("Linting")
@@ -45,13 +55,3 @@ def clean(c):
     c.run("rm -rf .pytest_cache", pty=True)
     c.run("rm -rf *.db", pty=True)
     c.run("pyclean --verbose .")
-
-@task
-def coverage(c):
-    print("Checking the test coverage")
-    c.run("coverage run --branch -m pytest src", pty=True)
-
-@task(coverage)
-def coverage_report(c):
-    print("Generating the test report")
-    c.run("coverage html", pty=True)

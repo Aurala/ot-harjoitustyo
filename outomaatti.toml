@@ -1,6 +1,9 @@
+# Play with these values carefully, the app does not validate values
+
 [resources]
 file_icons = "src/ui/resources/Font Awesome 6 Free-Solid-900.otf"
 file_database = "outomaatti.db"
+directory_patterns = "data/"
 
 [ui]
 window_name = "Outomaatti"
@@ -27,3 +30,7 @@ status_font_name = "Arial"
 status_font_size = 16
 
 [rules]
+# If you add custom rulesets, you need to add them here
+# "rules.life" means the class is in "src/rules/life.py"
+# The first one on the list is the default
+enabled = ["rules.life", "rules.highlife"]

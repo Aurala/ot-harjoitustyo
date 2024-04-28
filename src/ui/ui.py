@@ -28,7 +28,7 @@ class UI():
         self.clock = pygame.time.Clock()
 
         # Initialize Outomaatti
-        self.outomaatti = OutomaattiService(100, 100, "rules.life")
+        self.outomaatti = OutomaattiService(100, 100, settings.rules.enabled[0])
         self.generation = 0
         self.cell_surface = pygame.Surface((100, 100))
 

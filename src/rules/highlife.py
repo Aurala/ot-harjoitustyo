@@ -6,10 +6,11 @@ from entities.universe import Universe
 class CustomRuleset(Ruleset):
 
     def __init__(self):
-        self.name = "HighLife (B36/S23)"
+        self.name = "B36/S23"
+        self.friendly_name = "HighLife"
         self.description = "HighLife on Game of Life -variaatio ..."
 
-    # FIX: use of decorator, Pylint does not like
+    # FIX: this routine can be made faster, not sure how exactly but needs to be done
     @classmethod
     def calculate(cls, universe: Universe):
 

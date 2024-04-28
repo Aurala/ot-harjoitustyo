@@ -1,13 +1,26 @@
 from importlib import import_module
 from entities.universe import Universe
+from config import settings
+from repositories.library_repository import LibraryRepository
 
 
 class OutomaattiService:
 
     # FIX: Read defaults from a configuration file
-    def __init__(self, x=5, y=5, ruleset="rules.life"):
+    def __init__(self, x=5, y=5, ruleset=settings.rules.enabled[0]):
         self.universe = Universe(x, y)
         self.ruleset = import_module(ruleset).CustomRuleset
+        self.library_repository = LibraryRepository()
+        self._is_simulation_running = False
+
+    def is_simulation_running(self):
+        return self._is_simulation_running
+    
+    def play(self):
+        self._is_simulation_running = True
+
+    def pause(self):
+        self._is_simulation_running = False
 
     def get_width(self):
         return self.universe.width
@@ -46,3 +59,9 @@ class OutomaattiService:
     # FIX: Should pass Universe or just the methods to get/set?
     def next_generation(self):
         self.ruleset.calculate(self.universe)
+
+    def get_categories(self):
+        return self.library_repository.get_categories()
+    
+    def get_pattern(self, id):
+        return self.library_repository.get_pattern(id)
