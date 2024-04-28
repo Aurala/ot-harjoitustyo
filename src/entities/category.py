@@ -18,4 +18,4 @@ class Category:
         return self._description
 
     def __str__(self):
-        return f"Category {self.category_id}: {self.name}"
+        return f"Category {self._category_id}: {self._name}"

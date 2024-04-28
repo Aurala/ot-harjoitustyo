@@ -33,4 +33,4 @@ class Pattern:
         return self._metadata
 
     def __str__(self):
-        return f"Pattern {self.pattern_id}: {self.name}"
+        return f"Pattern {self._pattern_id}: {self._name}"

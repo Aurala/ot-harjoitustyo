@@ -3,59 +3,54 @@ import numpy as np
 
 class Universe:
 
-    # FIX: Define the visibility (private, protected)
     # FIX: Managing bad inputs
 
     def __init__(self, x=5, y=5, padding=5):
-        self.padding = padding
-        self.matrix = np.zeros(
-            [y + self.padding * 2, x + self.padding * 2], dtype=np.int8)
+        self._padding = padding
+        self._matrix = np.zeros(
+            [y + self._padding * 2, x + self._padding * 2], dtype=np.int8)
 
     @property
     def width(self):
-        _, x = self.matrix.shape
-        return x - self.padding * 2
+        _, x = self._matrix.shape
+        return x - self._padding * 2
 
     @property
     def height(self):
-        y, _ = self.matrix.shape
-        return y - self.padding * 2
+        y, _ = self._matrix.shape
+        return y - self._padding * 2
 
     @property
     def true_width(self):
-        _, x = self.matrix.shape
+        _, x = self._matrix.shape
         return x
 
     @property
     def true_height(self):
-        y, _ = self.matrix.shape
+        y, _ = self._matrix.shape
         return y
 
-    # FIX: Should be internal only
-    def get_padding(self):
-        return self.padding
-
     def get_visible_universe(self):
-        return self.matrix[self.padding:self.padding+self.height,
-                           self.padding:self.padding+self.width]
+        return self._matrix[self._padding:self._padding+self.height,
+                           self._padding:self._padding+self.width]
 
     def count_cells(self):
         return np.count_nonzero(self.get_visible_universe())
 
     def invert_cell(self, x, y):
         if 0 <= x < self.width and 0 <= y < self.height:
-            if self.matrix[y + self.padding][x + self.padding] == 0:
-                self.matrix[y + self.padding][x + self.padding] = 1
+            if self._matrix[y + self._padding][x + self._padding] == 0:
+                self._matrix[y + self._padding][x + self._padding] = 1
             else:
-                self.matrix[y + self.padding][x + self.padding] = 0
+                self._matrix[y + self._padding][x + self._padding] = 0
 
     def add_cell(self, x, y):
         if 0 <= x < self.width and 0 <= y < self.height:
-            self.matrix[y + self.padding][x + self.padding] = 1
+            self._matrix[y + self._padding][x + self._padding] = 1
 
     def erase_cell(self, x, y):
         if 0 <= x < self.width and 0 <= y < self.height:
-            self.matrix[y + self.padding][x + self.padding] = 0
+            self._matrix[y + self._padding][x + self._padding] = 0
 
     # FIX: Use Numpy methods for speed
     def add_pattern(self, x, y, pattern):
@@ -65,14 +60,14 @@ class Universe:
                     self.add_cell(x + j, y + i)
 
     def clear_universe(self):
-        self.matrix.fill(0)
+        self._matrix.fill(0)
 
     def get_entire_universe_as_ndarray(self):
-        return self.matrix.copy()
+        return self._matrix.copy()
 
     # FIX: Manage the possible size mismatch
     def set_entire_universe_as_ndarray(self, universe):
-        np.copyto(self.matrix, universe)
+        np.copyto(self._matrix, universe)
 
     def get_universe_as_ndarray(self):
         return self.get_visible_universe().copy()
