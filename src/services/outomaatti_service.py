@@ -15,7 +15,7 @@ class OutomaattiService:
 
     def is_simulation_running(self):
         return self._is_simulation_running
-    
+
     def play(self):
         self._is_simulation_running = True
 
@@ -62,6 +62,6 @@ class OutomaattiService:
 
     def get_categories(self):
         return self.library_repository.get_categories()
-    
-    def get_pattern(self, id):
-        return self.library_repository.get_pattern(id)
+
+    def get_pattern_by_name(self, name):
+        return self.library_repository.get_pattern_by_name(name)

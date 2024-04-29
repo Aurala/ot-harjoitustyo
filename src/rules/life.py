@@ -7,7 +7,7 @@ class CustomRuleset(Ruleset):
 
     def __init__(self):
         self.name = "B3/S23"
-        self.friendy_name =  "Game of Life"
+        self.friendy_name = "Game of Life"
         self.description = "Alkuperäiset John Conway'n kehittämät säännöt"
 
     # FIX: this routine can be made faster, not sure how exactly but needs to be done

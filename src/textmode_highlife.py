@@ -8,13 +8,7 @@ def main():
     outomaatti = OutomaattiService(80, 40, "rules.highlife")
     generation = 0
 
-    # Replikaattori
-    replicator = \
-        [[0, 0, 1, 1, 1],
-         [0, 1, 0, 0, 1],
-         [1, 0, 0, 0, 1],
-         [1, 0, 0, 1, 0],
-         [1, 1, 1, 0, 0]]
+    replicator = outomaatti.get_pattern_by_name("Replicator").pattern
     outomaatti.add_pattern(35, 17, replicator)
 
     while True:

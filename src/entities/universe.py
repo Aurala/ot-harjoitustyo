@@ -6,12 +6,33 @@ class Universe:
     # FIX: Managing bad inputs
 
     def __init__(self, x=5, y=5, padding=5):
+        """
+        Class constructor that creates a new Universe.
+
+        Universe holds the cell data in a 2D array, and methods to manipulate it.
+
+        It is not clear how to apply cellular automata rules for cells
+        next to edges. Therefore the Universe has some padding around it
+        and all calculations are applied to the extended area.
+
+        Args:
+            x (int, optional): Horizontal size of visible Universe. Defaults to 5.
+            y (int, optional): Vertical size of visible Universe. Defaults to 5.
+            padding (int, optional): Padding applied to the Universe. Defaults to 5.
+        """
         self._padding = padding
         self._matrix = np.zeros(
             [y + self._padding * 2, x + self._padding * 2], dtype=np.int8)
 
     @property
     def width(self):
+        """
+        Returns the horizontal size of the visible Universe (i.e. excluding the
+        padding).
+
+        Returns:
+            int: Width of visible Universe
+        """
         _, x = self._matrix.shape
         return x - self._padding * 2
 

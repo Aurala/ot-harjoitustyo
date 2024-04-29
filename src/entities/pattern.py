@@ -11,7 +11,7 @@ class Pattern:
     @property
     def pattern_id(self):
         return self._pattern_id
-    
+
     @property
     def category_id(self):
         return self._category_id
@@ -19,15 +19,15 @@ class Pattern:
     @property
     def name(self):
         return self._name
-    
+
     @property
     def rules(self):
         return self._rules
-    
+
     @property
     def pattern(self):
         return self._pattern
-    
+
     @property
     def metadata(self):
         return self._metadata

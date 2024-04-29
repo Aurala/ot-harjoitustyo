@@ -4,6 +4,7 @@ import re
 
 # FIX: error handling
 
+
 class RLE:
 
     def __init__(self):
@@ -41,7 +42,7 @@ class RLE:
         line_data = line_pattern.findall(lines)
         line_data = [(1, match[1]) if match[0] == "" else (
             int(match[0]), match[1]) for match in line_data]
-        
+
         pattern = []
         pattern_row = []
 
@@ -54,7 +55,7 @@ class RLE:
             elif sequence[1] == "b":
                 pattern_row += [0 for _ in range(sequence[0])]
             elif sequence[1] == "o":
-                pattern_row = [1 for _ in range(sequence[0])]
+                pattern_row += [1 for _ in range(sequence[0])]
             line_data = line_data[1:]
 
         return (f"B{birth_conditions}/S{survive_conditions}", pattern)

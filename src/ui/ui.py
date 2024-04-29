@@ -19,7 +19,6 @@ class UI():
         self.scaling_factor_x = self.surface_size_x / self.universe_size_x
         self.scaling_factor_y = self.surface_size_y / self.universe_size_y
 
-        # Initialize Pygame
         pygame.init()
         pygame.display.set_caption(settings.ui.window_name)
         self.surface = pygame.display.set_mode((800, 625))
@@ -27,12 +26,11 @@ class UI():
         self.background.fill((0, 0, 0))
         self.clock = pygame.time.Clock()
 
-        # Initialize Outomaatti
-        self.outomaatti = OutomaattiService(100, 100, settings.rules.enabled[0])
+        self.outomaatti = OutomaattiService(
+            100, 100, settings.rules.enabled[0])
         self.generation = 0
         self.cell_surface = pygame.Surface((100, 100))
 
-        # Define stuff
         self.cursor_normal = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_ARROW)
         self.cursor_pencil = pygame.cursors.Cursor(
             pygame.SYSTEM_CURSOR_CROSSHAIR)
@@ -50,28 +48,24 @@ class UI():
         self.font_active = {"color": settings.ui.menu_color_active_icon,
                             "selected_color": settings.ui.menu_color_active_icon}
 
-        # Construct the menu
         self.setup_menu()
 
-        # Set simulation paused when starting the app
+        # FIX: Use OutomaattiService for this
         self.is_simulation_running = False
 
     # FIX: refactor the code to a separate class
     def setup_menu(self):
 
-        # Theme
         self.theme = pygame_menu.Theme(
             widget_font=self.menufont, widget_font_color=settings.ui.menu_color_text, widget_font_size=16)
         self.theme.background_color = settings.ui.menu_color_background
         self.theme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
         self.theme.widget_selection_effect = pygame_menu.widgets.NoneSelection()
-    
-        # Init pygame-menu
+
         self.menu = pygame_menu.Menu(position=(
             100, 0), width=200, height=625, center_content=True, theme=self.theme, title='')
         self.menu.add.label("Outomaatti", font_name=self.logofont)
 
-        # Set the layout, controls
         self.menu.add.label("Nopeus:")
         speed_controls_frame = self.menu.add.frame_h(200, 50)
         speed_controls_frame.pack(self.menu.add.button(
@@ -312,40 +306,19 @@ class UI():
 
         # FIX: Patterns to come from the repository
 
-        # Gliders
-        glider = [[1, 0, 0], [0, 1, 1], [1, 1, 0]]
+        glider = self.outomaatti.get_pattern_by_name("Glider").pattern
         self.outomaatti.add_pattern(0, 0, glider)
         self.outomaatti.add_pattern(10, 10, glider)
         self.outomaatti.add_pattern(20, 20, glider)
         self.outomaatti.add_pattern(30, 30, glider)
         self.outomaatti.add_pattern(40, 40, glider)
 
-        # Blinkers
-        blinker = [[0, 1, 0], [0, 1, 0], [0, 1, 0]]
+        blinker = self.outomaatti.get_pattern_by_name("Blinker").pattern
         self.outomaatti.add_pattern(5, 50, blinker)
         self.outomaatti.add_pattern(5, 60, blinker)
         self.outomaatti.add_pattern(5, 70, blinker)
 
-        # Glider gun
-        glider_gun = \
-            [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-              0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
-                 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
-                 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-             [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
-                 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0,
-                 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0,
-                 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
-                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        glider_gun = self.outomaatti.get_pattern_by_name("Gosper glider gun").pattern
         self.outomaatti.add_pattern(40, 10, glider_gun)
 
         # FIX: optimize, optimize, optimize

@@ -1,6 +1,6 @@
 from invoke import task
 
-# FIX: Descriptions for each task; more extensive cleanup
+# FIX: Descriptions for each task
 
 @task
 def start(c):
