@@ -52,6 +52,7 @@ class UI():
 
         # FIX: Use OutomaattiService for this
         self.is_simulation_running = False
+        self.speed = 1
 
     # FIX: refactor the code to a separate class
     def setup_menu(self):
@@ -194,6 +195,7 @@ class UI():
                 else:
                     button.set_background_color(
                         settings.ui.menu_color_background)
+        self.speed = speed
 
    # FIX: logic
     def size_button_pressed(self, size):
@@ -255,14 +257,11 @@ class UI():
         if self.is_simulation_running:
             running = "Käynnissä... "
         text = self.statusfont.render(running +
-                                      "Universumi: " +
-                                      str(self.outomaatti.get_width()) +
-                                      "x" +
-                                      str(self.outomaatti.get_height()) +
-                                      "   Sukupolvi: " +
-                                      str(self.generation) +
-                                      "   Soluja: " +
-                                      str(self.outomaatti.count_cells()), True, settings.ui.status_color_text)
+                                      f"Universumi: {self.outomaatti.get_width()}x{self.outomaatti.get_height()}" +
+                                      f"   Sukupolvi: {self.generation}" +
+                                      f"   Soluja: {self.outomaatti.count_cells()}" +
+                                      f"   FPS: {self.clock.get_fps():.1f}",
+                                      True, settings.ui.status_color_text)
         self.surface.blit(text, (10, 600))
 
     def update_simulation(self):
@@ -318,17 +317,16 @@ class UI():
         self.outomaatti.add_pattern(5, 60, blinker)
         self.outomaatti.add_pattern(5, 70, blinker)
 
-        glider_gun = self.outomaatti.get_pattern_by_name("Gosper glider gun").pattern
+        glider_gun = self.outomaatti.get_pattern_by_name(
+            "Gosper glider gun").pattern
         self.outomaatti.add_pattern(40, 10, glider_gun)
 
         # FIX: optimize, optimize, optimize
         # - framerate
         # - define what to redraw and when
-        # - move the Outomaatti calculation to a thread if needed
+        # - move the Outomaatti calculation to an async thread if needed
 
         while 1:
-
-            self.clock.tick(30)
 
             self.update_mouse_cursor()
 
@@ -351,3 +349,5 @@ class UI():
             self.menu.draw(self.surface)
 
             pygame.display.update()
+
+            self.clock.tick(60)

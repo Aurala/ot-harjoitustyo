@@ -4,6 +4,7 @@
 file_icons = "src/ui/resources/Font Awesome 6 Free-Solid-900.otf"
 file_database = "outomaatti.db"
 directory_patterns = "data/"
+directory_snapshots = "snapshots/"
 
 [ui]
 window_name = "Outomaatti"

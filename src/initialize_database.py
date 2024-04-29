@@ -44,12 +44,23 @@ def create_tables(connection):
         cursor.execute(command)
     connection.commit()
 
+
 def populate_tables(connection):
 
     importer = RLE()
 
-    sql_command1 = "INSERT INTO Categories (name, description) VALUES (?, ?)"
-    sql_command2 = "INSERT INTO Patterns (category_id, name, rules, pattern, metadata) VALUES (?, ?, ?, ?, ?)"
+    sql_command1 = """
+                   INSERT INTO Categories (name, description) VALUES (?, ?)
+                   """
+    sql_command2 = """
+                   INSERT INTO Patterns (
+                       category_id,
+                       name,
+                       rules,
+                       pattern,
+                       metadata
+                   ) VALUES (?, ?, ?, ?, ?)
+                   """
 
     # FIX: Translate the categories/descriptions (if Finnish terms exist)
     # Source: https://conwaylife.com/wiki/Category:Patterns
@@ -57,47 +68,81 @@ def populate_tables(connection):
 
     categories = [
         ["Käyttäjän tuomat",
-         "Tässä kategoriassa ovat kaikki käyttäjän ohjelmaan tuomat kuviot",
+         """
+         Tässä kategoriassa ovat kaikki käyttäjän ohjelmaan tuomat kuviot
+         """,
          []
          ],
         ["Conduits",
-         "This category contains conduits, arrangements of still lifes and/or oscillators that move an active reaction to another location without themselves being permanently damaged.",
+         """
+         This category contains conduits, arrangements of still lifes and/or
+         oscillators that move an active reaction to another location without
+         themselves being permanently damaged.
+         """,
          []
          ],
         ["Garden of Eden",
-         "A Garden of Eden is a pattern that has no parents and thus can only occur in generation 0.",
+         """
+         A Garden of Eden is a pattern that has no parents and thus can only
+         occur in generation 0.
+         """,
          []
          ],
         ["Guns",
-         "A gun is a stationary pattern that emits spaceships (or rakes) repeatedly forever.",
+         """
+         A gun is a stationary pattern that emits spaceships (or rakes)
+         repeatedly forever.
+         """,
          ["gosper_glider_gun.rle"]
          ],
         ["Methusalehs",
-         "A methuselah is a pattern that takes a large number of generations in order to stabilize (known as its lifespan) and becomes much larger than its initial configuration at some point during its evolution.",
+         """
+         A methuselah is a pattern that takes a large number of generations
+         in order to stabilize (known as its lifespan) and becomes much larger
+         than its initial configuration at some point during its evolution.
+         """,
          []
          ],
         ["Oscillators",
-         "An oscillator is a pattern that is a predecessor of itself. That is, it is a pattern that repeats itself after a fixed number of generations (known as its period).",
+         """
+         An oscillator is a pattern that is a predecessor of itself. That is,
+         it is a pattern that repeats itself after a fixed number of generations
+         (known as its period).
+         """,
          ["blinker.rle"]
          ],
         ["Puffers",
-         "A puffer is a pattern that moves like a spaceship but leaves debris behind as it moves.",
+         """
+         A puffer is a pattern that moves like a spaceship but leaves debris
+         behind as it moves.
+         """,
          []
          ],
         ["Replicators",
-         "A replicator is any pattern that produces an arbitrary number of copies of itself. There is currently no precise definition.",
+         """
+         A replicator is any pattern that produces an arbitrary number of copies
+         of itself. There is currently no precise definition.
+         """,
          ["replicator.rle"]
          ],
         ["Spaceships",
-         "A spaceship is a finite pattern that reappears (without additions or losses) after a fixed number of generations displaced by a non-zero amount.",
+         """
+         A spaceship is a finite pattern that reappears (without additions or losses)
+         after a fixed number of generations displaced by a non-zero amount.
+         """,
          ["glider.rle"]
          ],
         ["Still lifes",
-         "A still life is a pattern that does not change from one generation to the next, and thus is a parent of itself.",
+         """
+         A still life is a pattern that does not change from one generation to the next,
+         and thus is a parent of itself.
+         """,
          []
          ],
         ["Wicks",
-         "A wick is a static or oscillating linearly repeating pattern.",
+         """
+         A wick is a static or oscillating linearly repeating pattern.
+         """,
          []
          ],
     ]
@@ -111,7 +156,11 @@ def populate_tables(connection):
                 settings.resources.directory_patterns + filename)
             if encoded is not None:
                 cursor.execute(sql_command2, [
-                               category_id, encoded[0], encoded[1], json.dumps(encoded[2]), encoded[3]])
+                               category_id,
+                               encoded[0],
+                               encoded[1],
+                               json.dumps(encoded[2]),
+                               encoded[3]])
     connection.commit()
 
 

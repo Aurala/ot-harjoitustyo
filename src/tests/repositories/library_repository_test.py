@@ -14,4 +14,5 @@ class TestLibraryRepository(unittest.TestCase):
         self.assertNotEqual(self.library_repository.get_pattern_by_id(1), None)
 
     def test_patterns_are_returned_by_name(self):
-        self.assertNotEqual(self.library_repository.get_pattern_by_name("Glider"), None)
+        self.assertNotEqual(
+            self.library_repository.get_pattern_by_name("Glider"), None)

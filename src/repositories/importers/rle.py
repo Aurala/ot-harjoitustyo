@@ -11,6 +11,9 @@ class RLE:
         pass
 
     def parse_metadata(self, content):
+
+        # FIX: Error management
+
         metadata = []
         name = ""
         for line in content:
@@ -26,6 +29,8 @@ class RLE:
     # published under the MIT license.
     # FIX: In some data files birth and survive conditions are in lowercase
     def parse_data(self, content):
+
+        # FIX: Error management
 
         lines = [line for line in content if line.strip()[0] != "#"]
         header = lines[0]
@@ -62,7 +67,9 @@ class RLE:
 
     def read_from_file(self, filename):
 
-        rle_file = open(filename, "r")
+        # FIX: Error management
+
+        rle_file = open(filename, "r", encoding="utf-8")
         rle_data = rle_file.readlines()
 
         name, metadata = self.parse_metadata(rle_data)

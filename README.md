@@ -22,7 +22,7 @@ Koodikatselmointiin tarkoitettu release löytyy [täältä](https://github.com/A
 
 ## Dokumentaatio
 
-- Käyttöohje
+- [Käyttöohje](dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 - [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 - Testausdokumentti

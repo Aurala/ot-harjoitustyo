@@ -22,12 +22,12 @@ def test(c):
     print("Running tests")
     c.run("pytest src", pty=True)
 
-@task(test)
+@task
 def coverage(c):
     print("Checking the test coverage")
     c.run("coverage run --branch -m pytest src", pty=True)
 
-@task(coverage)
+@task
 def coverage_report(c):
     print("Generating the test report")
     c.run("coverage html", pty=True)

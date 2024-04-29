@@ -1,0 +1,4 @@
+#N Blinker
+#C Invalid RLE file for unit testing - B & S missing
+x = 3, y = 1, rule = 3/23
+3o!

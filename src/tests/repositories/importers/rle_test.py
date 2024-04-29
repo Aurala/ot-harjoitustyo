@@ -16,3 +16,5 @@ class TestUniverse(unittest.TestCase):
         self.assertEqual(pattern, [[1, 1, 1]])
         self.assertEqual(
             metadata, "#N Blinker\n#C Valid RLE file for unit testing\n")
+        
+    # FIX: Tests for RLE files that deviate from most common format
