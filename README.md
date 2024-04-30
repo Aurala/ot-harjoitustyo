@@ -18,7 +18,8 @@ Riippuvuuksien puolesta sovellus toimii Python-versioilla 3.8-3.11. Kehityksess�
 
 ## Lataa ja kokeile
 
-Koodikatselmointiin tarkoitettu release löytyy [täältä](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Viikko5).
+- [Koodikatselmointiin tarkoitettu release](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Viikko5)
+- [Viikon 6 palautus](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Viikko6)
 
 ## Dokumentaatio
 
@@ -43,6 +44,12 @@ Komento virtuaaliympäristön ja lataa tarvittavat riippuvuudet.
 
 Poetryn asennusohjeet löytyvät [täältä](https://python-poetry.org/docs/#installing-with-the-official-installer).
 
+Seuraavaksi alustetaan tietokanta komennolla:
+
+```
+poetry run invoke initdb
+```
+
 ### Käynnistys
 
 Ohjelma käynnistyy komennolla:
@@ -54,9 +61,10 @@ poetry run invoke start
 Käyttöliittymän toteutus on vielä kesken ja kaikki sen sisältämät kontrollit eivät toimi. Toimivaa mm.:
 
 - Play/Pause
-- Solujen poisto
+- Tyhjennys
 - Solujen piirtäminen ja poistaminen hiirellä
 - Snapshot (kirjoittaa tiedostoon PNG-kuvan simulaatiosta)
+- Random
 - Exit
 
 Vaihtoehtoisesti käyttäjä voi käynnistää tekstimuotoisen käyttöliittymän komennoilla:
@@ -71,7 +79,7 @@ tai
 poetry run invoke highlife
 ```
 
-Erona komennoissa on se, että ensimmäinen käyttää oletusarvoisia sääntöjä (B3/S23) ja jälkimmäinen nk. Highlife-sääntöjä (B36/S23). Sovellus lataa säännöt toteuttavat funktiot dynaamisesti eri luokista.
+Tekstikäyttöliittymät on tehty nopeaa testaamista varten. Erona yo. komennoissa on se, että ensimmäinen käyttää oletusarvoisia sääntöjä (B3/S23) ja jälkimmäinen nk. Highlife-sääntöjä (B36/S23). Sovellus lataa säännöt toteuttavat funktiot dynaamisesti eri luokista.
 
 ### Testaus
 
@@ -101,7 +109,7 @@ poetry run invoke coverage-report
 
 ### Muuta
 
-Erilaisten työkalujen luomat työtiedostot ja cache-tiedostot voidaan poistaa komennolla:
+Erilaisten työkalujen luomat työtiedostot,  cache-tiedostot yms. voidaan poistaa komennolla:
 
 ```
 poetry run invoke clean

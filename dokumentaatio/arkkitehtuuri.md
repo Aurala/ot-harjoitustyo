@@ -112,6 +112,7 @@ Seuraavia ongelmia tullaan ratkomaan kurssin viimeisten viikkojen aikana:
     - Yksi tapahtumankäsittelijä menu-eventeille
     - Kaiken siirrettävissä olevan logiikan siirto luokkaan `OutomaattiService`
 - Luokka Universe ei kuulu pakettin `entities`
+- Kaikille "LifeLike"-algoritmeille yhteisen logiikan siirtäminen luokista `Life` ja `HighLife` luokkaan `Ruleset`
 - LibraryRepositoryn ulkopuolella käsitellään tiedostoja
     - Tiedostojenkäsittelyn siirtäminen luokasta `repositories.importers.RLE` tähän luokkaan; RLE-luokka lukee jatkossa kuvioita sille annetusta tekstimuotoisesta sisällöstä (samalla `importers` --> `decoders`)
     - Tietokannanluontiskriptin siirtäminen käyttämään RLE-decoderia `LibraryRepository`:n kautta
