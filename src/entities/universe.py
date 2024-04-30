@@ -2,24 +2,34 @@ import numpy as np
 
 
 class Universe:
+    """
+    Class holds information about Universe.
 
-    # FIX: Managing bad inputs
+    Universe holds the cell data in a 2D array, and methods to manipulate it.
+
+    It is not clear how to apply cellular automata rules for cells next to edges.
+    Therefore the Universe has some padding around it and all calculations are
+    applied to the extended area.
+
+    Attributes:
+        pattern_id: integer, used to query the pattern from the database
+        category_id: integer, links the pattern to a category
+        name: string, the pattern's name
+        rules: string, the rules the pattern was designed for
+        pattern: list, the represented as a 2D array
+        metadata: string, arbitrary information about the pattern
+    """
 
     def __init__(self, x=5, y=5, padding=5):
         """
         Class constructor that creates a new Universe.
 
-        Universe holds the cell data in a 2D array, and methods to manipulate it.
-
-        It is not clear how to apply cellular automata rules for cells next to edges.
-        Therefore the Universe has some padding around it and all calculations are
-        applied to the extended area.
-
         Args:
-            x (int, optional): Horizontal size of visible Universe. Defaults to 5.
-            y (int, optional): Vertical size of visible Universe. Defaults to 5.
-            padding (int, optional): Padding applied to the Universe. Defaults to 5.
+            x (int, optional): horizontal size of visible Universe (default: 5)
+            y (int, optional): vertical size of visible Universe (default: 5)
+            padding (int, optional): padding applied to the Universe (default: 5)
         """
+        # FIX: Managing bad inputs
         self._padding = padding
         self._matrix = np.zeros(
             [y + self._padding * 2, x + self._padding * 2], dtype=np.int8)
@@ -30,7 +40,7 @@ class Universe:
         Returns the width of the visible Universe.
 
         Returns:
-            int: Width of the visible Universe
+            int: the width of the visible Universe
         """
         _, x = self._matrix.shape
         return x - self._padding * 2
@@ -41,7 +51,7 @@ class Universe:
         Returns the height of the visible Universe.
 
         Returns:
-            int: Height of the visible Universe
+            int: the height of the visible Universe
         """
         y, _ = self._matrix.shape
         return y - self._padding * 2
@@ -52,7 +62,7 @@ class Universe:
         Returns the width of the entire Universe.
 
         Returns:
-            int: Width of the entire Universe
+            int: the width of the entire Universe
         """
         _, x = self._matrix.shape
         return x
@@ -63,7 +73,7 @@ class Universe:
         Returns the height of the entire Universe.
 
         Returns:
-            int: Height of the entire Universe
+            int: the height of the entire Universe
         """
         y, _ = self._matrix.shape
         return y
@@ -73,7 +83,7 @@ class Universe:
         Returns the array containing the visible Universe.
 
         Returns:
-            numpy.ndarray: 2D array containing the visible Universe
+            numpy.ndarray: a 2D array containing the visible Universe
         """
         return self._matrix[self._padding:self._padding+self.height,
                             self._padding:self._padding+self.width]
@@ -83,7 +93,7 @@ class Universe:
         Returns the number of alive cells in the visible Universe.
 
         Returns:
-            int: The number of alive cells in the visible Universe
+            int: the number of alive cells in the visible Universe
         """
         return np.count_nonzero(self.get_visible_universe())
 
@@ -93,8 +103,8 @@ class Universe:
         becomes dead, and vice versa.
 
         Args:
-            x (int): x coordinate of the cell to be inverted
-            y (int): y coordinate of the cell to be inverted
+            x (int): the x coordinate of the cell to be inverted
+            y (int): the y coordinate of the cell to be inverted
         """
         if 0 <= x < self.width and 0 <= y < self.height:
             if self._matrix[y + self._padding][x + self._padding] == 0:
@@ -107,8 +117,8 @@ class Universe:
         Adds a living cell in the visible Universe.
 
         Args:
-            x (int): x coordinate of the cell to be added
-            y (int): y coordinate of the cell to be added
+            x (int): the x coordinate of the cell to be added
+            y (int): the y coordinate of the cell to be added
         """
         if 0 <= x < self.width and 0 <= y < self.height:
             self._matrix[y + self._padding][x + self._padding] = 1
@@ -118,8 +128,8 @@ class Universe:
         Sets a cell dead in the visible Universe.
 
         Args:
-            x (int): x coordinate of the cell to be added
-            y (int): y coordinate of the cell to be added
+            x (int): the x coordinate of the cell to be added
+            y (int): the y coordinate of the cell to be added
         """
         if 0 <= x < self.width and 0 <= y < self.height:
             self._matrix[y + self._padding][x + self._padding] = 0
@@ -130,9 +140,9 @@ class Universe:
         Adds a predefined pattern to the Universe.
 
         Args:
-            x (int): x coordinate of the cell to be added
-            y (int): y coordinate of the cell to be added
-            pattern (list): 2D list of cells
+            x (int): the coordinate of the cell to be added
+            y (int): the coordinate of the cell to be added
+            pattern (list): a 2D array of cells
         """
         for i, row in enumerate(pattern):
             for j, value in enumerate(row):
@@ -150,7 +160,7 @@ class Universe:
         Returns a copy of the entire Universe.
 
         Returns:
-            numpy.ndarray: 2D array containing the entire Universe
+            numpy.ndarray: the entire Universe
         """
         return self._matrix.copy()
 
@@ -158,9 +168,11 @@ class Universe:
     def set_entire_universe_as_ndarray(self, universe):
         """
         Sets the entire Universe.
+        
+        For example, after calculating the next generation.
 
         Args:
-            universe (numpy.ndarray): 2D array containing the new Universe
+            universe (numpy.ndarray): the new Universe
         """
         np.copyto(self._matrix, universe)
 
@@ -169,7 +181,7 @@ class Universe:
         Returns a copy of the visible Universe.
 
         Returns:
-            numpy.ndarray: 2D array containing the visible Universe
+            numpy.ndarray: the visible Universe
         """
         return self.get_visible_universe().copy()
 
@@ -178,7 +190,7 @@ class Universe:
         Returns the visible Universe.
 
         Returns:
-            list: 2D array containing the visible Universe
+            list: the visible Universe
         """
         return self.get_visible_universe().tolist()
 
@@ -187,7 +199,7 @@ class Universe:
         Returns the visible Universe.
 
         Returns:
-            string: A string containing the entire Universe.
+            str: the entire Universe
         """
         universe = self.get_visible_universe()
         presentation = np.where(universe == 0, ".", "*").astype(str)

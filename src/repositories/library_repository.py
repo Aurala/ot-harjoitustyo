@@ -5,11 +5,27 @@ from database_connection import get_database_connection
 
 
 class LibraryRepository:
+    """
+    Class manages all access to the persistent storage for the application:
+    - Reading and writing patterns and categories SQLite database
+    - Reading RLE files containing patterns
+    - Writing snapshots of the simulation to PNG files
+    """
 
     def __init__(self):
+        """
+        Class constructor creates a new LibraryRepository with database
+        access configured in the settings file.
+        """
         self._connection = get_database_connection()
 
     def get_categories(self):
+        """
+        Returns all pattern categories.
+
+        Returns:
+            list: all categories as Category objects
+        """
         cursor = self._connection.cursor()
         cursor.execute("SELECT category_id, name, description FROM Categories")
         rows = cursor.fetchall()
@@ -21,6 +37,12 @@ class LibraryRepository:
         return categories
 
     def get_patterns(self, category_id):
+        """
+        Returns all patterns in the specified category.
+
+        Returns:
+            list: all patterns in the category as Pattern objects
+        """
 
         sql_command = "SELECT * FROM Patterns WHERE category_id=?"
 
@@ -36,6 +58,12 @@ class LibraryRepository:
         return patterns
 
     def get_pattern_by_id(self, pattern_id):
+        """
+        Returns one category based on its identifier.
+
+        Returns:
+            Category: specified category
+        """
 
         sql_command = "SELECT * FROM Patterns WHERE pattern_id=?"
 
@@ -49,6 +77,12 @@ class LibraryRepository:
         return Pattern(row[0], row[1], row[2], row[3], json.loads(row[4]), row[5])
 
     def get_pattern_by_name(self, name):
+        """
+        Returns one category based on its name.
+
+        Returns:
+            Category: specified category
+        """
 
         sql_command = "SELECT * FROM Patterns WHERE name=?"
 
@@ -60,6 +94,3 @@ class LibraryRepository:
             return None
 
         return Pattern(row[0], row[1], row[2], row[3], json.loads(row[4]), row[5])
-
-    def save_pattern(self, pattern):
-        pass

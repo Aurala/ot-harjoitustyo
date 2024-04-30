@@ -1,16 +1,35 @@
 import re
 
-# RLE format explained: https://conwaylife.com/wiki/Run_Length_Encoded
-
-# FIX: error handling
-
 
 class RLE:
+    """
+    Class provides a set of methods to decode patterns that are stored in the
+    Run Length Encoded (RLE) format.
+
+    Explanation of the format: https://conwaylife.com/wiki/Run_Length_Encoded
+
+    RLE files one can found online have small deviations and this decoder is
+    not able to parse all of them.
+    """
 
     def __init__(self):
-        pass
+        """
+        Class constructor. Takes no arguments.
+        """
 
     def parse_metadata(self, content):
+        """
+        Parses metadata (all lines starting with a hash) from a string containing
+        a Run Length Encoded pattern.
+
+        The pattern's name is extracted from metadata.
+
+        Args:
+            content (str): the RLE data
+
+        Returns:
+            (str, str): the pattern's name, the rest of the metadata
+        """
 
         # FIX: Error management
 
@@ -24,11 +43,22 @@ class RLE:
                 name = line[2:].strip()
         return (name, "\n".join("".join(row) for row in metadata) + "\n")
 
-    # This function borrows some RLE-parsing code from Justin Reppert's Game of Life
-    # project at https://github.com/reppertj/Game-of-Life/blob/master/lifereader.py
-    # published under the MIT license.
-    # FIX: In some data files birth and survive conditions are in lowercase
+
     def parse_data(self, content):
+        """
+        Parses pattern data (all lines not starting with a hash) from a string
+        containing a Run Length Encoded pattern.
+
+        The function borrows some regexp magic from Justin Reppert's
+        Game of Life project published under the MIT license.
+        https://github.com/reppertj/Game-of-Life/blob/master/lifereader.py
+
+        Args:
+            content (str): the RLE data
+
+        Returns:
+            (str, list): the rules the pattern was designed for, the pattern data
+        """
 
         # FIX: Error management
 
@@ -65,7 +95,23 @@ class RLE:
 
         return (f"B{birth_conditions}/S{survive_conditions}", pattern)
 
+    # FIX: no file managment in this class, will decode text as
+    # given by the repository
     def read_from_file(self, filename):
+        """
+        Reads Run Length Encoded data from a file and parses it
+        for metadata and pattern data.
+
+        Args:
+            filename (str): the file that contains the data
+
+        Returns:
+            (str, str, list, str):
+            the pattern name,
+            the rules the pattern wa designed for,
+            the pattern data,
+            the metadata
+        """
 
         # FIX: Error management
 
