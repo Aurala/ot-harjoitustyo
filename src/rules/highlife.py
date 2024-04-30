@@ -6,18 +6,18 @@ from entities.universe import Universe
 class CustomRuleset(Ruleset):
 
     def __init__(self):
-        self.name = "HighLife (B36/S23)"
+        self.name = "B36/S23"
+        self.friendly_name = "HighLife"
         self.description = "HighLife on Game of Life -variaatio ..."
 
-    # FIX: use of decorator, Pylint does not like
+    # FIX: this routine can be made faster, not sure how exactly but needs to be done
     @classmethod
     def calculate(cls, universe: Universe):
 
         birth_conditions = [3, 6]
         survive_conditions = [2, 3]
 
-        # FIX: To be fetched via a method, not accessed directly
-        old_universe = universe.matrix.copy()
+        old_universe = universe.get_entire_universe_as_ndarray()
         new_universe = np.zeros_like(old_universe)
 
         height, width = old_universe.shape

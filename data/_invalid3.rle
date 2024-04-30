@@ -1,0 +1,4 @@
+#N Blinker
+#C Invalid RLE file for unit testing - B & S in lowercase
+x = 3, y = 1, rule = b3/s23
+3o!

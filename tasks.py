@@ -1,6 +1,6 @@
 from invoke import task
 
-# FIX: Descriptions for each task; more extensive cleanup
+# FIX: Descriptions for each task
 
 @task
 def start(c):
@@ -21,6 +21,16 @@ def highlife(c):
 def test(c):
     print("Running tests")
     c.run("pytest src", pty=True)
+
+@task
+def coverage(c):
+    print("Checking the test coverage")
+    c.run("coverage run --branch -m pytest src", pty=True)
+
+@task
+def coverage_report(c):
+    print("Generating the test report")
+    c.run("coverage html", pty=True)
 
 @task
 def lint(c):
@@ -45,13 +55,3 @@ def clean(c):
     c.run("rm -rf .pytest_cache", pty=True)
     c.run("rm -rf *.db", pty=True)
     c.run("pyclean --verbose .")
-
-@task
-def coverage(c):
-    print("Checking the test coverage")
-    c.run("coverage run --branch -m pytest src", pty=True)
-
-@task(coverage)
-def coverage_report(c):
-    print("Generating the test report")
-    c.run("coverage html", pty=True)
