@@ -21,4 +21,5 @@
 | 23.4.2024 | 3 | Koodin siivousta; testejä; toimivuuden testaaminen Cubbli Linuxissa; viikko3-branchin mergeäminen mainiin ja palautus |
 | 28.4.2024 | 8 | Refaktorointia; RLE-importterin viimeistely; tietokannan populointiskripti |
 | 29.4.2024 | 5 | RLE-importterin bugikorjaus; käyttöohjeet; DocStringit; arkkitehtuuridokumentaatio; koodin ja testien valmistelua palautusta varten |
-| Yhteensä | 75 | |
+| 30.4.2024 | 4 | Lisää DocStringejä; dokumentaation täydennystä; toimivuuden testaaminen Cubbli Linuxissa; viikko6-branchin mergeäminen mainiin ja palautus; release |
+| Yhteensä | 79 | |

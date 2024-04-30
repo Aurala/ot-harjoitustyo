@@ -43,7 +43,6 @@ class RLE:
                 name = line[2:].strip()
         return (name, "\n".join("".join(row) for row in metadata) + "\n")
 
-
     def parse_data(self, content):
         """
         Parses pattern data (all lines not starting with a hash) from a string

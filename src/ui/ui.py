@@ -216,7 +216,7 @@ class UI():
 
     # FIX: logic
     def random_button_pressed(self):
-        pass
+        self.outomaatti.place_random_pattern()
 
     # FIX: add a confirmation dialog
     def trash_button_pressed(self):

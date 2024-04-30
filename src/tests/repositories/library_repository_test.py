@@ -10,6 +10,9 @@ class TestLibraryRepository(unittest.TestCase):
     def test_categories_are_returned(self):
         self.assertNotEqual(self.library_repository.get_categories(), [])
 
+    def test_patterns_are_returned(self):
+        self.assertNotEqual(self.library_repository.get_patterns(), [])
+
     def test_patterns_are_returned_by_id(self):
         self.assertNotEqual(self.library_repository.get_pattern_by_id(1), None)
 

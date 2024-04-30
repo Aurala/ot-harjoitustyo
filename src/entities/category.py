@@ -61,4 +61,3 @@ class Category:
             str: Textual representation of the category
         """
         return f"Category {self._category_id}: {self._name}"
-    

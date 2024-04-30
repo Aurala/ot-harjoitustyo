@@ -19,6 +19,8 @@ class LibraryRepository:
         """
         self._connection = get_database_connection()
 
+    # FIX: remove duplicate code, the methods below can use same functionalities
+
     def get_categories(self):
         """
         Returns all pattern categories.
@@ -36,7 +38,28 @@ class LibraryRepository:
 
         return categories
 
-    def get_patterns(self, category_id):
+    def get_patterns(self):
+        """
+        Returns all patterns.
+
+        Returns:
+            list: all patterns as Pattern objects
+        """
+
+        sql_command = "SELECT * FROM Patterns"
+
+        cursor = self._connection.cursor()
+        cursor.execute(sql_command)
+        rows = cursor.fetchall()
+
+        patterns = []
+        for row in rows:
+            patterns.append(
+                Pattern(row[0], row[1], row[2], row[3], json.loads(row[4]), row[5]))
+
+        return patterns
+
+    def get_patterns_by_category(self, category_id):
         """
         Returns all patterns in the specified category.
 

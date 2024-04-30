@@ -44,7 +44,10 @@
 - RLE-muodossa olevien kuvioiden tuonti sovellukseen toteutettu
     - Käyttöliittymän import-nappi ei vielä toimi
     - Tietokannan luova skripti populoi tietokantaan joukon kategorioita ja tuo niihin RLE-kuvioita määritellyistä tiedostoista data-kansiossa
-- Frams per second -laskuri toteutettu
+- Frames per second -laskuri toteutettu
+- Random-nappi toteutettu (lisää satunnaisia kuvioita kanvaasille)
 - Suurempi määrä asetuksia (outomaatti.toml)
+- DocStringit lähes kaikissa luokissa
 - Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 5 virhettä)
 - Luokkien haarautumakattavuus > 60% (paitsi luokka HighLife, jota ei ajeta ellei erikseen konffata Lifen tilalle)
+- Alustavat käyttöohjeet ja arkkitehtuurikuvaus

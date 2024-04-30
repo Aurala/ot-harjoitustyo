@@ -1,3 +1,4 @@
+import random
 from importlib import import_module
 from entities.universe import Universe
 from config import settings
@@ -62,6 +63,18 @@ class OutomaattiService:
 
     def get_categories(self):
         return self.library_repository.get_categories()
+
+    def place_random_pattern(self):
+        patterns = self.library_repository.get_patterns()
+        if len(patterns) > 0:
+            self.universe.add_pattern(random.randint(1, self.universe.width), random.randint(
+                1, self.universe.height), random.choice(patterns).pattern)
+
+    def get_patterns_by_category(self, category_id):
+        return self.library_repository.get_patterns_by_category(category_id)
+
+    def get_pattern_by_id(self, pattern_id):
+        return self.library_repository.get_pattern_by_id(pattern_id)
 
     def get_pattern_by_name(self, name):
         return self.library_repository.get_pattern_by_name(name)

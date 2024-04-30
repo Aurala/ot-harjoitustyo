@@ -48,7 +48,7 @@ Kontrollit:
 - Tiedosto, antaa käyttäjän selata tiedostoja ja tuoda RLE-muotoon tallennetun kuvan sovellukseen _(ei toiminnassa vielä)_
 - Asetukset, antaa käyttäjän säätää asetuksia _(ei toiminnassa vielä)_
     - Luokka, joka tarjoaa laskentaan käytettävät säännöt
-- Kamera, tallentaa nykyisen Universumin tiedostoon
+- Kamera, tallentaa nykyisen Universumin tiedostoon _(toimii osittain)_
 - Info, avaa ohjeet _(ei toiminnassa vielä)_
 - Exit, sulkee sovelluksen
 

@@ -168,7 +168,7 @@ class Universe:
     def set_entire_universe_as_ndarray(self, universe):
         """
         Sets the entire Universe.
-        
+
         For example, after calculating the next generation.
 
         Args:
