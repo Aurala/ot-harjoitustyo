@@ -1,5 +1,6 @@
 import pygame_menu
 from ui.components.confirmation import Confirmation
+from ui.components.info import Info
 
 class Menu:
 
@@ -201,7 +202,9 @@ class Menu:
     # FIX: logic
     def info_button_pressed(self):
         if not self.outomaatti.is_running():
-            pass
+            info = Info(700, 600, self.theme)
+            info.show(self.surface)
+            self.outomaatti.force_redraw()
 
     # FIX: confirmation dialog
     def exit_button_pressed(self):

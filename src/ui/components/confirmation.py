@@ -1,5 +1,4 @@
 import pygame_menu
-from pygame_menu.examples import create_example_window
 
 
 class Confirmation:
@@ -29,5 +28,6 @@ class Confirmation:
 
     def show(self, surface):
         self._return_value = None
+        self._menu.enable()
         self._menu.mainloop(surface)
         return self._return_value
