@@ -26,23 +26,19 @@ class UI:
 
         pygame.display.set_caption(settings.ui.window_name)
         self.surface = pygame.display.set_mode((800, 625))
-        #self.simulation_surface = pygame.Surface((600, 600))
-        #self.status_surface = pygame.Surface((600, 25))
-        #self.background.fill((0, 0, 0))
         self.clock = pygame.time.Clock()
-
-        self.theme = Theme(self.pygame_global)
-        self.menu = Menu(self.pygame_global, self.theme)
-        self.status = Status(self.pygame_global, self.theme)
-        self.simulation = Simulation(self.pygame_global, self.theme, self.scaling_factor_x, self.scaling_factor_y)
 
         self.outomaatti = OutomaattiService(
             100, 100, settings.rules.enabled[0])
 
-        # FIX: Use OutomaattiService for this
-        self.is_simulation_running = False
-        self.speed = 1
-        self.generation = 0
+        self.outomaatti.pause()
+        self.outomaatti.set_speed(1)
+        self.outomaatti.reset_generation()
+
+        self.theme = Theme(self.pygame_global)
+        self.menu = Menu(self.pygame_global, self.outomaatti, self.surface, self.theme)
+        self.status = Status(self.pygame_global, self.theme)
+        self.simulation = Simulation(self.pygame_global, self.theme, self.scaling_factor_x, self.scaling_factor_y)
 
     def update_mouse_cursor(self):
         mouse_position_x, mouse_position_y = pygame.mouse.get_pos()
@@ -50,10 +46,6 @@ class UI:
             pygame.mouse.set_cursor(self.theme.cursor_pencil)
         else:
             pygame.mouse.set_cursor(self.theme.cursor_normal)
-
-    # FIX: Draw only what needs to be drawn, not the whole screen --> speed
-    #def update_background(self):
-    #    self.surface.blit(self.background, (0, 0))
 
     # FIX: Less nested code
     def process_events(self, events):
@@ -67,7 +59,7 @@ class UI:
                 mouse_position_y_scaled = int(
                     mouse_position_y / self.scaling_factor_y)
                 if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
-                    if not self.is_simulation_running:
+                    if not self.outomaatti.is_running:
                         self.outomaatti.invert_cell(
                             mouse_position_x_scaled, mouse_position_y_scaled)
 
@@ -96,9 +88,10 @@ class UI:
         # - define what to redraw and when
         # - move the Outomaatti calculation to an async thread if needed
 
-        self.simulation.update(self.surface, self.outomaatti.get_universe_as_ndarray())
-
         while 1:
+
+            if self.outomaatti.is_redraw_needed():
+                self.simulation.update(self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
 
             self.update_mouse_cursor()
 
@@ -106,23 +99,16 @@ class UI:
             events = pygame.event.get()
             self.process_events(events)
 
-            #self.update_background()
-
-            # self.cell_surface.fill((255, 0, 0))
-
-            if self.is_simulation_running:
+            if self.outomaatti.is_running():
                 self.outomaatti.next_generation()
-                self.generation += 1
-                self.simulation.update(self.surface, self.outomaatti.get_universe_as_ndarray())
+                self.simulation.update(self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
 
-            #self.update_simulation()
-            #FIX: Generation from OutomaattiService
-            parameters = {"running": self.is_simulation_running,
-                          "width": self.outomaatti.get_width(),
-                          "height": self.outomaatti.get_height(),
-                          "generation": self.generation,
-                          "cells": self.outomaatti.count_cells(),
-                          "frames": self.clock.get_fps()}
+            parameters = {"running": self.outomaatti.is_running(),
+                        "width": self.outomaatti.get_width(),
+                        "height": self.outomaatti.get_height(),
+                        "generation": self.outomaatti.get_generation(),
+                        "cells": self.outomaatti.count_cells(),
+                        "frames": self.clock.get_fps()}
             self.status.update(self.surface, parameters)
 
             self.menu.menu.update(events)
@@ -130,4 +116,4 @@ class UI:
 
             pygame.display.update()
 
-            self.clock.tick(60)
+            self.clock.tick(30)

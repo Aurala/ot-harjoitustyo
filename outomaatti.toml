@@ -16,14 +16,14 @@ default_universe_height = 100
 
 # Menu
 menu_color_background = "#4EC5F1"
-menu_color_background_speed = "#003AFF"
+menu_color_background_selected = "#003AFF"
 menu_color_logo_text = "#FFFFFF"
 menu_color_text = "#FFFFFF"
 menu_color_active_icon = "#FFFFFF"
 menu_color_inactive_icon = "#808080"
 menu_font_name = "Arial"
 menu_font_size = 16
-menu_icon_font_size = 24
+menu_icon_size = 24
 
 # Status bar
 status_color_text = "#4EC5F1"

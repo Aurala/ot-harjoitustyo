@@ -134,7 +134,6 @@ class Universe:
         if 0 <= x < self.width and 0 <= y < self.height:
             self._matrix[y + self._padding][x + self._padding] = 0
 
-    # FIX: Use Numpy methods for speed
     def add_pattern(self, x, y, pattern):
         """
         Adds a predefined pattern to the Universe.
@@ -176,14 +175,16 @@ class Universe:
         """
         np.copyto(self._matrix, universe)
 
-    def get_universe_as_ndarray(self):
+    def get_universe_as_rgb_ndarray(self):
         """
         Returns a copy of the visible Universe.
 
         Returns:
             numpy.ndarray: the visible Universe
         """
-        return self.get_visible_universe().copy()
+        rgb_ndarray = self.get_visible_universe().copy().transpose()
+        rgb_ndarray = np.tile(np.expand_dims(rgb_ndarray, axis=2), (1, 1, 3))
+        return rgb_ndarray
 
     def get_universe_as_list(self):
         """

@@ -1,15 +1,16 @@
 import pygame_menu
-from config import settings
-
+from ui.components.confirmation import Confirmation
 
 class Menu:
 
-    def __init__(self, pygame, theme):
-        self.theme = theme.get_theme()
+    def __init__(self, pygame, outomaatti, surface, theme):
+        self.theme = theme
+        self.outomaatti = outomaatti
         self.pygame = pygame
+        self.surface = surface
 
         self.menu = pygame_menu.Menu(position=(
-            100, 0), width=200, height=625, center_content=True, theme=self.theme, title='')
+            100, 0), width=200, height=625, center_content=True, theme=self.theme.get_theme(), title='')
         self.menu.add.label("Outomaatti", font_name=theme.logofont)
 
         self.menu.add.label("Nopeus:")
@@ -29,6 +30,7 @@ class Menu:
             lambda: self.speed_button_pressed("speed_three", 3),
             font_name=theme.fontawesome,
             button_id="speed_three"))
+        self.speed_button_pressed("speed_one", 1)
 
         self.menu.add.label("Koko:")
         size_controls_frame = self.menu.add.frame_h(200, 50)
@@ -106,11 +108,10 @@ class Menu:
             button_id="info"))
         application_controls_frame.pack(self.menu.add.button(
             "right-from-bracket",
-            pygame_menu.events.EXIT,
+            lambda: self.exit_button_pressed(),
             font_name=theme.fontawesome,
             button_id="exit"))
 
-    # FIX: actually changing speed
     def change_button_states(self, playing):
         ids = ["speed_one", "speed_two", "speed_three", "size_minus",
                "size_plus", "next", "random", "trash", "browse",
@@ -118,9 +119,9 @@ class Menu:
         for id in ids:
             button = self.menu.get_widget(id, True)
             if playing:
-                button.update_font(self.font_inactive.copy())
+                button.update_font(self.theme.font_inactive.copy())
             else:
-                button.update_font(self.font_active.copy())
+                button.update_font(self.theme.font_active.copy())
         if playing:
             self.menu.get_widget("play", True).hide()
             self.menu.get_widget("pause", True).show()
@@ -128,31 +129,30 @@ class Menu:
             self.menu.get_widget("pause", True).hide()
             self.menu.get_widget("play", True).show()
 
-    # FIX: logic
     def speed_button_pressed(self, widget, speed):
-        if not self.is_simulation_running:
+        if not self.outomaatti.is_running():
             ids = ["speed_one", "speed_two", "speed_three"]
             for id in ids:
                 button = self.menu.get_widget(id, True)
                 if button.get_id() == widget:
                     button.set_background_color(
-                        settings.ui.menu_color_background_speed)
+                        self.theme.background_color_selected)
                 else:
                     button.set_background_color(
-                        settings.ui.menu_color_background)
-        self.speed = speed
-
+                        self.theme.background_color)
+        self.outomaatti.set_speed(speed)
+  
    # FIX: logic
     def size_button_pressed(self, size):
-        pass
+        if not self.outomaatti.is_running():
+            pass
 
-    # FIX: change the state of buttons
     def play_button_pressed(self):
-        if self.is_simulation_running:
-            self.is_simulation_running = False
+        if self.outomaatti.is_running():
+            self.outomaatti.pause()
             self.change_button_states(False)
         else:
-            self.is_simulation_running = True
+            self.outomaatti.play()
             self.change_button_states(True)
 
     # FIX: logic, change the state of buttons
@@ -161,38 +161,63 @@ class Menu:
 
     # FIX: logic
     def random_button_pressed(self):
-        self.outomaatti.place_random_pattern()
+        if not self.outomaatti.is_running():
+            self.outomaatti.place_random_pattern()
 
     # FIX: add a confirmation dialog
     def trash_button_pressed(self):
-        if not self.is_simulation_running:
-            self.outomaatti.clear_universe()
+        if not self.outomaatti.is_running():
+            parameters = {
+                "question": "Tyhjennetäänkö Universumi?",
+                1: "Kyllä",
+                2: "Ei"
+            }
+            empty_confirmation = Confirmation(400, 150, parameters, self.theme)
+            if empty_confirmation.show(self.surface) == 1:
+                self.outomaatti.clear_universe()
+            empty_confirmation = None
+            self.outomaatti.force_redraw()
 
     # FIX: logic
     def browse_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            pass
 
     # FIX: logic
     def import_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            pass
 
     # FIX: logic
     def settings_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            pass
 
     # FIX: logic
     def snapshot_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            pass
 
     # FIX: logic
     def info_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            pass
 
     # FIX: confirmation dialog
     def exit_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            parameters = {
+                "question": "Suljetaanko Outomaatti",
+                1: "Kyllä",
+                2: "Ei"
+            }
+            exit_confirmation = Confirmation(400, 150, parameters, self.theme)
+            if exit_confirmation.show(self.surface) == 1:
+                self.outomaatti.close()
+            exit_confirmation = None
+            self.outomaatti.force_redraw()
 
     # FIX: save name, type and location from settings; save the scaled version
     def snapshot_button_pressed(self):
-        if not self.is_simulation_running:
-            pygame.image.save(self.cell_surface, "universe.png")
+        if not self.outomaatti.is_running:
+            self.pygame.image.save(self.cell_surface, "universe.png")
