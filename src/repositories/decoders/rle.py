@@ -96,7 +96,7 @@ class RLE:
 
     # FIX: no file managment in this class, will decode text as
     # given by the repository
-    def read_from_file(self, filename):
+    def decode(self, encoded_data):
         """
         Reads Run Length Encoded data from a file and parses it
         for metadata and pattern data.
@@ -114,10 +114,10 @@ class RLE:
 
         # FIX: Error management
 
-        rle_file = open(filename, "r", encoding="utf-8")
-        rle_data = rle_file.readlines()
+        #rle_file = open(filename, "r", encoding="utf-8")
+        #rle_data = rle_file.readlines()
 
-        name, metadata = self.parse_metadata(rle_data)
-        rules, pattern = self.parse_data(rle_data)
+        name, metadata = self.parse_metadata(encoded_data)
+        rules, pattern = self.parse_data(encoded_data)
 
         return (name, rules, pattern, metadata)

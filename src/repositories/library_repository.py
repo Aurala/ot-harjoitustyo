@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from entities.pattern import Pattern
 from entities.category import Category
 from database_connection import get_database_connection
@@ -18,6 +19,16 @@ class LibraryRepository:
         access configured in the settings file.
         """
         self._connection = get_database_connection()
+
+        cursor = self._connection.cursor()
+
+        try:
+            cursor.execute("SELECT 1 FROM Categories")
+            rows = cursor.fetchall()
+        except sqlite3.OperationalError:
+            print("Muista alustaa tietokanta ennen Outomaatti-sovelluksen ajamista:" +
+                  "'poetry invoke run build'")
+            raise SystemExit
 
     # FIX: remove duplicate code, the methods below can use same functionalities
 
