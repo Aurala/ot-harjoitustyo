@@ -144,7 +144,7 @@ class Menu:
                     button.set_background_color(
                         self.theme.background_color)
         self.outomaatti.set_speed(speed)
-  
+
    # FIX: logic
     def size_button_pressed(self, size):
         if not self.outomaatti.is_running():
@@ -160,8 +160,8 @@ class Menu:
 
     def next_button_pressed(self):
         if not self.outomaatti.is_running():
-            self.outomaatti.next_generation()         
-            self.outomaatti.force_redraw()   
+            self.outomaatti.next_generation()
+            self.outomaatti.force_redraw()
 
     def random_button_pressed(self):
         if not self.outomaatti.is_running():
@@ -183,7 +183,8 @@ class Menu:
     # FIX: finalize
     def browse_button_pressed(self):
         if not self.outomaatti.is_running():
-            pattern_chooser = PatternChooser(700, 550, self.outomaatti, self.theme)
+            pattern_chooser = PatternChooser(
+                700, 550, self.outomaatti, self.theme)
             pattern_id = pattern_chooser.show(self.surface)
             pattern_chooser = None
             self.outomaatti.force_redraw()

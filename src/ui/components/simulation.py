@@ -8,10 +8,11 @@ class Simulation:
         self._pygame = pygame
         self._scaling_factor_x = scaling_factor_x
         self._scaling_factor_y = scaling_factor_y
-        self._cell_surface = self._pygame.Surface((100, 100)) # FIX
+        self._cell_surface = self._pygame.Surface((100, 100))  # FIX
 
     def update(self, surface, universe):
-        self._cell_surface = self._pygame.surfarray.make_surface(universe * 255)
+        self._cell_surface = self._pygame.surfarray.make_surface(
+            universe * 255)
         surface.blit(self._pygame.transform.scale_by(
             self._cell_surface, (self._scaling_factor_x, self._scaling_factor_y)), (0, 0))
 

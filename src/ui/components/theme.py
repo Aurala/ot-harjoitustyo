@@ -14,12 +14,12 @@ class Theme:
         self.background_color_selected = settings.ui.menu_color_background_selected
 
         self.theme = pygame_menu.Theme(
-            widget_font = self.menufont,
-            widget_font_color = settings.ui.menu_color_text,
-            widget_font_size = settings.ui.menu_font_size,
-            title_font_size = settings.ui.menu_font_size,
-            background_color = settings.ui.menu_color_background,
-            title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
+            widget_font=self.menufont,
+            widget_font_color=settings.ui.menu_color_text,
+            widget_font_size=settings.ui.menu_font_size,
+            title_font_size=settings.ui.menu_font_size,
+            background_color=settings.ui.menu_color_background,
+            title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
         )
         self.theme.widget_selection_effect = pygame_menu.widgets.NoneSelection()
 
@@ -38,6 +38,6 @@ class Theme:
                               "selected_color": settings.ui.menu_color_inactive_icon}
         self.font_active = {"color": settings.ui.menu_color_active_icon,
                             "selected_color": settings.ui.menu_color_active_icon}
-        
+
     def get_theme(self):
         return self.theme

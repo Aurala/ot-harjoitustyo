@@ -191,7 +191,8 @@ def populate_tables(connection):
         category_id = cursor.execute(
             sql_command1, [category[0], category[1]]).lastrowid
         for filename in category[2]:
-            with open(settings.resources.directory_patterns + filename) as rle_file:
+            with open(settings.resources.directory_patterns +
+                      filename, "r", encoding="UTF-8") as rle_file:
                 rle_data = rle_file.readlines()
             encoded = decoder.decode(rle_data)
             if encoded is not None:

@@ -24,9 +24,11 @@ class PatternChooser:
         for category in categories:
             self._menu.add.label("--- Kategoria: " + category.name + " ---")
             self._menu.add.label(category.description)
-            patterns = self._outomaatti.get_patterns_by_category(category.category_id)
+            patterns = self._outomaatti.get_patterns_by_category(
+                category.category_id)
             for pattern in patterns:
-                self._menu.add.button("Kuvio: " + pattern.name, lambda id=pattern.pattern_id: self.on_click(id))
+                self._menu.add.button(
+                    "Kuvio: " + pattern.name, lambda id=pattern.pattern_id: self.on_click(id))
             self._menu.add.label("")
 
         self._menu.add.label("")

@@ -23,12 +23,12 @@ class LibraryRepository:
         cursor = self._connection.cursor()
 
         try:
-            cursor.execute("SELECT 1 FROM Categories")
-            rows = cursor.fetchall()
-        except sqlite3.OperationalError:
-            print("Muista alustaa tietokanta ennen Outomaatti-sovelluksen ajamista:" +
+            cursor.execute("SELECT 1 FROM Categories").fetchall()
+        except sqlite3.OperationalError as error:
+            print("Muista alustaa tietokanta ennen Outomaatti-sovelluksen ajamista:",
                   "'poetry invoke run build'")
-            raise SystemExit
+            raise SystemExit from error
+
 
     # FIX: remove duplicate code, the methods below can use same functionalities
 

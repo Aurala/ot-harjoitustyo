@@ -1,4 +1,5 @@
 import random
+import sys
 from importlib import import_module
 from entities.universe import Universe
 from config import settings
@@ -25,7 +26,7 @@ class OutomaattiService:
         if redraw_needed:
             self._redraw_needed = False
         return redraw_needed
-    
+
     def force_redraw(self):
         self._redraw_needed = True
 
@@ -36,7 +37,7 @@ class OutomaattiService:
         self._running = False
 
     def close(self):
-        exit()
+        sys.exit()
 
     def set_speed(self, speed):
         if 1 <= speed <= 3:

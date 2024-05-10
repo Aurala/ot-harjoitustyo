@@ -8,7 +8,8 @@ class Status:
         self.theme = theme
 
     def update(self, surface, parameters):
-        self.pygame.draw.rect(surface, (0, 0, 0), self.pygame.Rect(0, 600, 600, 625))
+        self.pygame.draw.rect(surface, (0, 0, 0),
+                              self.pygame.Rect(0, 600, 600, 625))
         status = ""
         if parameters["running"]:
             status = "Käynnissä..."

@@ -94,8 +94,7 @@ class RLE:
 
         return (f"B{birth_conditions}/S{survive_conditions}", pattern)
 
-    # FIX: no file managment in this class, will decode text as
-    # given by the repository
+    # FIX: Error management
     def decode(self, encoded_data):
         """
         Reads Run Length Encoded data from a file and parses it
@@ -111,11 +110,6 @@ class RLE:
             the pattern data,
             the metadata
         """
-
-        # FIX: Error management
-
-        #rle_file = open(filename, "r", encoding="utf-8")
-        #rle_data = rle_file.readlines()
 
         name, metadata = self.parse_metadata(encoded_data)
         rules, pattern = self.parse_data(encoded_data)

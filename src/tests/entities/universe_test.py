@@ -23,3 +23,11 @@ class TestUniverse(unittest.TestCase):
         universe = self.universe.get_entire_universe_as_ndarray()
         self.assertEqual(isinstance(universe, np.ndarray), True)
         self.assertEqual(universe.shape, (15, 15))
+
+    def test_returns_the_height(self):
+        self.assertEqual(self.universe.true_height, 15)
+        self.assertEqual(self.universe.height, 5)
+
+    def test_returns_the_width(self):
+        self.assertEqual(self.universe.true_width, 15)
+        self.assertEqual(self.universe.width, 5)

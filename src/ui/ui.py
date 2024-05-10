@@ -24,38 +24,40 @@ class UI:
         pygame.init()
         self.pygame_global = pygame
 
-        pygame.display.set_caption(settings.ui.window_name)
-        self.surface = pygame.display.set_mode((800, 625))
-        self.clock = pygame.time.Clock()
+        self.pygame_global.display.set_caption(settings.ui.window_name)
+        self.surface = self.pygame_global.display.set_mode((800, 625))
+        self.clock = self.pygame_global.time.Clock()
 
         self.outomaatti = OutomaattiService(
             100, 100, settings.rules.enabled[0])
 
         self.theme = Theme(self.pygame_global)
-        self.menu = Menu(self.pygame_global, self.outomaatti, self.surface, self.theme)
+        self.menu = Menu(self.pygame_global, self.outomaatti,
+                         self.surface, self.theme)
         self.status = Status(self.pygame_global, self.theme)
-        self.simulation = Simulation(self.pygame_global, self.theme, self.scaling_factor_x, self.scaling_factor_y)
+        self.simulation = Simulation(
+            self.pygame_global, self.theme, self.scaling_factor_x, self.scaling_factor_y)
 
     def update_mouse_cursor(self):
         mouse_position_x, mouse_position_y = pygame.mouse.get_pos()
         if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
-            pygame.mouse.set_cursor(self.theme.cursor_pencil)
+            self.pygame_global.mouse.set_cursor(self.theme.cursor_pencil)
         else:
-            pygame.mouse.set_cursor(self.theme.cursor_normal)
+            self.pygame_global.mouse.set_cursor(self.theme.cursor_normal)
 
     # FIX: Less nested code
     def process_events(self, events):
         for event in events:
-            if event.type == pygame.QUIT:
+            if event.type == self.pygame_global.QUIT:
                 self.is_running = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_position_x, mouse_position_y = pygame.mouse.get_pos()
+            if event.type == self.pygame_global.MOUSEBUTTONDOWN:
+                mouse_position_x, mouse_position_y = self.pygame_global.mouse.get_pos()
                 mouse_position_x_scaled = int(
                     mouse_position_x / self.scaling_factor_x)
                 mouse_position_y_scaled = int(
                     mouse_position_y / self.scaling_factor_y)
                 if mouse_position_x <= self.surface_size_x and mouse_position_y <= self.surface_size_y:
-                    if not self.outomaatti.is_running:
+                    if not self.outomaatti.is_running():
                         self.outomaatti.invert_cell(
                             mouse_position_x_scaled, mouse_position_y_scaled)
 
@@ -75,19 +77,21 @@ class UI:
         while 1:
 
             if self.outomaatti.is_redraw_needed():
-                self.simulation.update(self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
+                self.simulation.update(
+                    self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
 
             self.update_mouse_cursor()
 
             # FIX: Should process both Outomaatti and menu events at once
-            events = pygame.event.get()
+            events = self.pygame_global.event.get()
             self.process_events(events)
 
             if self.outomaatti.is_running():
                 ticks += 1
                 if ticks > last_ticks + (10 * (self.outomaatti.get_speed()-1)):
                     self.outomaatti.next_generation()
-                    self.simulation.update(self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
+                    self.simulation.update(
+                        self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
                     last_ticks = ticks
 
             parameters = {"running": self.outomaatti.is_running(),
@@ -101,6 +105,6 @@ class UI:
             self.menu.menu.update(events)
             self.menu.menu.draw(self.surface)
 
-            pygame.display.update()
+            self.pygame_global.display.update()
 
             self.clock.tick(60)
