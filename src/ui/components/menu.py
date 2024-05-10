@@ -1,7 +1,8 @@
 import pygame_menu
 from ui.components.confirmation import Confirmation
 from ui.components.info import Info
-from ui.components.patternchooser import PatternChooser
+from ui.components.patternpicker import PatternPicker
+from ui.components.settings import Settings
 
 
 class Menu:
@@ -96,7 +97,7 @@ class Menu:
         application_controls_frame = self.menu.add.frame_h(200, 50)
         application_controls_frame.pack(self.menu.add.button(
             "gear",
-            self.settings_button_pressed(),
+            lambda: self.settings_button_pressed(),
             font_name=theme.fontawesome,
             button_id="settings"))
         application_controls_frame.pack(self.menu.add.button(
@@ -183,7 +184,7 @@ class Menu:
     # FIX: finalize
     def browse_button_pressed(self):
         if not self.outomaatti.is_running():
-            pattern_chooser = PatternChooser(
+            pattern_chooser = PatternPicker(
                 700, 550, self.outomaatti, self.theme)
             pattern_id = pattern_chooser.show(self.surface)
             pattern_chooser = None
@@ -197,7 +198,9 @@ class Menu:
     # FIX: logic
     def settings_button_pressed(self):
         if not self.outomaatti.is_running():
-            pass
+            settings = Settings(400, 150, self.outomaatti, self.theme)
+            settings.show(self.surface)
+            self.outomaatti.force_redraw()
 
     def info_button_pressed(self):
         if not self.outomaatti.is_running():

@@ -59,3 +59,5 @@
 - Info-toiminnallisuus toteutettu
 - Next-toiminnallisuus toteutettu
 - Joka kategoriaan lisätty valmiiksi määritettyjä kuvioita
+- Nopeusvalinta toteutettu
+- Asetukset-valikko totetettu

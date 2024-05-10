@@ -62,7 +62,7 @@ Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä ole
 - Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioiksi.
 - Käyttäjän sulkiessa sovelluksen, se tallentaa meneillään olevan simulaation tietokantaan.
 - Tehty: Käyttäjä voi tallettaa tiedostoon yksittäisen kuvakaappauksen simulaatiosta.
-- Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
+- Tehty: Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
 - Käyttäjä voi tallettaa automaattisesti tiedostoon kuvakaappauksen jokaisesta sukupolvesta simulaation aikana.
 - Käyttäjä voi tuoda kuvioita [eri formaateissa](https://conwaylife.com/wiki/File_formats) olevista tiedostoista.
 - Visuaaliset parannukset.

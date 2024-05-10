@@ -29,10 +29,10 @@ menu_icon_size = 24
 # Status bar
 status_color_text = "#4EC5F1"
 status_font_name = "Arial"
-status_font_size = 16
+status_font_size = 12
 
 [rules]
 # If you add custom rulesets, you need to add them here.
 # "rules.life" means the class is in "src/rules/life.py".
 # The first one on the list is the default.
-enabled = ["rules.life", "rules.highlife"]
+enabled = [["Life (B3/S23)", "rules.life"], ["HighLife (B36/S23)", "rules.highlife"]]

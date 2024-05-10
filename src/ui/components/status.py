@@ -12,13 +12,14 @@ class Status:
                               self.pygame.Rect(0, 600, 600, 625))
         status = ""
         if parameters["running"]:
-            status = "Käynnissä..."
+            status = "Käynnissä"
         else:
             status = "Pysäytetty"
         text = self.theme.statusfont.render(f"{status}   " +
+                                            f"Säännöt: {parameters['ruleset']}   " +
                                             f"Universumi: {parameters['width']}x{parameters['height']}   " +
                                             f"Sukupolvi: {parameters['generation']}   " +
                                             f"Soluja: {parameters['cells']}   " +
-                                            f"FPS: {parameters['frames']:.1f}",
+                                            f"FPS: {parameters['frames']:.0f}",
                                             True, self.theme.statusfont_color)
         surface.blit(text, (10, 600))

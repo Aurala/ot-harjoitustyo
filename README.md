@@ -67,20 +67,6 @@ Käyttöliittymän toteutus on vielä kesken ja kaikki sen sisältämät kontrol
 - Random
 - Exit
 
-Vaihtoehtoisesti käyttäjä voi käynnistää tekstimuotoisen käyttöliittymän komennoilla:
-
-```
-poetry run invoke life
-```
-
-tai
-
-```
-poetry run invoke highlife
-```
-
-Tekstikäyttöliittymät on tehty nopeaa testaamista varten. Erona yo. komennoissa on se, että ensimmäinen käyttää oletusarvoisia sääntöjä (B3/S23) ja jälkimmäinen nk. Highlife-sääntöjä (B36/S23). Sovellus lataa säännöt toteuttavat funktiot dynaamisesti eri luokista.
-
 ### Testaus
 
 Koodin laatua mittaava testi ajetaan komennolla:

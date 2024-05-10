@@ -1,7 +1,7 @@
 import pygame_menu
 
 
-class PatternChooser:
+class PatternPicker:
 
     def __init__(self, width, height, outomaatti, theme):
 

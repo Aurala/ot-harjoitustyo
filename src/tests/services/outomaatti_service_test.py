@@ -89,3 +89,48 @@ class TestOutomaattiService(unittest.TestCase):
         self.assertEqual(outomaatti.get_universe_as_text(), "*\n")
         outomaatti.clear_universe()
         self.assertEqual(outomaatti.get_universe_as_text(), ".\n")
+
+    def test_place_random_pattern(self):
+        pass  # FIX
+
+    def test_get_categories_by_category(self):
+        pass  # FIX
+
+    def test_get_pattern_by_id(self):
+        pass  # FIX
+
+    def test_get_pattern_by_name(self):
+        pass  # FIX
+
+    def test_get_universe_as_list(self):
+        pass  # FIX
+
+    def test_get_universe_as_rgb_ndarray(self):
+        pass  # FIX
+
+    def test_is_running(self):
+        pass  # FIX
+
+    def test_is_redraw_needed(self):
+        pass  # FIX
+
+    def test_force_redraw(self):
+        pass  # FIX
+
+    def test_set_speed(self):
+        pass  # FIX
+
+    def test_get_speed(self):
+        pass  # FIX
+
+    def test_pause(self):
+        pass  # FIX
+
+    def test_play(self):
+        pass  # FIX
+
+    def test_get_generation(self):
+        pass  # FIX
+
+    def test_reset_generation(self):
+        pass  # FIX

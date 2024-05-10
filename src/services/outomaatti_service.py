@@ -9,14 +9,26 @@ from repositories.library_repository import LibraryRepository
 class OutomaattiService:
 
     # FIX: Read defaults from a configuration file
-    def __init__(self, x=5, y=5, ruleset=settings.rules.enabled[0]):
+    def __init__(self, x=5, y=5, ruleset=0):
         self._universe = Universe(x, y)
-        self._ruleset = import_module(ruleset).CustomRuleset
+        self._ruleset_number = ruleset
+        self.set_ruleset(self._ruleset_number)
         self._library_repository = LibraryRepository()
         self._running = False
         self._speed = 1
         self._generation = 0
         self._redraw_needed = True
+
+    def get_ruleset(self):
+        return self._ruleset_number
+
+    def get_rulesets(self):
+        return settings.rules.enabled
+
+    def set_ruleset(self, ruleset_id):
+        self._ruleset_number = ruleset_id
+        self._ruleset = import_module(
+            settings.rules.enabled[ruleset_id][1]).CustomRuleset
 
     def is_running(self):
         return self._running

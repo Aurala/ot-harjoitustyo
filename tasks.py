@@ -8,16 +8,6 @@ def start(c):
     c.run("python3 src/index.py", pty=True)
 
 @task
-def life(c):
-    print("Starting Outomaatti (textmode, ruleset=Life)")
-    c.run("python3 src/textmode_life.py", pty=True)
-
-@task
-def highlife(c):
-    print("Starting Outomaatti (textmode, ruleset=Highlife)")
-    c.run("python3 src/textmode_highlife.py", pty=True)
-
-@task
 def test(c):
     print("Running tests")
     c.run("pytest src", pty=True)

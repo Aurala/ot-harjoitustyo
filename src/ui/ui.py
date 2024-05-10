@@ -28,8 +28,7 @@ class UI:
         self.surface = self.pygame_global.display.set_mode((800, 625))
         self.clock = self.pygame_global.time.Clock()
 
-        self.outomaatti = OutomaattiService(
-            100, 100, settings.rules.enabled[0])
+        self.outomaatti = OutomaattiService(100, 100)
 
         self.theme = Theme(self.pygame_global)
         self.menu = Menu(self.pygame_global, self.outomaatti,
@@ -95,6 +94,7 @@ class UI:
                     last_ticks = ticks
 
             parameters = {"running": self.outomaatti.is_running(),
+                          "ruleset": settings.rules.enabled[self.outomaatti.get_ruleset()][0],
                           "width": self.outomaatti.get_width(),
                           "height": self.outomaatti.get_height(),
                           "generation": self.outomaatti.get_generation(),

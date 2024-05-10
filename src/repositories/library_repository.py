@@ -29,7 +29,6 @@ class LibraryRepository:
                   "'poetry invoke run build'")
             raise SystemExit from error
 
-
     # FIX: remove duplicate code, the methods below can use same functionalities
 
     def get_categories(self):
