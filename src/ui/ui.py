@@ -31,10 +31,6 @@ class UI:
         self.outomaatti = OutomaattiService(
             100, 100, settings.rules.enabled[0])
 
-        self.outomaatti.pause()
-        self.outomaatti.set_speed(1)
-        self.outomaatti.reset_generation()
-
         self.theme = Theme(self.pygame_global)
         self.menu = Menu(self.pygame_global, self.outomaatti, self.surface, self.theme)
         self.status = Status(self.pygame_global, self.theme)
@@ -65,28 +61,16 @@ class UI:
 
     def mainloop(self):
 
-        # FIX: Patterns to come from the repository
-
-        glider = self.outomaatti.get_pattern_by_name("Glider").pattern
-        self.outomaatti.add_pattern(0, 0, glider)
-        self.outomaatti.add_pattern(10, 10, glider)
-        self.outomaatti.add_pattern(20, 20, glider)
-        self.outomaatti.add_pattern(30, 30, glider)
-        self.outomaatti.add_pattern(40, 40, glider)
-
-        blinker = self.outomaatti.get_pattern_by_name("Blinker").pattern
-        self.outomaatti.add_pattern(5, 50, blinker)
-        self.outomaatti.add_pattern(5, 60, blinker)
-        self.outomaatti.add_pattern(5, 70, blinker)
-
-        glider_gun = self.outomaatti.get_pattern_by_name(
-            "Gosper glider gun").pattern
-        self.outomaatti.add_pattern(40, 10, glider_gun)
+        medusa = self.outomaatti.get_pattern_by_name("Medusa").pattern
+        self.outomaatti.add_pattern(10, 1, medusa)
 
         # FIX: optimize, optimize, optimize
         # - framerate
         # - define what to redraw and when
         # - move the Outomaatti calculation to an async thread if needed
+
+        ticks = 0
+        last_ticks = -10
 
         while 1:
 
@@ -100,15 +84,18 @@ class UI:
             self.process_events(events)
 
             if self.outomaatti.is_running():
-                self.outomaatti.next_generation()
-                self.simulation.update(self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
+                ticks += 1
+                if ticks > last_ticks + (10 * (self.outomaatti.get_speed()-1)):
+                    self.outomaatti.next_generation()
+                    self.simulation.update(self.surface, self.outomaatti.get_universe_as_rgb_ndarray())
+                    last_ticks = ticks
 
             parameters = {"running": self.outomaatti.is_running(),
-                        "width": self.outomaatti.get_width(),
-                        "height": self.outomaatti.get_height(),
-                        "generation": self.outomaatti.get_generation(),
-                        "cells": self.outomaatti.count_cells(),
-                        "frames": self.clock.get_fps()}
+                          "width": self.outomaatti.get_width(),
+                          "height": self.outomaatti.get_height(),
+                          "generation": self.outomaatti.get_generation(),
+                          "cells": self.outomaatti.count_cells(),
+                          "frames": self.clock.get_fps()}
             self.status.update(self.surface, parameters)
 
             self.menu.menu.update(events)
@@ -116,4 +103,4 @@ class UI:
 
             pygame.display.update()
 
-            self.clock.tick(30)
+            self.clock.tick(60)

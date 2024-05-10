@@ -44,9 +44,9 @@ Graafisten elementtien lähteet:
 - Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
 - Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
 - Tehty: Käyttäjä voi käynnistää simulaation.
-- Käyttäjä voi säätää simulaation nopeutta.
+- Tehty: Käyttäjä voi säätää simulaation nopeutta.
 - Tehty: Käyttäjä voi pysäyttää simulaation.
-- Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
+- Tehty: Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
 - Tehty: Simulaation ollessa pysäytettynä, käyttäjällä on mahdollisuus muokata kanvaasia (yllä mainituilla työkaluilla).
 - Tehty: Käyttäjä voi seurata simulaation tilaa (sukupolvi, elossa olevien solujen määrä) infopalkista.
 - Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.

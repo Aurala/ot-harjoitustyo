@@ -79,21 +79,27 @@ def populate_tables(connection):
          oscillators that move an active reaction to another location without
          themselves being permanently damaged.
          """,
-         []
+         ["conduit1.rle",
+          "bx222.rle",
+          "syringe.rle"]
          ],
         ["Garden of Eden",
          """
          A Garden of Eden is a pattern that has no parents and thus can only
          occur in generation 0.
          """,
-         []
+         ["gardensofeden2009.rle"]
          ],
         ["Guns",
          """
          A gun is a stationary pattern that emits spaceships (or rakes)
          repeatedly forever.
          """,
-         ["gosper_glider_gun.rle"]
+         ["bigun.rle",
+          "gosper_glider_gun.rle",
+          "medusa.rle",
+          "period44mwssgun.rle",
+          "simkinglidergun.rle"]
          ],
         ["Methusalehs",
          """
@@ -101,7 +107,9 @@ def populate_tables(connection):
          in order to stabilize (known as its lifespan) and becomes much larger
          than its initial configuration at some point during its evolution.
          """,
-         []
+         ["queenbee.rle",
+          "wing.rle",
+          "52513m.rle"]
          ],
         ["Oscillators",
          """
@@ -109,14 +117,24 @@ def populate_tables(connection):
          it is a pattern that repeats itself after a fixed number of generations
          (known as its period).
          """,
-         ["blinker.rle"]
+         ["blinker.rle",
+          "pulsar.rle",
+          "pinwheel.rle",
+          "p81_180_glider_loop.rle"]
          ],
         ["Puffers",
          """
          A puffer is a pattern that moves like a spaceship but leaves debris
          behind as it moves.
          """,
-         []
+         ["puffer1.rle",
+          "puffer2.rle",
+          "blinkerpuffer1.rle",
+          "blocklayingswitchengine.rle",
+          "gliderproducingswitchengine.rle",
+          "noahsark.rle",
+          "pufferfish.rle",
+          "p28blockpuffer.rle"]
          ],
         ["Replicators",
          """
@@ -130,20 +148,41 @@ def populate_tables(connection):
          A spaceship is a finite pattern that reappears (without additions or losses)
          after a fixed number of generations displaced by a non-zero amount.
          """,
-         ["glider.rle"]
+         ["glider.rle",
+          "bigglider.rle",
+          "lwss.rle",
+          "mwss.rle",
+          "hwss.rle",
+          "loafer.rle",
+          "copperhead.rle",
+          "bulldozer.rle",
+          "lobster.rle",
+          "enterprise.rle"]
          ],
         ["Still lifes",
          """
          A still life is a pattern that does not change from one generation to the next,
          and thus is a parent of itself.
          """,
-         []
+         ["aircraftcarrier.rle",
+          "314.rle",
+          "beehive.rle",
+          "block.rle",
+          "boat.rle",
+          "eater1.rle",
+          "eater2.rle",
+          "loaf.rle",
+          "pond.rle",
+          "ship.rle",
+          "snake.rle",
+          "tub.rle"]
          ],
         ["Wicks",
          """
          A wick is a static or oscillating linearly repeating pattern.
          """,
-         []
+         ["ants.rle",
+          "blinkerfuse.rle"]
          ],
     ]
 

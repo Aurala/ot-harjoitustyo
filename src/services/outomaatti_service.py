@@ -78,6 +78,7 @@ class OutomaattiService:
 
     def clear_universe(self):
         self._universe.clear_universe()
+        self.reset_generation()
         self.force_redraw()
 
     def get_universe_as_rgb_ndarray(self):

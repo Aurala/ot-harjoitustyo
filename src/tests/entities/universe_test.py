@@ -15,9 +15,9 @@ class TestUniverse(unittest.TestCase):
         self.assertEqual(len(universe[1]), 5)
 
     def test_returns_visible_universe_as_numpy_array(self):
-        universe = self.universe.get_universe_as_ndarray()
+        universe = self.universe.get_universe_as_rgb_ndarray()
         self.assertEqual(isinstance(universe, np.ndarray), True)
-        self.assertEqual(universe.shape, (5, 5))
+        self.assertEqual(universe.shape, (5, 5, 3))
 
     def test_returns_entire_universe_as_numpy_array(self):
         universe = self.universe.get_entire_universe_as_ndarray()

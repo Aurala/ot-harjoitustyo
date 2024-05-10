@@ -14,7 +14,8 @@ class Info:
             width=self._width,
             height=self._height,
             theme=self._theme.get_theme(),
-            title=""        )
+            title=""
+        )
 
         self._menu.add.button("Sulje", lambda: self.on_click())
 

@@ -1,6 +1,8 @@
 import pygame_menu
 from ui.components.confirmation import Confirmation
 from ui.components.info import Info
+from ui.components.patternchooser import PatternChooser
+
 
 class Menu:
 
@@ -156,16 +158,15 @@ class Menu:
             self.outomaatti.play()
             self.change_button_states(True)
 
-    # FIX: logic, change the state of buttons
     def next_button_pressed(self):
-        pass
+        if not self.outomaatti.is_running():
+            self.outomaatti.next_generation()         
+            self.outomaatti.force_redraw()   
 
-    # FIX: logic
     def random_button_pressed(self):
         if not self.outomaatti.is_running():
             self.outomaatti.place_random_pattern()
 
-    # FIX: add a confirmation dialog
     def trash_button_pressed(self):
         if not self.outomaatti.is_running():
             parameters = {
@@ -179,10 +180,13 @@ class Menu:
             empty_confirmation = None
             self.outomaatti.force_redraw()
 
-    # FIX: logic
+    # FIX: finalize
     def browse_button_pressed(self):
         if not self.outomaatti.is_running():
-            pass
+            pattern_chooser = PatternChooser(700, 550, self.outomaatti, self.theme)
+            pattern_id = pattern_chooser.show(self.surface)
+            pattern_chooser = None
+            self.outomaatti.force_redraw()
 
     # FIX: logic
     def import_button_pressed(self):
@@ -194,19 +198,17 @@ class Menu:
         if not self.outomaatti.is_running():
             pass
 
-    # FIX: logic
-    def snapshot_button_pressed(self):
-        if not self.outomaatti.is_running():
-            pass
-
-    # FIX: logic
     def info_button_pressed(self):
         if not self.outomaatti.is_running():
-            info = Info(700, 600, self.theme)
+            info = Info(700, 550, self.theme)
             info.show(self.surface)
             self.outomaatti.force_redraw()
 
-    # FIX: confirmation dialog
+    # FIX: save name, type and location from settings; save the scaled version
+    def snapshot_button_pressed(self):
+        if not self.outomaatti.is_running:
+            self.pygame.image.save(self.cell_surface, "universe.png")
+
     def exit_button_pressed(self):
         if not self.outomaatti.is_running():
             parameters = {
@@ -219,8 +221,3 @@ class Menu:
                 self.outomaatti.close()
             exit_confirmation = None
             self.outomaatti.force_redraw()
-
-    # FIX: save name, type and location from settings; save the scaled version
-    def snapshot_button_pressed(self):
-        if not self.outomaatti.is_running:
-            self.pygame.image.save(self.cell_surface, "universe.png")

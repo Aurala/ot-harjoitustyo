@@ -51,3 +51,11 @@
 - Koodia refaktoroitu ja formatoitu, automaattisesti ja käsin, linttausvirheiden poistamiseksi (< 5 virhettä)
 - Luokkien haarautumakattavuus > 60% (paitsi luokka HighLife, jota ei ajeta ellei erikseen konffata Lifen tilalle)
 - Alustavat käyttöohjeet ja arkkitehtuurikuvaus
+
+# Viikko 7
+
+- UI-koodi refaktoroitu pienempiin kokonaisuuksiin
+- Konfirmaatiodialogeja toiminnallisuuksissa
+- Info-toiminnallisuus toteutettu
+- Next-toiminnallisuus toteutettu
+- Joka kategoriaan lisätty valmiiksi määritettyjä kuvioita
