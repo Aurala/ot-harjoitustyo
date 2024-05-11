@@ -1,47 +1,50 @@
+import os
 from invoke import task
 
-# FIX: Descriptions for each task
 
 @task
-def start(c):
+def start(ctx):
     print("Starting Outomaatti")
-    c.run("python3 src/index.py", pty=True)
+    ctx.run("python3 src/index.py", pty=True)
 
 @task
-def test(c):
+def test(ctx):
     print("Running tests")
-    c.run("pytest src", pty=True)
+    ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db python3 src/initialize_database.py", pty=True)
+    ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db pytest src", pty=True)
+#    ctx.run("pytest src", pty=True)
 
 @task
-def coverage(c):
+def coverage(ctx):
     print("Checking the test coverage")
-    c.run("coverage run --branch -m pytest src", pty=True)
+    ctx.run("coverage run --branch -m pytest src", pty=True)
 
 @task
-def coverage_report(c):
+def coverage_report(ctx):
     print("Generating the test report")
-    c.run("coverage html", pty=True)
+    ctx.run("coverage html", pty=True)
 
 @task
-def lint(c):
+def lint(ctx):
     print("Linting")
-    c.run("pylint src", pty=True)
+    ctx.run("pylint src", pty=True)
 
 @task
-def format(c):
+def format(ctx):
     print("Formatting code (press CTRL-C now if there are uncommitted changes)")
-    c.run("autopep8 --in-place --recursive src", pty=True)
+    ctx.run("autopep8 --in-place --recursive src", pty=True)
 
 @task
-def initdb(c):
+def initdb(ctx):
     print("Initializing the database")
-    c.run("python3 src/initialize_database.py")
+    ctx.run("python3 src/initialize_database.py")
 
 @task
-def clean(c):
+def clean(ctx):
     print("Cleaning up")
-    c.run("rm -rf .coverage", pty=True)
-    c.run("rm -rf htmlcov", pty=True)
-    c.run("rm -rf .pytest_cache", pty=True)
-    c.run("rm -rf *.db", pty=True)
-    c.run("pyclean --verbose .")
+    ctx.run("rm -rf .coverage", pty=True)
+    ctx.run("rm -rf htmlcov", pty=True)
+    ctx.run("rm -rf .pytest_cache", pty=True)
+    ctx.run("rm -rf outomaatti-test.db", pty=True)
+    ctx.run("rm -rf snapshots", pty=True)
+    ctx.run("pyclean --verbose .", pty=True)

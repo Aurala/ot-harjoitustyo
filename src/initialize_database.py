@@ -1,7 +1,6 @@
-import json
 from database_connection import get_database_connection
 from config import settings
-from repositories.decoders.rle import RLE
+from repositories.library_repository import LibraryRepository
 
 
 def drop_tables(connection):
@@ -45,31 +44,19 @@ def create_tables(connection):
     connection.commit()
 
 
+# Source: https://conwaylife.com/wiki/Category:Patterns
+# License: GNU Free Documentation License (https://www.gnu.org/licenses/fdl-1.3.html)
+
 def populate_tables(connection):
 
-    decoder = RLE()
-
-    sql_command1 = """
+    sql_command = """
                    INSERT INTO Categories (name, description) VALUES (?, ?)
                    """
-    sql_command2 = """
-                   INSERT INTO Patterns (
-                       category_id,
-                       name,
-                       rules,
-                       pattern,
-                       metadata
-                   ) VALUES (?, ?, ?, ?, ?)
-                   """
-
-    # FIX: Translate the categories/descriptions (if Finnish terms exist)
-    # Source: https://conwaylife.com/wiki/Category:Patterns
-    # License: GNU Free Documentation License (https://www.gnu.org/licenses/fdl-1.3.html)
 
     categories = [
         ["Käyttäjän tuomat",
          """
-         Tässä kategoriassa ovat kaikki käyttäjän ohjelmaan tuomat kuviot
+         Tässä kategoriassa ovat kaikki käyttäjän ohjelmaan tuomat kuviot.
          """,
          []
          ],
@@ -186,22 +173,15 @@ def populate_tables(connection):
          ],
     ]
 
+    library_repository = LibraryRepository()
+
     cursor = connection.cursor()
     for category in categories:
         category_id = cursor.execute(
-            sql_command1, [category[0], category[1]]).lastrowid
+            sql_command, [category[0], category[1]]).lastrowid
         for filename in category[2]:
-            with open(settings.resources.directory_patterns +
-                      filename, "r", encoding="UTF-8") as rle_file:
-                rle_data = rle_file.readlines()
-            encoded = decoder.decode(rle_data)
-            if encoded is not None:
-                cursor.execute(sql_command2, [
-                               category_id,
-                               encoded[0],
-                               encoded[1],
-                               json.dumps(encoded[2]),
-                               encoded[3]])
+            library_repository.import_pattern(settings.resources.directory_patterns +
+                                              filename, category_id=category_id)
     connection.commit()
 
 

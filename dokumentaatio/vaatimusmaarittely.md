@@ -38,19 +38,19 @@ Graafisten elementtien lähteet:
 
 ## Toiminnallisuus
 
-- Käyttäjä voi muuttaa kanvaasin kokoa.
+- Tehty: Käyttäjä voi muuttaa kanvaasin kokoa.
 - Tehty: Käyttäjä voi piirtää soluja kanvaasille.
 - Tehty: Käyttäjä voi pyyhkiä soluja kanvaasilta.
-- Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
-- Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
+- Tehty (tiedostosta): Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
+- Kesken: Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
 - Tehty: Käyttäjä voi käynnistää simulaation.
 - Tehty: Käyttäjä voi säätää simulaation nopeutta.
 - Tehty: Käyttäjä voi pysäyttää simulaation.
 - Tehty: Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
 - Tehty: Simulaation ollessa pysäytettynä, käyttäjällä on mahdollisuus muokata kanvaasia (yllä mainituilla työkaluilla).
 - Tehty: Käyttäjä voi seurata simulaation tilaa (sukupolvi, elossa olevien solujen määrä) infopalkista.
-- Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.
-- Käyttäjä voi muuttaa parametrejä, jotka annetaan funktiolle, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
+- Ei tehty: Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.
+- Ei tehty: Käyttäjä voi muuttaa parametrejä, jotka annetaan funktiolle, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
 
 ## Jatkokehitysideoita ("backlog")
 

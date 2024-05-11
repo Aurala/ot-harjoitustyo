@@ -1,8 +1,13 @@
+import os
 import json
 import sqlite3
+from datetime import datetime
+from pygame import image
+from config import settings
 from entities.pattern import Pattern
 from entities.category import Category
 from database_connection import get_database_connection
+from repositories.decoders.rle import RLE
 
 
 class LibraryRepository:
@@ -127,3 +132,47 @@ class LibraryRepository:
             return None
 
         return Pattern(row[0], row[1], row[2], row[3], json.loads(row[4]), row[5])
+
+    def import_pattern(self, filename, category_id=1):
+
+        sql_command = """
+                      INSERT INTO Patterns (
+                      category_id,
+                      name,
+                      rules,
+                      pattern,
+                      metadata
+                      ) VALUES (?, ?, ?, ?, ?)
+                      """
+
+        if filename.lower().endswith(".rle"):
+
+            decoder = RLE()
+
+            with open(filename, "r", encoding="UTF-8") as rle_file:
+                rle_data = rle_file.readlines()
+
+            encoded = decoder.decode(rle_data)
+            if encoded is not None:
+                cursor = self._connection.cursor()
+                cursor.execute(sql_command, [
+                    category_id,
+                    encoded[0],
+                    encoded[1],
+                    json.dumps(encoded[2]),
+                    encoded[3]
+                ])
+                self._connection.commit()
+
+            return True
+
+        return False
+
+    def save_snapshot(self, surface):
+        directory = settings.resources.directory_snapshots
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        timestamp = str(datetime.now())
+        filename = directory + timestamp + ".png"
+        print(filename)
+        image.save(surface, filename)

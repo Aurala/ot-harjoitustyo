@@ -29,10 +29,17 @@ class Universe:
             y (int, optional): vertical size of visible Universe (default: 5)
             padding (int, optional): padding applied to the Universe (default: 5)
         """
-        # FIX: Managing bad inputs
         self._padding = padding
         self._matrix = np.zeros(
             [y + self._padding * 2, x + self._padding * 2], dtype=np.int8)
+
+    def change_size(self, change):
+        if self.width + change >= 1 and self.height + change >= 1:
+            delta = change // 2
+            if change < 0:
+                self._matrix = self._matrix[abs(delta):delta, abs(delta):delta]
+            elif change > 0:
+                self._matrix = np.pad(self._matrix, delta)
 
     @property
     def width(self):
@@ -163,7 +170,6 @@ class Universe:
         """
         return self._matrix.copy()
 
-    # FIX: Manage the possible size mismatch
     def set_entire_universe_as_ndarray(self, universe):
         """
         Sets the entire Universe.

@@ -7,10 +7,11 @@ from ui.components.settings import Settings
 
 class Menu:
 
-    def __init__(self, pygame, outomaatti, surface, theme):
+    def __init__(self, pygame, outomaatti, simulation, surface, theme):
         self.theme = theme
         self.outomaatti = outomaatti
         self.pygame = pygame
+        self.simulation = simulation
         self.surface = surface
 
         self.menu = pygame_menu.Menu(position=(
@@ -40,12 +41,12 @@ class Menu:
         size_controls_frame = self.menu.add.frame_h(200, 50)
         size_controls_frame.pack(self.menu.add.button(
             "minus",
-            lambda: self.size_button_pressed(-5),
+            lambda: self.size_button_pressed(-1),
             font_name=theme.fontawesome,
             button_id="size_minus"))
         size_controls_frame.pack(self.menu.add.button(
             "plus",
-            lambda: self.size_button_pressed(5),
+            lambda: self.size_button_pressed(1),
             font_name=theme.fontawesome,
             button_id="size_plus"))
 
@@ -88,11 +89,6 @@ class Menu:
             lambda: self.browse_button_pressed(),
             font_name=theme.fontawesome,
             button_id="browse"))
-        pattern_controls_frame.pack(self.menu.add.button(
-            "folder-open",
-            lambda: self.import_button_pressed(),
-            font_name=theme.fontawesome,
-            button_id="import"))
 
         application_controls_frame = self.menu.add.frame_h(200, 50)
         application_controls_frame.pack(self.menu.add.button(
@@ -119,7 +115,7 @@ class Menu:
     def change_button_states(self, playing):
         ids = ["speed_one", "speed_two", "speed_three", "size_minus",
                "size_plus", "next", "random", "trash", "browse",
-               "import", "settings", "snapshot", "info", "exit"]
+               "settings", "snapshot", "info", "exit"]
         for id in ids:
             button = self.menu.get_widget(id, True)
             if playing:
@@ -146,10 +142,9 @@ class Menu:
                         self.theme.background_color)
         self.outomaatti.set_speed(speed)
 
-   # FIX: logic
-    def size_button_pressed(self, size):
+    def size_button_pressed(self, change):
         if not self.outomaatti.is_running():
-            pass
+            self.outomaatti.change_size(change)
 
     def play_button_pressed(self):
         if self.outomaatti.is_running():
@@ -170,6 +165,7 @@ class Menu:
 
     def trash_button_pressed(self):
         if not self.outomaatti.is_running():
+            self.outomaatti.menu_open()
             parameters = {
                 "question": "Tyhjennetäänkö Universumi?",
                 1: "Kyllä",
@@ -179,42 +175,40 @@ class Menu:
             if empty_confirmation.show(self.surface) == 1:
                 self.outomaatti.clear_universe()
             empty_confirmation = None
-            self.outomaatti.force_redraw()
+            self.outomaatti.menu_closed()
 
     # FIX: finalize
     def browse_button_pressed(self):
         if not self.outomaatti.is_running():
+            self.outomaatti.menu_open()
             pattern_chooser = PatternPicker(
                 700, 550, self.outomaatti, self.theme)
             pattern_id = pattern_chooser.show(self.surface)
             pattern_chooser = None
-            self.outomaatti.force_redraw()
+            self.outomaatti.menu_closed()
 
-    # FIX: logic
-    def import_button_pressed(self):
-        if not self.outomaatti.is_running():
-            pass
-
-    # FIX: logic
     def settings_button_pressed(self):
         if not self.outomaatti.is_running():
+            self.outomaatti.menu_open()
             settings = Settings(400, 150, self.outomaatti, self.theme)
             settings.show(self.surface)
-            self.outomaatti.force_redraw()
+            self.outomaatti.menu_closed()
 
     def info_button_pressed(self):
         if not self.outomaatti.is_running():
+            self.outomaatti.menu_open()
             info = Info(700, 550, self.theme)
             info.show(self.surface)
-            self.outomaatti.force_redraw()
+            self.outomaatti.menu_closed()
 
-    # FIX: save name, type and location from settings; save the scaled version
     def snapshot_button_pressed(self):
-        if not self.outomaatti.is_running:
-            self.pygame.image.save(self.cell_surface, "universe.png")
+        if not self.outomaatti.is_running():
+            print("snapshot")
+            self.outomaatti.save_snapshot(self.simulation.get_snapshot())
 
     def exit_button_pressed(self):
         if not self.outomaatti.is_running():
+            self.outomaatti.menu_open()
             parameters = {
                 "question": "Suljetaanko Outomaatti",
                 1: "Kyllä",
@@ -224,4 +218,4 @@ class Menu:
             if exit_confirmation.show(self.surface) == 1:
                 self.outomaatti.close()
             exit_confirmation = None
-            self.outomaatti.force_redraw()
+            self.outomaatti.menu_closed()

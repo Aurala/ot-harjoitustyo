@@ -8,7 +8,6 @@ from repositories.library_repository import LibraryRepository
 
 class OutomaattiService:
 
-    # FIX: Read defaults from a configuration file
     def __init__(self, x=5, y=5, ruleset=0):
         self._universe = Universe(x, y)
         self._ruleset_number = ruleset
@@ -18,6 +17,31 @@ class OutomaattiService:
         self._speed = 1
         self._generation = 0
         self._redraw_needed = True
+        self._menu_open = False
+
+    def save_snapshot(self, surface):
+        self._library_repository.save_snapshot(surface)
+
+    def menu_open(self):
+        self._menu_open = True
+
+    def menu_closed(self):
+        self._menu_open = False
+        self.force_redraw()
+
+    def is_menu_open(self):
+        return self._menu_open
+
+    def change_size(self, change):
+        change = change * settings.general.size_change
+        if self.get_width() + change >= 10 and self.get_height() + change >= 10:
+            self._universe.change_size(change)
+            self.force_redraw()
+
+    def import_pattern(self, filename):
+        if self._library_repository.import_pattern(filename):
+            return "Tiedoston lisäys tietokantaan onnistui!"
+        return "Tiedoston lisäys tietokantaan epäonnistui!"
 
     def get_ruleset(self):
         return self._ruleset_number
@@ -103,8 +127,6 @@ class OutomaattiService:
     def get_universe_as_text(self):
         return self._universe.get_universe_as_text()
 
-    # FIX: Should there be a lock of some kind until this operation finishes?
-    # FIX: Should pass Universe or just the methods to get/set?
     def next_generation(self):
         self._ruleset.calculate(self._universe)
         self._generation += 1

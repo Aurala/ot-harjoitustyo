@@ -28,7 +28,7 @@ class PatternPicker:
                 category.category_id)
             for pattern in patterns:
                 self._menu.add.button(
-                    "Kuvio: " + pattern.name, lambda id=pattern.pattern_id: self.on_click(id))
+                    "Valitse kuvio: " + pattern.name, lambda id=pattern.pattern_id: self.on_click(id))
             self._menu.add.label("")
 
         self._menu.add.label("")

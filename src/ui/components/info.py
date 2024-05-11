@@ -18,10 +18,12 @@ class Info:
         )
 
         self._menu.add.button("Sulje", lambda: self.on_click())
+        self._menu.add.label("")
 
         for info in settings.resources.file_help:
             self._menu.add.image(info)
 
+        self._menu.add.label("")
         self._menu.add.button("Sulje", lambda: self.on_click())
 
     def on_click(self):

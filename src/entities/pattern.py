@@ -101,12 +101,3 @@ class Pattern:
             str: _description_
         """
         return self._metadata
-
-    def __str__(self):
-        """
-        Returns a textual representation of the pattern.
-
-        Returns:
-            str: Textual representation of the pattern
-        """
-        return f"Pattern {self._pattern_id}: {self._name}"

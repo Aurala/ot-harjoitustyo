@@ -19,7 +19,7 @@ class Theme:
             widget_font_size=settings.ui.menu_font_size,
             title_font_size=settings.ui.menu_font_size,
             background_color=settings.ui.menu_color_background,
-            title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
+            title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE,
         )
         self.theme.widget_selection_effect = pygame_menu.widgets.NoneSelection()
 

@@ -24,4 +24,5 @@
 | 30.4.2024 | 4 | Lisää DocStringejä; dokumentaation täydennystä; toimivuuden testaaminen Cubbli Linuxissa; viikko6-branchin mergeäminen mainiin ja palautus; release |
 | 9.5.2024 | 8 | UI jaettu eri luokkiin; lisätty konfirmaatiodialogit; lisätty info |
 | 10.5.2024 | 12 | Valmiita kuvioita lisätty joka kategoriaan; nopeuskontrollit; tuotujen kuvioiden selailu; asetukset-valikko; LibraryRepositoryn refaktorointi |
-| Yhteensä | 100 | |
+| 11.5.2024 | 12 | Snapshot-toiminnallisuus; testejä; testaamiseen oma tietokanta; kaiken tiedostojen käsittelyn siirtäminen LibraryRepositoryyn; kuvioiden tuonti sovellukseen drag & dropilla; Popup-komponentti |
+| Yhteensä | 112 | |

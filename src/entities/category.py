@@ -52,12 +52,3 @@ class Category:
             str: Category's description
         """
         return self._description
-
-    def __str__(self):
-        """
-        Returns a textual representation of the category.
-
-        Returns:
-            str: Textual representation of the category
-        """
-        return f"Category {self._category_id}: {self._name}"

@@ -7,10 +7,15 @@ file_database = "outomaatti.db"
 directory_patterns = "data/"
 directory_snapshots = "snapshots/"
 
-[ui]
-window_name = "Outomaatti"
+[general]
 default_universe_width = 100
 default_universe_height = 100
+
+# Use even values only
+size_change = 10
+
+[ui]
+window_name = "Outomaatti"
 
 # Tuples "(255, 255, 255)" are not supported by Dynaconf.
 # Please write color codes in hex strings ("#FFFFFF").
