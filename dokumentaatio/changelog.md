@@ -52,12 +52,19 @@
 - Luokkien haarautumakattavuus > 60% (paitsi luokka HighLife, jota ei ajeta ellei erikseen konffata Lifen tilalle)
 - Alustavat käyttöohjeet ja arkkitehtuurikuvaus
 
-# Viikko 7
+# Viikko 7 (loppupalautus)
 
-- UI-koodi refaktoroitu pienempiin kokonaisuuksiin
+- UI-koodi refaktoroitu pienempiin kokonaisuuksiin (komponentteihin)
 - Konfirmaatiodialogeja toiminnallisuuksissa
 - Info-toiminnallisuus toteutettu
 - Next-toiminnallisuus toteutettu
-- Joka kategoriaan lisätty valmiiksi määritettyjä kuvioita
+- Joka kuviokategoriaan lisätty valmiiksi määritettyjä kuvioita
 - Nopeusvalinta toteutettu
 - Asetukset-valikko totetettu
+- Omien kuvioiden tuominen sovellukseen drag & dropilla toteutettu
+- Testikattavuutta lisätty
+- DocStringit lisätty kaikkiin luokkiin ja funktioihin
+- Koodia siistitty
+- Kattava testaus suoritettu
+- Kattava vertailu arviointikriteereihin suoritettu
+- Dokumentaatiota lisätty vaatimusten mukaisesti

@@ -1,13 +1,9 @@
 [tool.poetry]
 name = "outomaatti"
-version = "0.1.0"
+version = "1.0.0"
 description = "Outomaatti"
 authors = ["Markus <markus.aurala@gmail.com>"]
 readme = "README.md"
-
-# Numpy ^1.24 eteenpäin: Python 3.9
-# Numpy 1.24 ei asennu Python 3.12:lla
-# Kurssin vaatimus: Python ^3.8
 
 [tool.poetry.dependencies]
 python = ">= 3.8, < 3.12"

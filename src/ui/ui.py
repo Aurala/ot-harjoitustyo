@@ -14,7 +14,7 @@ class UI:
 
     def __init__(self):
         """Constructor for the Outomaatti UI.
-        
+
         Creates an instance of OutomaattiService and instances of UI components.
         """
 
@@ -86,7 +86,7 @@ class UI:
 
     def mainloop(self):
         """UI mainloop.
-        
+
         Keeps reading inputs, processing them, refreshing components, etc.
         """
 

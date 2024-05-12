@@ -2,7 +2,7 @@
 
 [resources]
 file_icons = "src/ui/resources/Font Awesome 6 Free-Solid-900.otf"
-file_help = ["src/ui/resources/info1.png", "src/ui/resources/info2.png", "src/ui/resources/info3.png"]
+file_help = ["src/ui/resources/info1.png"]
 file_database = "outomaatti.db"
 directory_patterns = "data/"
 directory_snapshots = "snapshots/"

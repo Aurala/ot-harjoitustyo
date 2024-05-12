@@ -25,4 +25,5 @@
 | 9.5.2024 | 8 | UI jaettu eri luokkiin; lisätty konfirmaatiodialogit; lisätty info |
 | 10.5.2024 | 12 | Valmiita kuvioita lisätty joka kategoriaan; nopeuskontrollit; tuotujen kuvioiden selailu; asetukset-valikko; LibraryRepositoryn refaktorointi |
 | 11.5.2024 | 12 | Snapshot-toiminnallisuus; testejä; testaamiseen oma tietokanta; kaiken tiedostojen käsittelyn siirtäminen LibraryRepositoryyn; kuvioiden tuonti sovellukseen drag & dropilla; Popup-komponentti |
-| Yhteensä | 112 | |
+| 12.5.2024 | 12 | Viimeiset toiminnallisuudet; DocStringien ja testien kirjoittamista; dokumentointia; toimivuuden testaaminen Cubbli Linuxissa; loppupalautus-branchin mergeäminen mainiin ja palautus; release |
+| Yhteensä | 124 | |

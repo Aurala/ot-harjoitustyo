@@ -42,7 +42,7 @@ Graafisten elementtien lähteet:
 - Tehty: Käyttäjä voi piirtää soluja kanvaasille.
 - Tehty: Käyttäjä voi pyyhkiä soluja kanvaasilta.
 - Tehty (tiedostosta): Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
-- Kesken: Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
+- Tehty: Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
 - Tehty: Käyttäjä voi käynnistää simulaation.
 - Tehty: Käyttäjä voi säätää simulaation nopeutta.
 - Tehty: Käyttäjä voi pysäyttää simulaation.
