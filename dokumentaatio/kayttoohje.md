@@ -1,4 +1,4 @@
-# Käyttöohje (alustava)
+# Käyttöohje
 
 ## Ohjelman käynnistäminen
 
