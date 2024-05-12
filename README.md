@@ -45,7 +45,13 @@ Komento virtuaaliympäristön ja lataa tarvittavat riippuvuudet.
 
 Poetryn asennusohjeet löytyvät [täältä](https://python-poetry.org/docs/#installing-with-the-official-installer).
 
-Seuraavaksi alustetaan tietokanta komennolla:
+Käynnistetään Poetryn shell:
+
+```
+poetry shell
+```
+
+Lopuksi alustetaan tietokanta komennolla:
 
 ```
 poetry run invoke build
