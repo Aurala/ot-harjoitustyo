@@ -1,37 +1,43 @@
-# Play with these values carefully, the app does not validate values
+# Play with these values carefully, the app does not validate values!
 
 [resources]
 file_icons = "src/ui/resources/Font Awesome 6 Free-Solid-900.otf"
+file_help = ["src/ui/resources/info1.png"]
 file_database = "outomaatti.db"
 directory_patterns = "data/"
 directory_snapshots = "snapshots/"
 
-[ui]
-window_name = "Outomaatti"
+[general]
 default_universe_width = 100
 default_universe_height = 100
 
-# Tuples "(255, 255, 255)" are not supported by Dynaconf
-# Please write color codes in hex strings ("#FFFFFF")
+# Use even values only.
+size_change = 10
+
+[ui]
+window_name = "Outomaatti"
+
+# Tuples "(255, 255, 255)" are not supported by Dynaconf.
+# Please write color codes in hex strings ("#FFFFFF").
 
 # Menu
 menu_color_background = "#4EC5F1"
-menu_color_background_speed = "#003AFF"
+menu_color_background_selected = "#003AFF"
 menu_color_logo_text = "#FFFFFF"
 menu_color_text = "#FFFFFF"
 menu_color_active_icon = "#FFFFFF"
 menu_color_inactive_icon = "#808080"
 menu_font_name = "Arial"
 menu_font_size = 16
-menu_icon_font_size = 24
+menu_icon_size = 24
 
 # Status bar
 status_color_text = "#4EC5F1"
 status_font_name = "Arial"
-status_font_size = 16
+status_font_size = 12
 
 [rules]
-# If you add custom rulesets, you need to add them here
-# "rules.life" means the class is in "src/rules/life.py"
-# The first one on the list is the default
-enabled = ["rules.life", "rules.highlife"]
+# If you add custom rulesets, you need to add them here.
+# "rules.life" means the class is in "src/rules/life.py".
+# The first one on the list is the default.
+enabled = [["Life (B3/S23)", "rules.life"], ["HighLife (B36/S23)", "rules.highlife"]]

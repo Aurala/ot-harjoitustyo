@@ -2,7 +2,11 @@
 
 ## Rakenne
 
-Olennaiset osat kuvattu hakemistorakenteen muodossa:
+Ohjelman rakenne noudattaa kolmitasoista kerrosarkkitehtuuria:
+
+![](kuvat/pakkauskaavio.png)
+
+Sovelluksen olennaiset osat kuvattu hakemistorakenteen muodossa:
 
 ```
 ├── src
@@ -21,66 +25,90 @@ Olennaiset osat kuvattu hakemistorakenteen muodossa:
 └── outomaatti.toml
 ````
 
-- entities: tietokohteita sisältäviä luokkia
-- repositories: yksi luokka, joka huolehtii tietojen pysyväistallennuksesta
-    - importers: luokkia, joita repository käyttää apuna, esim. lukemaan jotain tiettyä tiedostoformaattia
-- rules: luokkia, jotka toteuttavat erilaisia soluautomaattisääntöjä; voi vaihtaa sovelluksessa
-- services: yksi luokka, joka hoitaa sovelluksen toimintalogiikan
-- ui: yksi luokka, joka hoitaa sovelluksen käyttöliittymän
-    - resources: käyttöliittymän resurssitiedostoja, mm. fonttitiedosto, joka tarjoaa ikonit kontrolleihin
-- index.py: käynnistää graafisen käyttöliittymän
-- database_connection.py: tietokantayhteyden määrittävä tiedosto
-- initialize_database.py: tietokannan alustava ja populoiva tiedosto
-- data: hakemisto, jossa on RLE-muodossa olevia kuvioita tuotavaksi sovellukseen; osa tuodaan automaattisesti tietokannan alustuksen yhteydessä
-- outomaatti.db: SQLite-tietokanta
-- outomaatti.toml: sovelluksen konfiguraatiotiedosto
+- `entities`: tietokohteita sisältäviä luokkia
+- `repositories`: yksi luokka, joka huolehtii tietojen pysyväistallennuksesta
+    - `decoders`: nyt yksi luokka (`RLE`), jota `LibraryRepository` käyttää lukemaan RLE-tiedostoformaattia
+- `rules`: luokkia, jotka toteuttavat erilaisia soluautomaattisääntöjä ja joita voi vaihtaa dynaamisesti sovelluksessa
+- `services`: nyt yksi luokka (`OutomaattiService`), joka hoitaa sovelluksen toimintalogiikan
+- `ui`: luokka (`UI`), joka luo sovelluksen käyttöliittymän
+    - `components`: UI-toiminnallisuutta palasteltuna pienempiin kokonaisuuksiin
+    - `resources`: käyttöliittymän resurssitiedostoja (kuvia, ikonifontit)
+- `index.py`: käynnistää graafisen käyttöliittymän
+- `database_connection.py`: tietokantayhteyden määrittävä tiedosto
+- `initialize_database.py`: tietokannan alustava ja populoiva tiedosto
+- `data`: hakemisto, jossa on RLE-muodossa olevia kuvioita; tuodaan automaattisesti tietokannan alustuksen yhteydessä
+- `outomaatti.db`: SQLite-tietokanta
+- `outomaatti.toml`: sovelluksen konfiguraatiotiedosto
 
 ## Käyttöliittymä
 
-Käyttöliittymä on toteutettu Pygamella. Se käsittää yhden päänäkymän, jonka päälle tuodaan tietyissä tapauksissa alinäkymiä ponnahdusikkunoina:
+Käyttöliittymä on toteutettu Pygamella, käyttäen `pygame_menu`-kirjastoa. Se käsittää yhden päänäkymän, jonka päälle tuodaan tietyissä tapauksissa alinäkymiä ponnahdusikkunoina:
 
 - Lyhyet ohjeet sovelluksen käyttäjälle
-- Kuviotiedostojen tuonti sovelluksen
 - Kuviotiedostojen selaus
 - Asetukset
+- Konfirmaatiodialogit
+- Popup-viestit
 
-Käyttöliittymä on pyritty eristämään täysin sovelluslogiikasta, joka on OutomaattiService-luokassa. _Tämä toteutuu viikon 6 jälkeen vielä [puutteellisesti](#ohjelman-rakenteessa-tiedetyt-ongelmat)._
+Käyttöliittymä on pyritty eristämään sovelluslogiikasta, joka on OutomaattiService-luokassa.
 
 ## Sovelluslogiikka
 
-Toiminnallisista kokonaisuuksista vastaa luokka OutomaattiService.
+Toiminnallisista kokonaisuuksista vastaa luokka `OutomaattiService`.
 
-OutomaattiServicen ja ohjelman muiden osien välisiä suhteita kuvataan alla:
+Luokan `OutomaattiService` ja ohjelman muiden osien välisiä suhteita kuvataan alla:
 
 ```mermaid
 classDiagram
     UI "1" -- "1" OutomaattiService
     Universe "1" -- "1" OutomaattiService
     OutomaattiService "1" -- "1" LibraryRepository
+    LibraryRepository "1" -- "*" RLE
     LibraryRepository "1" -- "*" Pattern
     LibraryRepository "1" -- "*" Category
     Ruleset "*" -- "1" OutomaattiService
     CustomRuleset "1" --|> "1" Ruleset
 ```
 
+Yo. kuvassa ei selkeyden takia näy käyttöliittymäkomponentit, joita alustetaan luokassa `UI`.
+
+- `Menu`
+- `Confirmation`
+- `Info`
+- `Status`
+- `Simulation`
+- `Theme`
+- `Settings`
+- `Popup`
+- `PatternPicker`
+
+Refaktoroinnista huolimatta käyttöliittymäkomponenttien väliset riippuvuudet eivät ole täysin selkeät. Kts. [alle](#ohjelman-rakenteessa-tiedetyt-ongelmat).
+
 ## Tietojen pysyväistallennus
 
 Pakkauksen `repositories` luokka `LibraryRepository` huolehtii tietojen tallettamisesta ja lukemisesta.
 
-Luokan `LibraryRepository` pääasiallisena tietovarastona toimii paikallisella levyllä sijaitseva SQLite-tietokanta, mutta se osaa myös käyttää pakkauksen `importers` luokkaa `RLE` lukemaan tiedostoista [RLE-formaatissa](https://conwaylife.com/wiki/Run_Length_Encoded) tallennettuja kuvioita.
+Luokan `LibraryRepository` pääasiallisena tietovarastona toimii paikallisella levyllä sijaitseva SQLite-tietokanta. Tietokantatiedoston nimi määritetään konfiguraatiotiedostossa. Testeihin käytetyt Invoke-taskit ohittavat tämän asetuksen ja luovat testitietokannan `outomaatti-test.db`.
 
-Muu osa sovelluksesta ei ole tietoinen tietokannasta tai tiedostoista.
+Tietokanta käsittää kaksi taulua:
 
-_Em. toteutuu viikon 6 jälkeen vielä [puutteellisesti](#ohjelman-rakenteessa-tiedetyt-ongelmat)._
+![](kuvat/tietokanta.png)
+
+Luokka käsittelee tiedostoja kahdella tavalla:
+
+1. Luokka lukee ja purkaa kuvioita tiedostoista, jotka tuodaan käyttöliittymään drag and droppaamalla käyttöliittymään. Tällä hetkellä pakkauksessa `decoders` on luokka `RLE`, jolla luetaan [RLE-formaatissa](https://conwaylife.com/wiki/Run_Length_Encoded) tallennettuja kuvioita. Tuodut tiedostot tallennetaan tietokannan tauluun `Patterns`.
+2. Luokka tallettaa `pygame.Surface`-olioista PNG-tiedostoihin.
+
+Muu osa sovelluksesta ei ole tietoinen tietokannasta tai tiedostoista. Sovelluksen käyttämää tietokantaa tai muuta tallennustapaa on mahdollista muuttaa helposti.
 
 ## Päätoiminnallisuudet
 
 Sovelluksen toimintaa kuvataan [käyttöohjeessa](kayttoohje.md).
 
 Oheinen sekvenssikaavio kuvaa mitä tapahtuu kun käyttäjä sovelluksen avattuaan painaa Play-nappia. Tässä vaiheessa:
-- UI on luonut OutomaattiService-olion.
-- OutomaattiService-olio on luonut Universe-olion, joka kuvaa x*y-kokoista soluautomaattia.
-- UI on lisännyt muutamia testikuvioita OutomaattiServiceä käyttäen Universeen.
+- `UI` on luonut `OutomaattiService`-olion.
+- `OutomaattiService`-olio on luonut `Universe`-olion, joka kuvaa x*y-kokoista soluautomaattia.
+- `UI` on lisännyt testikuvion luokkaa `OutomaattiService` käyttäen Universeen.
 
 ```mermaid
 sequenceDiagram
@@ -95,8 +123,8 @@ sequenceDiagram
     CustomRuleset->>Universe: set_entire_universe_as_ndarray(new_universe)
     CustomRuleset-->>-OutomaattiService: 
     OutomaattiService-->>-UI: 
-    UI->>+OutomaattiService: get_universe_as_ndarray()
-    OutomaattiService->>+Universe: get_universe_as_ndarray()
+    UI->>+OutomaattiService: get_universe_as_rgb_ndarray()
+    OutomaattiService->>+Universe: get_universe_as_rgb_ndarray()
     Universe-->>-OutomaattiService: ndarray
     OutomaattiService-->>-UI: ndarray
     UI->>-UI: renderöinti
@@ -106,13 +134,8 @@ sequenceDiagram
 
 Seuraavia ongelmia tullaan ratkomaan kurssin viimeisten viikkojen aikana:
 
-- Luokassa `UI` on liikaa koodia
-    - Toiminnallisuuden jakaminen useampaan luokkaan
-    - Menun/kontrollien generointi esim. sanakirjassa olevan tiedon perusteella
-    - Yksi tapahtumankäsittelijä menu-eventeille
-    - Kaiken siirrettävissä olevan logiikan siirto luokkaan `OutomaattiService`
-- Luokka Universe ei kuulu pakettin `entities`
-- Kaikille "LifeLike"-algoritmeille yhteisen logiikan siirtäminen luokista `Life` ja `HighLife` luokkaan `Ruleset`
-- LibraryRepositoryn ulkopuolella käsitellään tiedostoja
-    - Tiedostojenkäsittelyn siirtäminen luokasta `repositories.importers.RLE` tähän luokkaan; RLE-luokka lukee jatkossa kuvioita sille annetusta tekstimuotoisesta sisällöstä (samalla `importers` --> `decoders`)
-    - Tietokannanluontiskriptin siirtäminen käyttämään RLE-decoderia `LibraryRepository`:n kautta
+- UI on refaktoitu useampaan luokkaan (komponenttiin), mutta riippuvuudet eivät ole niin selkeitä kuin oli tavoitteena.
+    - Jälkiviisaana on helppo todeta:
+        - UI olisi ollut parempi tehdä Tkinterillä. Aluksi käyttöön suunniteltu `Pygame GUI`-kirjasto osoittautui bugiseksi ja vaihtoehtoinen kirjasto `pygame_menu` ei taipunut tarkoitukseen. Se monimutkaisti arkkitehtuuria.
+        - Pygamen event-mallia olisi pitänyt tutkia. Potentiaalisesti se olisi mahdollistanut käyttöliittymäarkkitehtuurin selkeyttämisen niin, että käyttöliittymäluokat eivät kutsuisi toinen toisiaan.
+- Luokka Universe ei välttämättä kuuluisi pakettin `entities`.

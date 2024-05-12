@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 
 class RLE:
@@ -25,16 +26,14 @@ class RLE:
         The pattern's name is extracted from metadata.
 
         Args:
-            content (str): the RLE data
+            content (str): Encoded data
 
         Returns:
-            (str, str): the pattern's name, the rest of the metadata
+            (str, str): Pattern's name, Rest of the metadata
         """
 
-        # FIX: Error management
-
         metadata = []
-        name = ""
+        name = "Tuntematon " + str(datetime.now())
         for line in content:
             line = line.strip()
             if line.startswith("#"):
@@ -53,23 +52,21 @@ class RLE:
         https://github.com/reppertj/Game-of-Life/blob/master/lifereader.py
 
         Args:
-            content (str): the RLE data
+            content (str): Encoded data
 
         Returns:
-            (str, list): the rules the pattern was designed for, the pattern data
+            (str, list): Rules the pattern was designed for, Pattern's data
         """
-
-        # FIX: Error management
 
         lines = [line for line in content if line.strip()[0] != "#"]
         header = lines[0]
         lines = lines[1:]
         lines = "".join(lines).strip("\n")
         header_pattern = re.compile(
-            r"x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?B(\d+).*?S(\d+.)")
+            r"x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?[bB](\d+).*?[sS](\d+.)")
         header_matches = header_pattern.search(header)
         width = int(header_matches.group(1))
-        height = int(header_matches.group(2))
+        _ = int(header_matches.group(2))
         birth_conditions = header_matches.group(3)
         survive_conditions = header_matches.group(4)
         line_pattern = re.compile(r"(\d*)([bo$!])")
@@ -94,30 +91,23 @@ class RLE:
 
         return (f"B{birth_conditions}/S{survive_conditions}", pattern)
 
-    # FIX: no file managment in this class, will decode text as
-    # given by the repository
-    def read_from_file(self, filename):
+    def decode(self, encoded_data):
         """
         Reads Run Length Encoded data from a file and parses it
         for metadata and pattern data.
 
         Args:
-            filename (str): the file that contains the data
+            encoded_data (str): Encoded data
 
         Returns:
             (str, str, list, str):
-            the pattern name,
-            the rules the pattern wa designed for,
-            the pattern data,
-            the metadata
+            Pattern's name,
+            Rules the pattern wa designed for,
+            Pattern's data,
+            Pattern's metadata
         """
 
-        # FIX: Error management
-
-        rle_file = open(filename, "r", encoding="utf-8")
-        rle_data = rle_file.readlines()
-
-        name, metadata = self.parse_metadata(rle_data)
-        rules, pattern = self.parse_data(rle_data)
+        name, metadata = self.parse_metadata(encoded_data)
+        rules, pattern = self.parse_data(encoded_data)
 
         return (name, rules, pattern, metadata)

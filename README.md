@@ -20,13 +20,14 @@ Riippuvuuksien puolesta sovellus toimii Python-versioilla 3.8-3.11. Kehityksess�
 
 - [Koodikatselmointiin tarkoitettu release](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Viikko5)
 - [Viikon 6 palautus](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Viikko6)
+- [Loppupalautus](https://github.com/Aurala/ot-harjoitustyo/releases/tag/Loppupalautus)
 
 ## Dokumentaatio
 
 - [Käyttöohje](dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 - [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
-- Testausdokumentti
+- [Testausdokumentti](dokumentaatio/testausdokumentti.md)
 - [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
 - [Changelog](dokumentaatio/changelog.md)
 
@@ -47,7 +48,7 @@ Poetryn asennusohjeet löytyvät [täältä](https://python-poetry.org/docs/#ins
 Seuraavaksi alustetaan tietokanta komennolla:
 
 ```
-poetry run invoke initdb
+poetry run invoke build
 ```
 
 ### Käynnistys
@@ -57,29 +58,6 @@ Ohjelma käynnistyy komennolla:
 ```
 poetry run invoke start
 ```
-
-Käyttöliittymän toteutus on vielä kesken ja kaikki sen sisältämät kontrollit eivät toimi. Toimivaa mm.:
-
-- Play/Pause
-- Tyhjennys
-- Solujen piirtäminen ja poistaminen hiirellä
-- Snapshot (kirjoittaa tiedostoon PNG-kuvan simulaatiosta)
-- Random
-- Exit
-
-Vaihtoehtoisesti käyttäjä voi käynnistää tekstimuotoisen käyttöliittymän komennoilla:
-
-```
-poetry run invoke life
-```
-
-tai
-
-```
-poetry run invoke highlife
-```
-
-Tekstikäyttöliittymät on tehty nopeaa testaamista varten. Erona yo. komennoissa on se, että ensimmäinen käyttää oletusarvoisia sääntöjä (B3/S23) ja jälkimmäinen nk. Highlife-sääntöjä (B36/S23). Sovellus lataa säännöt toteuttavat funktiot dynaamisesti eri luokista.
 
 ### Testaus
 
@@ -98,18 +76,14 @@ poetry run invoke test
 Testiraportti generoidaan komennolla:
 
 ```
-poetry run invoke coverage
-```
-
-Tai jos käyttäjä haluaa HTML-muotoisen testiraportin, joka tallentuu projektin juureen hakemistoon 'htmlcov', niin komento on:
-
-```
 poetry run invoke coverage-report
 ```
 
+Testit ajetaan tilapäistä testitietokantaa vasten.
+
 ### Muuta
 
-Erilaisten työkalujen luomat työtiedostot,  cache-tiedostot yms. voidaan poistaa komennolla:
+Erilaisten työkalujen luomat työtiedostot, cache-tiedostot yms. voidaan poistaa komennolla:
 
 ```
 poetry run invoke clean

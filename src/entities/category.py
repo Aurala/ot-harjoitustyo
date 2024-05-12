@@ -1,23 +1,22 @@
 class Category:
     """
-    Class holds information about one category.
+    Class holds information about one pattern category.
 
     Attributes match the columns in the database table 'Columns'.
 
     Attributes:
-        category_id: integer, Pattern uses this to link to a Category
-        name: string, the category's name
-        description: string, arbitrary information about the category
+        category_id (int): Unique identifier.
+        name (str): Name.
+        description (str): Arbitrary information about the category.
     """
 
     def __init__(self, category_id, name, description):
-        """
-        Class constructor that creates a new Pattern.
+        """Class constructor for creating a new Category.
 
         Args:
-            category_id (int): the identifier of the category
-            name (str): the category's name
-            description (str): arbitrary information about the category
+            category_id (int): Unique identifier.
+            name (str): Category's name.
+            description (str): Category's description.
         """
         self._category_id = category_id
         self._name = name
@@ -25,39 +24,27 @@ class Category:
 
     @property
     def category_id(self):
-        """
-        Returns the category's unique id (as set in the database).
+        """Returns the category's identifier.
 
         Returns:
-            int: Category id (unique)
+            int: Category's identifier.
         """
         return self._category_id
 
     @property
     def name(self):
-        """
-        Returns the category's name.
+        """Returns the category's name.
 
         Returns:
-            str: Category's name
+            str: Category's name.
         """
         return self._name
 
     @property
     def description(self):
-        """
-        Returns the category description.
+        """Returns the category's description.
 
         Returns:
-            str: Category's description
+            str: Sategory's description.
         """
         return self._description
-
-    def __str__(self):
-        """
-        Returns a textual representation of the category.
-
-        Returns:
-            str: Textual representation of the category
-        """
-        return f"Category {self._category_id}: {self._name}"

@@ -22,4 +22,8 @@
 | 28.4.2024 | 8 | Refaktorointia; RLE-importterin viimeistely; tietokannan populointiskripti |
 | 29.4.2024 | 5 | RLE-importterin bugikorjaus; käyttöohjeet; DocStringit; arkkitehtuuridokumentaatio; koodin ja testien valmistelua palautusta varten |
 | 30.4.2024 | 4 | Lisää DocStringejä; dokumentaation täydennystä; toimivuuden testaaminen Cubbli Linuxissa; viikko6-branchin mergeäminen mainiin ja palautus; release |
-| Yhteensä | 79 | |
+| 9.5.2024 | 8 | UI jaettu eri luokkiin; lisätty konfirmaatiodialogit; lisätty info |
+| 10.5.2024 | 12 | Valmiita kuvioita lisätty joka kategoriaan; nopeuskontrollit; tuotujen kuvioiden selailu; asetukset-valikko; LibraryRepositoryn refaktorointi |
+| 11.5.2024 | 12 | Snapshot-toiminnallisuus; testejä; testaamiseen oma tietokanta; kaiken tiedostojen käsittelyn siirtäminen LibraryRepositoryyn; kuvioiden tuonti sovellukseen drag & dropilla; Popup-komponentti |
+| 12.5.2024 | 12 | Viimeiset toiminnallisuudet; DocStringien ja testien kirjoittamista; dokumentointia; toimivuuden testaaminen Cubbli Linuxissa; loppupalautus-branchin mergeäminen mainiin ja palautus; release |
+| Yhteensä | 124 | |

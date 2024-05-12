@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B23/S3), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
+Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B3/S23), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
 
 Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytössä, esimerkiksi innostamaan lapsia matematiikan opiskeluun tai jopa tuottamaan Python-koodia (omien sääntöjen kirjoittaminen).
 
@@ -38,23 +38,23 @@ Graafisten elementtien lähteet:
 
 ## Toiminnallisuus
 
-- Käyttäjä voi muuttaa kanvaasin kokoa.
+- Tehty: Käyttäjä voi muuttaa kanvaasin kokoa.
 - Tehty: Käyttäjä voi piirtää soluja kanvaasille.
 - Tehty: Käyttäjä voi pyyhkiä soluja kanvaasilta.
-- Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
-- Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
+- Tehty (tiedostosta): Käyttäjä voi tuoda sovellukseen (tallentuvat tietokantaan) solukuvioita [RLE-muodossa](https://conwaylife.com/wiki/Run_Length_Encoded) olevasta tiedostosta tai copy-pastesta.
+- Tehty: Käyttäjä voi lisätä sovellukseen tuomiaan solukuvioita kanvaasille.
 - Tehty: Käyttäjä voi käynnistää simulaation.
-- Käyttäjä voi säätää simulaation nopeutta.
+- Tehty: Käyttäjä voi säätää simulaation nopeutta.
 - Tehty: Käyttäjä voi pysäyttää simulaation.
-- Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
+- Tehty: Käyttäjä voi edetä simulaatiossa eteenpäin yksi sukupolvi kerrallaan.
 - Tehty: Simulaation ollessa pysäytettynä, käyttäjällä on mahdollisuus muokata kanvaasia (yllä mainituilla työkaluilla).
 - Tehty: Käyttäjä voi seurata simulaation tilaa (sukupolvi, elossa olevien solujen määrä) infopalkista.
-- Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.
-- Käyttäjä voi muuttaa parametrejä, jotka annetaan funktiolle, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
+- Ei tehty: Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.
+- Ei tehty: Käyttäjä voi muuttaa parametrejä, jotka annetaan funktiolle, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
+
+Paria viimeistä toiminnallisuutta kokeilin kehitysvaiheessa ja totesin ne huonoiksi ideoiksi. En toteuttanut loppuun. Vastaavasti ketterän ohjelmistokehityksen hengessä toteutin jatkokehitysideoiden listalta pari toiminnallisuutta.
 
 ## Jatkokehitysideoita ("backlog")
-
-Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä olevien tuntien mukaisesti ketterän ohjelmistokehityksen hengessä.
 
 - Käyttäjä voi määrittää maksimikeston simulaatiolle.
 - Käyttäjä voi valita useista erilaista piirtotyökaluista.
@@ -62,7 +62,7 @@ Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä ole
 - Käyttäjä voi tuoda sovellukseen bittikarttoja, jotka muunnetaan solukuvioiksi.
 - Käyttäjän sulkiessa sovelluksen, se tallentaa meneillään olevan simulaation tietokantaan.
 - Tehty: Käyttäjä voi tallettaa tiedostoon yksittäisen kuvakaappauksen simulaatiosta.
-- Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
+- Tehty: Käyttäjä voi valita funktion, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
 - Käyttäjä voi tallettaa automaattisesti tiedostoon kuvakaappauksen jokaisesta sukupolvesta simulaation aikana.
 - Käyttäjä voi tuoda kuvioita [eri formaateissa](https://conwaylife.com/wiki/File_formats) olevista tiedostoista.
 - Visuaaliset parannukset.
