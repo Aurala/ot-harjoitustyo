@@ -173,3 +173,9 @@ class TestOutomaattiService(unittest.TestCase):
 
     def test_returns_patterns_by_category(self):
         self.assertEqual(len(self.outomaatti.get_patterns_by_category(10)), 12)
+
+    def test_placing_pattern_in_queue_works(self):
+        self.assertEqual(self.outomaatti.get_pattern_queue(), None)
+        self.outomaatti.set_pattern_queue(1)
+        self.assertEqual(self.outomaatti.get_pattern_queue(), 1)
+        self.assertEqual(self.outomaatti.get_pattern_queue(), None)

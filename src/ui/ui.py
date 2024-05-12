@@ -10,8 +10,13 @@ from ui.components.popup import Popup
 
 
 class UI:
+    """This class implements the Outomaatti UI."""
 
     def __init__(self):
+        """Constructor for the Outomaatti UI.
+        
+        Creates an instance of OutomaattiService and instances of UI components.
+        """
 
         self.simulation_surface_size_x = 600
         self.simulation_surface_size_y = 600
@@ -38,6 +43,10 @@ class UI:
                          self.surface, self.theme)
 
     def update_mouse_cursor(self):
+        """Updates mouse cursor based on location.
+
+        Mouse cursor changes shape when user can draw.
+        """
         mouse_position_x, mouse_position_y = self.pygame_global.mouse.get_pos()
         if not self.outomaatti.is_menu_open() and mouse_position_x <= self.simulation_surface_size_x and mouse_position_y <= self.simulation_surface_size_y:
             self.pygame_global.mouse.set_cursor(self.theme.cursor_pencil)
@@ -45,6 +54,11 @@ class UI:
             self.pygame_global.mouse.set_cursor(self.theme.cursor_normal)
 
     def process_events(self, events):
+        """Processes Pygame events.
+
+        Args:
+            events (list): Pygame events.
+        """
         for event in events:
             if event.type == self.pygame_global.QUIT:
                 self.is_running = False
@@ -55,8 +69,14 @@ class UI:
                 mouse_position_y_scaled = int(
                     mouse_position_y / self.scaling_factor_y)
                 if not self.outomaatti.is_running() and mouse_position_x <= self.simulation_surface_size_x and mouse_position_y <= self.simulation_surface_size_y:
-                    self.outomaatti.invert_cell(
-                        mouse_position_x_scaled, mouse_position_y_scaled)
+                    pattern_id = self.outomaatti.get_pattern_queue()
+                    if pattern_id is not None:
+                        pattern = self.outomaatti.get_pattern_by_id(pattern_id)
+                        self.outomaatti.add_pattern(
+                            mouse_position_x_scaled, mouse_position_y_scaled, pattern.pattern)
+                    else:
+                        self.outomaatti.invert_cell(
+                            mouse_position_x_scaled, mouse_position_y_scaled)
             elif event.type == self.pygame_global.DROPFILE:
                 status = self.outomaatti.import_pattern(event.file)
                 self.outomaatti.menu_open()
@@ -65,6 +85,10 @@ class UI:
                 self.outomaatti.menu_closed()
 
     def mainloop(self):
+        """UI mainloop.
+        
+        Keeps reading inputs, processing them, refreshing components, etc.
+        """
 
         medusa = self.outomaatti.get_pattern_by_name("Medusa").pattern
         self.outomaatti.add_pattern(10, 1, medusa)
@@ -89,6 +113,9 @@ class UI:
 
             events = self.pygame_global.event.get()
             self.process_events(events)
+            self.menu.menu.update(events)
+
+            self.menu.menu.draw(self.surface)
 
             if self.outomaatti.is_running():
                 ticks += 1
@@ -106,9 +133,6 @@ class UI:
                           "cells": self.outomaatti.count_cells(),
                           "frames": self.clock.get_fps()}
             self.status.update(self.surface, parameters)
-
-            self.menu.menu.update(events)
-            self.menu.menu.draw(self.surface)
 
             self.pygame_global.display.update()
 

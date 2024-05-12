@@ -238,6 +238,7 @@ class Menu:
             pattern_chooser = PatternPicker(
                 700, 550, self.outomaatti, self.theme)
             pattern_id = pattern_chooser.show(self.surface)
+            self.outomaatti.set_pattern_queue(pattern_id)
             pattern_chooser = None
             self.outomaatti.menu_closed()
 
@@ -271,7 +272,6 @@ class Menu:
         Saves a snapshot of the simulation in a file.
         """
         if not self.outomaatti.is_running():
-            print("snapshot")
             self.outomaatti.save_snapshot(self.simulation.get_snapshot())
 
     def exit_button_pressed(self):

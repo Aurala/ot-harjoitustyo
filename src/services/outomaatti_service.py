@@ -32,6 +32,7 @@ class OutomaattiService:
         self._generation = 0
         self._redraw_needed = True
         self._menu_open = False
+        self._pattern_queue = None
 
     def save_snapshot(self, surface):
         """Saves a snapshot of the simulation to a file.
@@ -360,3 +361,21 @@ class OutomaattiService:
             Pattern: Specified pattern as a Pattern object. (None if not found.)
         """
         return self._library_repository.get_pattern_by_name(name)
+
+    def set_pattern_queue(self, pattern_id):
+        """Sets a pattern in a "queue" to be added in the Universe on the next click.
+
+        Args:
+            pattern_id (int): Pattern's identifier.
+        """
+        self._pattern_queue = pattern_id
+
+    def get_pattern_queue(self):
+        """Gets a pattern from the queue (if any).
+
+        Returns:
+            int: Pattern's identifier.
+        """
+        pattern_id = self._pattern_queue
+        self._pattern_queue = None
+        return pattern_id

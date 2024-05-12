@@ -32,6 +32,9 @@ class PatternPicker:
 
         self._menu.add.button("Sulje", lambda: self.on_click(None))
         self._menu.add.label("")
+        self._menu.add.label(
+            "Valikon sulkeuduttua, klikkaa hiirellä kohtaa mihin haluat asettaa kuvion.")
+        self._menu.add.label("")
 
         categories = outomaatti.get_categories()
         for category in categories:
