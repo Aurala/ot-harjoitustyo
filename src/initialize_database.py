@@ -74,27 +74,26 @@ def populate_tables(connection):
          """,
          []
          ],
-        ["Conduits",
+        ["Konduiitit (Conduits)",
          """
-         This category contains conduits, arrangements of still lifes and/or
-         oscillators that move an active reaction to another location without
-         themselves being permanently damaged.
+         Tähän kategoriaan kuuluu kuvioita, jotka pystyvät siirtämään aktiivisen
+         reaktion toiseen paikkaan tulematta itse pysyvästi vahingoitetuiksi.
          """,
          ["conduit1.rle",
           "bx222.rle",
           "syringe.rle"]
          ],
-        ["Garden of Eden",
+        ["Eedenin puutarhat (Gardens of Eden)",
          """
-         A Garden of Eden is a pattern that has no parents and thus can only
-         occur in generation 0.
+         Sellaisia kuvioita, jotka eivät syntyä mistään muista kuvioista,
+         kutsutaan Eedenin puutarhoiksi.
          """,
          ["gardensofeden2009.rle"]
          ],
-        ["Guns",
+        ["Pyssyt (Guns)",
          """
-         A gun is a stationary pattern that emits spaceships (or rakes)
-         repeatedly forever.
+         Pyssy on paikallaan oleva kuvio, joka lähettää jatkuvasti
+         matkaan avaruusaluksia.
          """,
          ["bigun.rle",
           "gosper_glider_gun.rle",
@@ -102,31 +101,30 @@ def populate_tables(connection):
           "period44mwssgun.rle",
           "simkinglidergun.rle"]
          ],
-        ["Methusalehs",
+        ["Metusalehit (Methuselahs)",
          """
-         A methuselah is a pattern that takes a large number of generations
-         in order to stabilize (known as its lifespan) and becomes much larger
-         than its initial configuration at some point during its evolution.
+         Metusalehit ovat kuvioita, joiden stabiloituminen kestää suuren
+         määrän sukupolvia. Metusaleheista tulee jossain evoluutionsa
+         vaiheessa paljon suurempia kuin mitä ne ovat alussa.
          """,
          ["queenbee.rle",
           "wing.rle",
           "52513m.rle"]
          ],
-        ["Oscillators",
+        ["Oskillaattorit (Oscillators)",
          """
-         An oscillator is a pattern that is a predecessor of itself. That is,
-         it is a pattern that repeats itself after a fixed number of generations
-         (known as its period).
+         Oskillaattori on kuvio, joka toistaa säännöllistä evoluutiota eli
+         se palaa tietyn sukupolvimäärän jälkeen lähtötilaansa.
          """,
          ["blinker.rle",
           "pulsar.rle",
           "pinwheel.rle",
           "p81_180_glider_loop.rle"]
          ],
-        ["Puffers",
+        ["Tupruttajat (Puffers)",
          """
-         A puffer is a pattern that moves like a spaceship but leaves debris
-         behind as it moves.
+         Tupruttaja on kuvio, joka liikkuu kuin avaruusalus, mutta
+         jättää jälkeensä jälkiä.
          """,
          ["puffer1.rle",
           "puffer2.rle",
@@ -137,17 +135,17 @@ def populate_tables(connection):
           "pufferfish.rle",
           "p28blockpuffer.rle"]
          ],
-        ["Replicators",
+        ["Replikaattorit (Replicators)",
          """
-         A replicator is any pattern that produces an arbitrary number of copies
-         of itself. There is currently no precise definition.
+         Replikaattori on kuvio, joka tuottaa mielivaltaisen
+         määrän kopioita itsestään.
          """,
          ["replicator.rle"]
          ],
-        ["Spaceships",
+        ["Avarusalukset (Spaceships)",
          """
-         A spaceship is a finite pattern that reappears (without additions or losses)
-         after a fixed number of generations displaced by a non-zero amount.
+         Avaruusalus on kuvio, joka toistaa säännöllistä evoluutiota,
+         mutta - toisin kuin oskillaattori - se liikkuu paikasta toiseen.
          """,
          ["glider.rle",
           "bigglider.rle",
@@ -160,10 +158,9 @@ def populate_tables(connection):
           "lobster.rle",
           "enterprise.rle"]
          ],
-        ["Still lifes",
+        ["Muuttumattomat (Still lifes)",
          """
-         A still life is a pattern that does not change from one generation to the next,
-         and thus is a parent of itself.
+         Muuttumattomat ovat kuvioita, jotka eivät muutu sukupolvesta toiseen.
          """,
          ["aircraftcarrier.rle",
           "314.rle",
@@ -178,9 +175,9 @@ def populate_tables(connection):
           "snake.rle",
           "tub.rle"]
          ],
-        ["Wicks",
+        ["Sydänlangat (Wicks)",
          """
-         A wick is a static or oscillating linearly repeating pattern.
+         Sydänlanka on staattinen tai oskilloiva lineaarisesti toistuva kuvio.
          """,
          ["ants.rle",
           "blinkerfuse.rle"]
