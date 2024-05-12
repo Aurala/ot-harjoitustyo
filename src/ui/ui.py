@@ -1,5 +1,4 @@
 import pygame
-import numpy as np
 from config import settings
 from services.outomaatti_service import OutomaattiService
 from ui.components.menu import Menu

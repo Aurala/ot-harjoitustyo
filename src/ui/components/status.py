@@ -1,6 +1,3 @@
-from ui.components.theme import Theme
-
-
 class Status:
     """Creates the Statusbar component.
 

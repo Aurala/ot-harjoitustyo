@@ -26,10 +26,10 @@ class RLE:
         The pattern's name is extracted from metadata.
 
         Args:
-            content (str): the RLE data
+            content (str): Encoded data
 
         Returns:
-            (str, str): the pattern's name, the rest of the metadata
+            (str, str): Pattern's name, Rest of the metadata
         """
 
         metadata = []
@@ -52,10 +52,10 @@ class RLE:
         https://github.com/reppertj/Game-of-Life/blob/master/lifereader.py
 
         Args:
-            content (str): the RLE data
+            content (str): Encoded data
 
         Returns:
-            (str, list): the rules the pattern was designed for, the pattern data
+            (str, list): Rules the pattern was designed for, Pattern's data
         """
 
         lines = [line for line in content if line.strip()[0] != "#"]
@@ -97,14 +97,14 @@ class RLE:
         for metadata and pattern data.
 
         Args:
-            filename (str): the file that contains the data
+            encoded_data (str): Encoded data
 
         Returns:
             (str, str, list, str):
-            the pattern name,
-            the rules the pattern wa designed for,
-            the pattern data,
-            the metadata
+            Pattern's name,
+            Rules the pattern wa designed for,
+            Pattern's data,
+            Pattern's metadata
         """
 
         name, metadata = self.parse_metadata(encoded_data)

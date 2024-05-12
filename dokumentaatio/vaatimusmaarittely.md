@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B23/S3), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
+Outomaatti-sovellus toteuttaa [soluautomaatin](https://fi.wikipedia.org/wiki/Soluautomaatti). Oletusarvoina sovelluksessa on John Conway'n kehittämän [Game of Lifen](https://fi.wikipedia.org/wiki/Game_of_Life) säännöt (B3/S23), mutta sovellus tarjoaa mahdollisuuden sääntöjen parametrien muuttamiseen.
 
 Sovellusta voidaan käyttää viihdyttävänä ajanvietteenä tai opetuskäytössä, esimerkiksi innostamaan lapsia matematiikan opiskeluun tai jopa tuottamaan Python-koodia (omien sääntöjen kirjoittaminen).
 
@@ -52,9 +52,9 @@ Graafisten elementtien lähteet:
 - Ei tehty: Käyttäjä voi määrittää, katoavatko kanvaasin reunan yli kulkevat solut vai ilmestyvätkö ne kanvaasin vastakkaiselta puolelta.
 - Ei tehty: Käyttäjä voi muuttaa parametrejä, jotka annetaan funktiolle, joka päättää solujen syntymästä/kuolemasta/säilymisestä.
 
-## Jatkokehitysideoita ("backlog")
+Paria viimeistä toiminnallisuutta kokeilin kehitysvaiheessa ja totesin ne huonoiksi ideoiksi. En toteuttanut loppuun. Vastaavasti ketterän ohjelmistokehityksen hengessä toteutin jatkokehitysideoiden listalta pari toiminnallisuutta.
 
-Jatkokehitysideoita toteutetaan tästä listasta projektiin käytettävissä olevien tuntien mukaisesti ketterän ohjelmistokehityksen hengessä.
+## Jatkokehitysideoita ("backlog")
 
 - Käyttäjä voi määrittää maksimikeston simulaatiolle.
 - Käyttäjä voi valita useista erilaista piirtotyökaluista.
