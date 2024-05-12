@@ -1,4 +1,4 @@
-# Arkkitehtuuri (alustava)
+# Arkkitehtuuri
 
 ## Rakenne
 
