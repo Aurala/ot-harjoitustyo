@@ -3,8 +3,20 @@ from config import settings
 
 
 class Theme:
+    """Contains visual settings used by other UI components.
+
+    Attributes:
+        pygame (pygame): Reference to Pygame.
+    """
 
     def __init__(self, pygame):
+        """Constructor that creates the Theme object.
+
+        Most values are read from the configuration file.
+
+        Args:
+            pygame (pygame): Reference to Pygame.
+        """
 
         self.logofont = pygame_menu.font.FONT_MUNRO
         self.menufont = pygame.font.SysFont(
@@ -40,4 +52,9 @@ class Theme:
                             "selected_color": settings.ui.menu_color_active_icon}
 
     def get_theme(self):
+        """Returns the pygame_menu theme.
+
+        Returns:
+            pygame_menu.themes.Theme: theme settings for pygame_menu components.
+        """
         return self.theme

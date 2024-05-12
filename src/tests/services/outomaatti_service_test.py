@@ -65,24 +65,10 @@ class TestOutomaattiService(unittest.TestCase):
         outomaatti.add_pattern(0, 0, self.blinker_vertical)
         self.assertEqual(outomaatti.count_cells(), 3)
 
-    def test_erase_cell_from_universe(self):
-        outomaatti = OutomaattiService(1, 1)
-        outomaatti.add_cell(0, 0)
-        self.assertEqual(outomaatti.get_universe_as_text(), "*\n")
-        outomaatti.erase_cell(0, 0)
-        self.assertEqual(outomaatti.get_universe_as_text(), ".\n")
-
     def test_add_cell_outside_universe(self):
         outomaatti = OutomaattiService(1, 1)
         outomaatti.add_cell(1, 1)
         self.assertEqual(outomaatti.get_universe_as_text(), ".\n")
-
-    def test_erase_cell_outside_universe(self):
-        outomaatti = OutomaattiService(1, 1)
-        outomaatti.add_cell(0, 0)
-        self.assertEqual(outomaatti.get_universe_as_text(), "*\n")
-        outomaatti.erase_cell(1, 1)
-        self.assertEqual(outomaatti.get_universe_as_text(), "*\n")
 
     def test_clear_universe(self):
         outomaatti = OutomaattiService(1, 1)

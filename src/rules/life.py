@@ -1,16 +1,37 @@
+"""
+Life (B3/S23) on alkuperäinen John Conway'n kehittämä
+Game of Life.
+"""
+
 from rules.ruleset import Ruleset
 from entities.universe import Universe
 
 
 class CustomRuleset(Ruleset):
+    """Class containing a cellular automata ruleset.
+
+    CustomRuleset inherits from Ruleset.
+
+    Ruleset class has a method for performing computation
+    for LifeLike cellular automata based on parameters
+    defined in this class. If the user wants to implement
+    more complex non-LifeLike rulesets, they will be done
+    in a CustomRuleset class like this.
+
+    After developing a CustomRuleset, it needs to be added
+    to the configuration file.
+    """
 
     def __init__(self):
-        self.name = "B3/S23"
-        self.friendy_name = "Game of Life"
-        self.description = "Alkuperäiset John Conway'n kehittämät säännöt"
+        pass
 
     @classmethod
     def calculate(cls, universe: Universe):
+        """Computes the next generation based on Life (B3/S23) rules.
+
+        Args:
+            universe (Universe): Object holding the data.
+        """
 
         birth_conditions = [3]
         survive_conditions = [2, 3]

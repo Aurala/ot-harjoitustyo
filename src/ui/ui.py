@@ -33,9 +33,9 @@ class UI:
         self.theme = Theme(self.pygame_global)
         self.status = Status(self.pygame_global, self.theme)
         self.simulation = Simulation(
-            self.pygame_global, self.theme, self.universe_size_x, self.universe_size_y, self.simulation_surface_size_x, self.simulation_surface_size_y)
-        self.menu = Menu(self.pygame_global, self.outomaatti,
-                         self.simulation, self.surface, self.theme)
+            self.pygame_global, self.universe_size_x, self.universe_size_y, self.simulation_surface_size_x, self.simulation_surface_size_y)
+        self.menu = Menu(self.outomaatti, self.simulation,
+                         self.surface, self.theme)
 
     def update_mouse_cursor(self):
         mouse_position_x, mouse_position_y = self.pygame_global.mouse.get_pos()

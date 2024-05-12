@@ -11,17 +11,18 @@ from repositories.decoders.rle import RLE
 
 
 class LibraryRepository:
-    """
-    Class manages all access to the persistent storage for the application:
-    - Reading and writing patterns and categories SQLite database
-    - Reading RLE files containing patterns
+    """Class manages access to the database and files:
+
+    - Reading patterns from the SQLite database
+    - Importing patterns from files into the SQLite database
+    - Reading categories from the SQLite database
     - Writing snapshots of the simulation to PNG files
     """
 
     def __init__(self):
-        """
-        Class constructor creates a new LibraryRepository with database
-        access configured in the settings file.
+        """Class constructor for creating a new LibraryRepository.
+
+        Terminates the application if the database has not been initialized.
         """
         self._connection = get_database_connection()
 
@@ -30,18 +31,15 @@ class LibraryRepository:
         try:
             cursor.execute("SELECT 1 FROM Categories").fetchall()
         except sqlite3.OperationalError as error:
-            print("Muista alustaa tietokanta ennen Outomaatti-sovelluksen ajamista:",
-                  "'poetry invoke run build'")
+            print("Muista alustaa tietokanta ennen Outomaatti-sovelluksen " +
+                  "ajamista: 'poetry invoke run build'")
             raise SystemExit from error
 
-    # FIX: remove duplicate code, the methods below can use same functionalities
-
     def get_categories(self):
-        """
-        Returns all pattern categories.
+        """Returns all pattern categories.
 
         Returns:
-            list: all categories as Category objects
+            list: All categories as Category objects.
         """
         cursor = self._connection.cursor()
         cursor.execute("SELECT category_id, name, description FROM Categories")
@@ -54,13 +52,11 @@ class LibraryRepository:
         return categories
 
     def get_patterns(self):
-        """
-        Returns all patterns.
+        """Returns all patterns.
 
         Returns:
-            list: all patterns as Pattern objects
+            list: All patterns as Pattern objects.
         """
-
         sql_command = "SELECT * FROM Patterns"
 
         cursor = self._connection.cursor()
@@ -75,13 +71,14 @@ class LibraryRepository:
         return patterns
 
     def get_patterns_by_category(self, category_id):
-        """
-        Returns all patterns in the specified category.
+        """Returns patterns in a specified category.
+
+        Args:
+            category_id (int): Category identifier.
 
         Returns:
-            list: all patterns in the category as Pattern objects
+            list: Patterns as Pattern objects.
         """
-
         sql_command = "SELECT * FROM Patterns WHERE category_id=?"
 
         cursor = self._connection.cursor()
@@ -96,13 +93,14 @@ class LibraryRepository:
         return patterns
 
     def get_pattern_by_id(self, pattern_id):
-        """
-        Returns one category based on its identifier.
+        """Returns a pattern based on its identifier.
+
+        Args:
+            pattern_id (int): Pattern identifier.
 
         Returns:
-            Category: specified category
+            Pattern: Specified pattern as a Pattern object. (None if not found.)
         """
-
         sql_command = "SELECT * FROM Patterns WHERE pattern_id=?"
 
         cursor = self._connection.cursor()
@@ -114,18 +112,19 @@ class LibraryRepository:
 
         return Pattern(row[0], row[1], row[2], row[3], json.loads(row[4]), row[5])
 
-    def get_pattern_by_name(self, name):
-        """
-        Returns one category based on its name.
+    def get_pattern_by_name(self, pattern_name):
+        """Returns a pattern based on its name.
+
+        Args:
+            pattern_name (str): Pattern name.
 
         Returns:
-            Category: specified category
+            Pattern: Specified pattern as a Pattern object. (None if not found.)
         """
-
         sql_command = "SELECT * FROM Patterns WHERE name=?"
 
         cursor = self._connection.cursor()
-        cursor.execute(sql_command, [name])
+        cursor.execute(sql_command, [pattern_name])
         row = cursor.fetchone()
 
         if row is None:
@@ -134,7 +133,17 @@ class LibraryRepository:
         return Pattern(row[0], row[1], row[2], row[3], json.loads(row[4]), row[5])
 
     def import_pattern(self, filename, category_id=1):
+        """Imports a pattern into the database.
 
+        Currently manages Run-Length Encoded (RLE) files.
+        If the extension is not ".rle", does nothing.
+
+        Args:
+            filename (str): File containing the pattern.
+
+        Returns:
+            bool: Whether the operation was successful or not.
+        """
         sql_command = """
                       INSERT INTO Patterns (
                       category_id,
@@ -169,10 +178,18 @@ class LibraryRepository:
         return False
 
     def save_snapshot(self, surface):
+        """Saves a snapshot of the simulation to a PNG file.
+
+        The current timestamp will be used as the filename.
+        The output directory is specified in the settings.
+        If the director does not exist, it will be created.
+
+        Args:
+            surface (pygame.Surface): Surface containing the image
+        """
         directory = settings.resources.directory_snapshots
         if not os.path.exists(directory):
             os.makedirs(directory)
         timestamp = str(datetime.now())
         filename = directory + timestamp + ".png"
-        print(filename)
         image.save(surface, filename)

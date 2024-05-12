@@ -59,20 +59,6 @@ class TestUniverse(unittest.TestCase):
         self.universe.add_cell(42, 42)
         self.assertEqual(self.universe.count_cells(), 0)
 
-    def test_erases_cell(self):
-        self.assertEqual(self.universe.count_cells(), 0)
-        self.universe.add_cell(1, 1)
-        self.assertEqual(self.universe.count_cells(), 1)
-        self.universe.erase_cell(1, 1)
-        self.assertEqual(self.universe.count_cells(), 0)
-
-    def test_erases_cell_outside_universe(self):
-        self.assertEqual(self.universe.count_cells(), 0)
-        self.universe.add_cell(42, 42)
-        self.assertEqual(self.universe.count_cells(), 0)
-        self.universe.erase_cell(42, 42)
-        self.assertEqual(self.universe.count_cells(), 0)
-
     def test_clears_universe(self):
         self.assertEqual(self.universe.count_cells(), 0)
         self.universe.add_cell(1, 1)

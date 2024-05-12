@@ -1,7 +1,7 @@
 from dynaconf import Dynaconf
 
 settings = Dynaconf(
-    envvar_prefix="OUTOMAATTI",
+    envvar_pre="OUTOMAATTI",
     settings_files=['outomaatti.toml'],
 )
 

@@ -9,16 +9,16 @@ def start(ctx):
 
 @task
 def test(ctx):
-    print("Running tests")
+    print("Initialing the test database and running tests")
     ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db python3 src/initialize_database.py", pty=True)
     ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db pytest src", pty=True)
 
 @task
 def coverage(ctx):
     print("Checking the test coverage")
-    ctx.run("coverage run --branch -m pytest src", pty=True)
+    ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db coverage run --branch -m pytest src", pty=True)
 
-@task
+@task(coverage)
 def coverage_report(ctx):
     print("Generating the test report")
     ctx.run("coverage html", pty=True)
@@ -30,11 +30,11 @@ def lint(ctx):
 
 @task
 def format(ctx):
-    print("Formatting code (press CTRL-C now if there are uncommitted changes)")
+    print("Formatting code")
     ctx.run("autopep8 --in-place --recursive src", pty=True)
 
 @task
-def initdb(ctx):
+def build(ctx):
     print("Initializing the database")
     ctx.run("python3 src/initialize_database.py")
 
