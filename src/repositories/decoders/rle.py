@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 
 class RLE:
@@ -31,16 +32,14 @@ class RLE:
             (str, str): the pattern's name, the rest of the metadata
         """
 
-        # FIX: Error management
-
         metadata = []
-        name = ""
+        name = "Tuntematon " + str(datetime.now())
         for line in content:
             line = line.strip()
             if line.startswith("#"):
                 metadata.append(line)
             if line.startswith("#N"):
-                name = line[2:].strip()
+                name = line[2:].strip()    
         return (name, "\n".join("".join(row) for row in metadata) + "\n")
 
     def parse_data(self, content):
@@ -59,14 +58,12 @@ class RLE:
             (str, list): the rules the pattern was designed for, the pattern data
         """
 
-        # FIX: Error management
-
         lines = [line for line in content if line.strip()[0] != "#"]
         header = lines[0]
         lines = lines[1:]
         lines = "".join(lines).strip("\n")
         header_pattern = re.compile(
-            r"x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?B(\d+).*?S(\d+.)")
+            r"x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?[bB](\d+).*?[sS](\d+.)")
         header_matches = header_pattern.search(header)
         width = int(header_matches.group(1))
         height = int(header_matches.group(2))
@@ -94,7 +91,6 @@ class RLE:
 
         return (f"B{birth_conditions}/S{survive_conditions}", pattern)
 
-    # FIX: Error management
     def decode(self, encoded_data):
         """
         Reads Run Length Encoded data from a file and parses it

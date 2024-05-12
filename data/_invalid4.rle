@@ -1,3 +1,4 @@
-#C Invalid RLE file for unit testing - name missing
-x = 3, y = 1
+#N Blinker
+#C Invalid RLE file for unit testing - lowercase B & S
+x = 3, y = 1, rule = b3/s23
 3o!
