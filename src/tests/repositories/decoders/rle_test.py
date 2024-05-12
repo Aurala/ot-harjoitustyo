@@ -22,7 +22,7 @@ class TestRLE(unittest.TestCase):
         self.assertEqual(pattern, [[1, 1, 1]])
         self.assertEqual(
             metadata, "#N Blinker\n#C Valid RLE file for unit testing\n")
-        
+
     def test_can_decode_invalid_RLE_with_lowercase(self):
         name, rules, pattern, metadata = self.decoder.decode(self.valid_RLE)
         self.assertEqual(name, "Blinker")

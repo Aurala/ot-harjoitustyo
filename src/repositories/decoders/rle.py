@@ -39,7 +39,7 @@ class RLE:
             if line.startswith("#"):
                 metadata.append(line)
             if line.startswith("#N"):
-                name = line[2:].strip()    
+                name = line[2:].strip()
         return (name, "\n".join("".join(row) for row in metadata) + "\n")
 
     def parse_data(self, content):
@@ -66,7 +66,7 @@ class RLE:
             r"x\s?=\s?(\d+).*?y\s?=\s?(\d+).*?[bB](\d+).*?[sS](\d+.)")
         header_matches = header_pattern.search(header)
         width = int(header_matches.group(1))
-        height = int(header_matches.group(2))
+        _ = int(header_matches.group(2))
         birth_conditions = header_matches.group(3)
         survive_conditions = header_matches.group(4)
         line_pattern = re.compile(r"(\d*)([bo$!])")

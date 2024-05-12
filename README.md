@@ -58,15 +58,6 @@ Ohjelma käynnistyy komennolla:
 poetry run invoke start
 ```
 
-Käyttöliittymän toteutus on vielä kesken ja kaikki sen sisältämät kontrollit eivät toimi. Toimivaa mm.:
-
-- Play/Pause
-- Tyhjennys
-- Solujen piirtäminen ja poistaminen hiirellä
-- Snapshot (kirjoittaa tiedostoon PNG-kuvan simulaatiosta)
-- Random
-- Exit
-
 ### Testaus
 
 Koodin laatua mittaava testi ajetaan komennolla:

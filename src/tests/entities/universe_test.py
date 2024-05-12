@@ -44,16 +44,33 @@ class TestUniverse(unittest.TestCase):
         self.universe.invert_cell(1, 1)
         self.assertEqual(self.universe.count_cells(), 1)
 
+    def test_inverts_cell_outside_universe(self):
+        self.assertEqual(self.universe.count_cells(), 0)
+        self.universe.invert_cell(42, 42)
+        self.assertEqual(self.universe.count_cells(), 0)
+
     def test_adds_cell(self):
         self.assertEqual(self.universe.count_cells(), 0)
         self.universe.add_cell(1, 1)
         self.assertEqual(self.universe.count_cells(), 1)
+
+    def test_adds_cell_outside_universe(self):
+        self.assertEqual(self.universe.count_cells(), 0)
+        self.universe.add_cell(42, 42)
+        self.assertEqual(self.universe.count_cells(), 0)
 
     def test_erases_cell(self):
         self.assertEqual(self.universe.count_cells(), 0)
         self.universe.add_cell(1, 1)
         self.assertEqual(self.universe.count_cells(), 1)
         self.universe.erase_cell(1, 1)
+        self.assertEqual(self.universe.count_cells(), 0)
+
+    def test_erases_cell_outside_universe(self):
+        self.assertEqual(self.universe.count_cells(), 0)
+        self.universe.add_cell(42, 42)
+        self.assertEqual(self.universe.count_cells(), 0)
+        self.universe.erase_cell(42, 42)
         self.assertEqual(self.universe.count_cells(), 0)
 
     def test_clears_universe(self):
@@ -63,12 +80,19 @@ class TestUniverse(unittest.TestCase):
         self.universe.clear_universe()
         self.assertEqual(self.universe.count_cells(), 0)
 
-    def test_changes_size(self):
+    def test_increases_size(self):
         self.assertEqual(self.universe.width, 5)
         self.assertEqual(self.universe.height, 5)
         self.universe.change_size(100)
         self.assertEqual(self.universe.width, 105)
         self.assertEqual(self.universe.height, 105)
+
+    def test_decreases_size(self):
+        self.assertEqual(self.universe.width, 5)
+        self.assertEqual(self.universe.height, 5)
+        self.universe.change_size(-4)
+        self.assertEqual(self.universe.width, 1)
+        self.assertEqual(self.universe.height, 1)
 
     def test_does_not_change_size_to_zero(self):
         self.assertEqual(self.universe.width, 5)
@@ -80,6 +104,6 @@ class TestUniverse(unittest.TestCase):
     def test_does_not_change_size_to_negative(self):
         self.assertEqual(self.universe.width, 5)
         self.assertEqual(self.universe.height, 5)
-        self.universe.change_size(-10)
+        self.universe.change_size(-6)
         self.assertEqual(self.universe.width, 5)
         self.assertEqual(self.universe.height, 5)

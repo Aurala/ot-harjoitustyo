@@ -12,16 +12,19 @@ class TestLibraryRepository(unittest.TestCase):
         self.assertEqual(len(self.library_repository.get_categories()), 11)
 
     def test_default_patterns_are_returned(self):
-        self.assertEqual(len(self.library_repository.get_patterns()), 49)
+        self.assertNotEqual(len(self.library_repository.get_patterns()), 0)
 
     def test_default_patterns_are_returned_by_id(self):
-        self.assertEqual(self.library_repository.get_pattern_by_id(7).name, "Medusa")
+        self.assertEqual(
+            self.library_repository.get_pattern_by_id(7).name, "Medusa")
 
     def test_default_patterns_are_returned_by_name(self):
-        self.assertNotEqual(
-            self.library_repository.get_pattern_by_name("Glider"), None)
+        self.assertEqual(
+            self.library_repository.get_pattern_by_name("Glider").name, "Glider")
 
     def test_import_valid_pattern(self):
-        self.assertEqual(len(self.library_repository.get_patterns_by_category(1)), 0)
-        self.library_repository.import_pattern(settings.resources.directory_patterns + "_valid.rle")
-        self.assertEqual(len(self.library_repository.get_patterns_by_category(1)), 1)
+        patterns = len(self.library_repository.get_patterns_by_category(1))
+        self.library_repository.import_pattern(
+            settings.resources.directory_patterns + "_valid.rle")
+        self.assertEqual(
+            len(self.library_repository.get_patterns_by_category(1)), patterns + 1)

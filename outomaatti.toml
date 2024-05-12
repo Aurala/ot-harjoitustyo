@@ -11,7 +11,7 @@ directory_snapshots = "snapshots/"
 default_universe_width = 100
 default_universe_height = 100
 
-# Use even values only
+# Use even values only.
 size_change = 10
 
 [ui]

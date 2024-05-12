@@ -12,7 +12,6 @@ def test(ctx):
     print("Running tests")
     ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db python3 src/initialize_database.py", pty=True)
     ctx.run("OUTOMAATTI_RESOURCES__FILE_DATABASE=outomaatti-test.db pytest src", pty=True)
-#    ctx.run("pytest src", pty=True)
 
 @task
 def coverage(ctx):

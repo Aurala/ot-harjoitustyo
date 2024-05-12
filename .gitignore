@@ -4,4 +4,6 @@ __pycache__
 .coverage
 htmlcov
 *.db
+*.sqlite
 .secrets.*
+snapshots
