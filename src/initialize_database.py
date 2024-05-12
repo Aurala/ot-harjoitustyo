@@ -4,6 +4,11 @@ from repositories.library_repository import LibraryRepository
 
 
 def drop_tables(connection):
+    """Empties the database by dropping every table.
+
+    Args:
+        connection (sqlite3.Connection): Connection to SQLite3 database
+    """
 
     sql_commands = [
         "DROP TABLE IF EXISTS Patterns",
@@ -17,7 +22,11 @@ def drop_tables(connection):
 
 
 def create_tables(connection):
+    """Creates the database tables.
 
+    Args:
+        connection (sqlite3.Connection): Connection to SQLite3 database
+    """
     sql_commands = [
         """
         CREATE TABLE Patterns (
@@ -44,10 +53,15 @@ def create_tables(connection):
     connection.commit()
 
 
-# Source: https://conwaylife.com/wiki/Category:Patterns
+# Text source: https://conwaylife.com/wiki/Category:Patterns
 # License: GNU Free Documentation License (https://www.gnu.org/licenses/fdl-1.3.html)
 
 def populate_tables(connection):
+    """Populates the database with categories and patterns.
+
+    Args:
+        connection (sqlite3.Connection): Connection to SQLite3 database
+    """
 
     sql_command = """
                    INSERT INTO Categories (name, description) VALUES (?, ?)
@@ -186,6 +200,7 @@ def populate_tables(connection):
 
 
 def initialize_database():
+    """Initializes the database."""
 
     connection = get_database_connection()
 
